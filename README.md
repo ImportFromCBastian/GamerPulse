@@ -1,2 +1,2 @@
 # GamerPulse
-Project for PHP-REACT-API_REST
+This is  a project for PHP-REACT-API_REST seminary in UNLP  
