@@ -9,42 +9,41 @@
 <body>
   <header> <img class="logo" src="./images/GamerPulse.jpg" alt="logo"></header>
 
-  <form action="index.php">
-  <select size="1px">
-    <option value="Name">Nombre</option>
-    <option value="Gender">Genero</option>
-    <option value="Console">Plataforma</option>
-  </select>
-  
-
-  <input class ="button" type="submit" name ="filter" value="Filtrar" >
-  <output type="text" name="">
-  </form>
-
-
-    <div>
-
-      <footer>
-        <h3>Participantes:</h3>
-        <ul>
-          <li>Gregorio Ponce</li> <span> 2023 </span>
-          <li>Sebastian Hernandez</li> <span> 2023 </span>
-        </ul>
-      </footer>
-    </div>
+  <form action="index.php" method="get">
+    <input class ="inputs" type="text" name="inputName"  placeholder="Nombre">
+    <input class ="inputs" type="text" name="inputGender"  placeholder="G&eacute;nero">
+    <input class ="inputs" type="text" name="inputConsole"  placeholder="Plataforma">
+    </form>
+    <div class="divBox">
+      
+        <div class ="staticData">
+          <p id="prueba"><a href="https://articulo.mercadolibre.com.ar/MLA-1291698023-juego-new-super-mario-2-3ds-_JM#position=6&search_layout=stack&type=item&tracking_id=6b9e8ebc-43f2-46b4-a764-9a2cf34cce41" target="_blank"><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></p>
+          <p>New Super Mario Bros 2 - 3DS</p>
+          <p>Plataforma</p>
+          <p>Juego nuevo de la saga super mario</p>
+        </div>
+      
+        <div class ="staticData">
+          <p><a href="https://articulo.mercadolibre.com.ar/MLA-1291698023-juego-new-super-mario-2-3ds-_JM#position=6&search_layout=stack&type=item&tracking_id=6b9e8ebc-43f2-46b4-a764-9a2cf34cce41" target="_blank"><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></p>
+          <p>New Super Mario Bros 2 - 3DS</p> 
+          <p>Plataforma</p>
+          <p>Juego nuevo de la saga super mario</p>
+        </div>
+        <div class ="staticData">
+          <p><a href="https://articulo.mercadolibre.com.ar/MLA-1291698023-juego-new-super-mario-2-3ds-_JM#position=6&search_layout=stack&type=item&tracking_id=6b9e8ebc-43f2-46b4-a764-9a2cf34cce41" target="_blank"><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></p>
+          <p>New Super Mario Bros 2 - 3DS</p> 
+          <p>Plataforma</p>
+          <p>Juego nuevo de la saga super mario</p>
+        </div>
+      
+  </div>
+    <footer>
+      <h3>Participantes:</h3>
+      <ul>
+        <span> <li>Gregorio Ponce</li>  2023 </span>
+        <span> <li>Sebastian Hernandez</li>  2023 </span>
+      </ul>
+    </footer>
+    
   </body>
 </html>
-
-<?php 
-
-  $inputName = $_GET['inputName'];
-  $inputGender = $_GET['inputGender'];
-  $inputConsole = $_GET['inputConsole'];
-
-  $hashGames = array('Name' => "Mario Bros", 'Gender' => "Platforming" , 'Console' => "3DS" );
-
-  if($hashGames['Name'] == $inputName && $hashGames['Gender'] == $inputGender && $hashGames['Console'] == $inputConsole){
-    echo ":D";
-  }
-
- ?>
