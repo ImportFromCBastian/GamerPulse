@@ -1,25 +1,32 @@
 body{
   padding : 0px;
-  margin : 0px;
+  margin : 0px 0px 0px 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
-  background-color:whitesmoke; /* definir color scheme*/
+  background-color: rgba(91, 249, 196, .3); /* definir color scheme*/
   
 }
 
 
 footer{
-  margin: 0;
-  background-color: red;
+
+  width: 100%;
+  position: absolute;
+  bottom: 1px;
+  
+}
+
+
+footer ul li a{
+  text-decoration: none;
+  color: black;
 }
 
 .divBox{
   
   display: flex;
   justify-content: space-evenly;
-  margin: 15px 0px 0px 0px;
-  
-  background-color: rgba(91, 249, 196,.5);
+  margin: 15px 0px 0px 0px;  
   padding: 0px;
 }
 
@@ -28,17 +35,10 @@ footer{
   letter-spacing: -2px;
   border-radius: 8%;
   background-color: rgb(91, 249, 196);
-
-  
 }
+
 .staticData p{
   margin: 0px 10px 9px 10px;
-  text-align: center;
-}
-
-#prueba:hover{
-  width: 55px;
-  height: 55px;
   text-align: center;
 }
 
@@ -50,6 +50,5 @@ h3{
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  
-  
+  align-items: center;
 }

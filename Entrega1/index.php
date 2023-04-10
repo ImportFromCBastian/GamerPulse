@@ -17,7 +17,7 @@
     <div class="divBox">
       
         <div class ="staticData">
-          <p id="prueba"><a href="https://articulo.mercadolibre.com.ar/MLA-1291698023-juego-new-super-mario-2-3ds-_JM#position=6&search_layout=stack&type=item&tracking_id=6b9e8ebc-43f2-46b4-a764-9a2cf34cce41" target="_blank"><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></p>
+          <p ><a href="https://articulo.mercadolibre.com.ar/MLA-1291698023-juego-new-super-mario-2-3ds-_JM#position=6&search_layout=stack&type=item&tracking_id=6b9e8ebc-43f2-46b4-a764-9a2cf34cce41" target="_blank"><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></p>
           <p>New Super Mario Bros 2 - 3DS</p>
           <p>Plataforma</p>
           <p>Juego nuevo de la saga super mario</p>
@@ -29,6 +29,7 @@
           <p>Plataforma</p>
           <p>Juego nuevo de la saga super mario</p>
         </div>
+
         <div class ="staticData">
           <p><a href="https://articulo.mercadolibre.com.ar/MLA-1291698023-juego-new-super-mario-2-3ds-_JM#position=6&search_layout=stack&type=item&tracking_id=6b9e8ebc-43f2-46b4-a764-9a2cf34cce41" target="_blank"><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></p>
           <p>New Super Mario Bros 2 - 3DS</p> 
@@ -40,8 +41,8 @@
     <footer>
       <h3>Participantes:</h3>
       <ul>
-        <span> <li>Gregorio Ponce</li>  2023 </span>
-        <span> <li>Sebastian Hernandez</li>  2023 </span>
+        <strong><li><a href="https://github.com/GregoPonce">Gregorio Ponce 2023</a></li></strong>   
+        <strong><li><a href="https://github.com/ImportFromCBastian">Sebastian Hernandez 2023</a></li></strong>   
       </ul>
     </footer>
     
