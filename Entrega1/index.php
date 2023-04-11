@@ -16,7 +16,7 @@
         <input class ="inputFilter" type="text" name="inputConsole"  placeholder="Plataforma">
         <span>      
           <input class ="inputs" type="submit" name="filter" value="Filtrar">
-          <button class ="inputs add" onClick="altaJuegos.php " name="addGame" value="Agregar Juego">
+          <a class="inputs" href="altaJuego.php">Agregar Juego</a>
         </span>
       </div>
 
