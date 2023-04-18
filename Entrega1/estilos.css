@@ -10,9 +10,7 @@ body{
 
 footer{
 
-  width: 100%;
-  position: absolute;
-  bottom: 1px;
+  width: 100%;  
   
 }
 
@@ -50,12 +48,18 @@ h3{
   margin: 0;
 }
 
+header{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
 
 .logo{
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  align-items: center;
+  
+
 }
 
 .img_in_box{
