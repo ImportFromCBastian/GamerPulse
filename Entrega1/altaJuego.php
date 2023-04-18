@@ -9,21 +9,24 @@
 </head>
 <body>
     <header> <img class="logo" src=./images/GamerPulse.jpg" alt="logo"></header>
+    <div class="alta" >
+        <form  action="altaJuego.php" method="get">
 
-    <form action="altaJuego.php" method="get">
-        <label for ="nombre"> Nombre:</label>
-        <input type ="text" id ="nombre" name="nombre"> <br>
-        <label for ="img"> Imagen:</label>
-        <input type ="text" id ="img" name="img"> <br>
-        <label for ="descripcion"> Descripcion:</label>
-        <input type ="text" id ="descripcion" name="descripcion"> <br>
-        <label for ="plataforma"> Plataforma:</label>
-        <input type ="text" id ="plataforma" name="plataforma"> <br>
-        <label for ="url"> URL:</label>
-        <input type ="text" id ="url" name="url"> <br>
-        <label for ="genero"> Genero:</label>
-        <input type ="text" id ="genero" name="genero"> <br>
-    </form> 
+
+                <input class="inputs" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
+
+                <input class ="inputs" type ="text" placeholder="Imagen de la caratula " id ="img" name="img">
+
+                <input class="inputs" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
+
+                <input class="inputs" type ="text" placeholder="Plataforma" id ="plataforma" name="plataforma">
+
+           <input class="inputs" type ="text" placeholder="URL del juego" id ="url" name="url">
+
+        <input class="inputs" type ="text" placeholder="G&eacute;nero" id ="genero" name="genero">
+        </form>
+    </div> 
+
     <footer>
       <h3>Participantes:</h3>
       <ul>
