@@ -17,7 +17,7 @@
 
                 <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
 
-                <input class ="inputFilter" type ="text" placeholder="Imagen de la caratula " id ="img" name="img">
+                <input class ="inputFilter" type ="file" placeholder="Imagen de la caratula " id ="img" name="img">
 
                 <input class="inputFilter" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
 
