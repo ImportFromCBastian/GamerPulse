@@ -57,13 +57,13 @@
           alerta += "El campo descripcion es incorrecto. ";
         }
         if (!["pc", "ps4", "xbox", "switch"].includes(document.getElementById('plataforma').value)) {
-          alerta += "El campo plataforma es incorrecto. ";
+          alerta += "Seleccione la plataforma. ";
         }
         if (document.getElementById("url").length>80){
           alerta += "El campo url es incorrecto. ";
         }
         if (!["accion", "aventura", "fantasia", "peleas"].includes(document.getElementById('genero').value)) {
-          alerta += "El campo genero es incorrecto. ";
+          alerta += "Advertencia: no eligió género ";
         }
        alert(alerta);
        document.getElementById('texto').innerHTML=alerta;
