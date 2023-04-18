@@ -15,7 +15,6 @@
       </div>
         <form  action="altaJuego.php" method="get" id="formulario">
 
-
                 <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
 
                 <input class ="inputFilter" type ="text" placeholder="Imagen de la caratula " id ="img" name="img">
@@ -23,6 +22,7 @@
                 <input class="inputFilter" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
 
                 <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url">
+                
                 <select class="inputFilter"id="plataforma" name="plataforma">
                     <option value="defaultPlat">Seleccione una plataforma</option>
                     <option value="pc">PC</option>
@@ -32,48 +32,47 @@
                 </select>
 
 
-            <select class="inputFilter" id="genero" name="genero">
-              <option value="defaultGen">Seleccione un g&eacute;nero</option>
-              <option value="accion">Accion</option>
-              <option value="aventura">Aventura</option>
-              <option value="fantasia">Fantasia</option>
-              <option value="peleas">Peleas</option>
-            </select>
-          <span>
-            <input class="inputs" type="submit" value="Validar">
-            <input class="inputs" type="reset" value="Reset">
-          </span>
+              <select class="inputFilter" id="genero" name="genero">
+                <option value="defaultGen">Seleccione un g&eacute;nero</option>
+                <option value="accion">Accion</option>
+                <option value="aventura">Aventura</option>
+                <option value="fantasia">Fantasia</option>
+                <option value="peleas">Peleas</option>
+              </select>
+            <span>
+              <input class="inputs" type="submit" value="Validar">
+              <input class="inputs" type="reset" value="Reset">
+            </span>
         </form>
-        <script> 
-      function verificador(){ 
-        
+      <script> 
+      function verificador(event){ 
         var alerta="";
-        if (document.getElementById("nombre").value == null){
+        if (document.getElementById("nombre").value == ""){
           alerta += "El campo nombre es incorrecto. ";
         } 
-        if (document.getElementById("img").files.length === 0) {
+        if (document.getElementById("img").value.length === 0) {
           alerta += "Seleccione una imagen. ";
         }
         if ((document.getElementById("descripcion").value == null) || (document.getElementById("descripcion").length>255)) {
           alerta += "El campo descripcion es incorrecto. ";
         }
-        if (!["pc", "ps4", "xbox", "switch"].includes(plataforma)) {
+        if (!["pc", "ps4", "xbox", "switch"].includes(document.getElementById('plataforma').value)) {
           alerta += "El campo plataforma es incorrecto. ";
         }
         if (document.getElementById("url").length>80){
           alerta += "El campo url es incorrecto. ";
         }
-        if (!["accion", "aventura", "fantasia", "peleas"].includes(genero)) {
+        if (!["accion", "aventura", "fantasia", "peleas"].includes(document.getElementById('genero').value)) {
           alerta += "El campo genero es incorrecto. ";
         }
-          alert(alerta);
-          document.getElementById('texto').innerHTML=alerta;
+       alert(alerta);
+       document.getElementById('texto').innerHTML=alerta;
         if (alerta !==''){
           event.preventDefault();   
         }   
         }
         
-        window.addEventListener('submit', verificador); 
+        document.getElementById('formulario').addEventListener('submit', verificador); 
       </script>
 
     </div> 
