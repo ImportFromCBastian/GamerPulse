@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alta Juego</title>
+    <title>GamerPulse</title>
     <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
@@ -18,33 +18,33 @@
 
                 <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
 
-                <input class ="inputFilter" type ="file" placeholder="Imagen de la caratula " id ="img" name="img">
-
+                
                 <input class="inputFilter" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
-
+                
                 <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url">
                 
                 <select class="inputFilter"id="plataforma" name="plataforma">
-                    <option value="defaultPlat">Seleccione una plataforma</option>
-                    <option value="pc">PC</option>
+                  <option value="defaultPlat">Seleccione una plataforma</option>
+                  <option value="pc">PC</option>
                     <option value="ps4">PlayStation 4</option>
                     <option value="xbox">Xbox One</option>
                     <option value="switch">Nintendo Switch</option>
-                </select>
-
-
-              <select class="inputFilter" id="genero" name="genero">
-                <option value="defaultGen">Seleccione un g&eacute;nero</option>
-                <option value="accion">Accion</option>
-                <option value="aventura">Aventura</option>
-                <option value="fantasia">Fantasia</option>
-                <option value="peleas">Peleas</option>
-              </select>
-            <span>
+                  </select>
+                  
+                  
+                  <select class="inputFilter" id="genero" name="genero">
+                    <option value="defaultGen">Seleccione un g&eacute;nero</option>
+                    <option value="accion">Accion</option>
+                    <option value="aventura">Aventura</option>
+                    <option value="fantasia">Fantasia</option>
+                    <option value="peleas">Peleas</option>
+                  </select>
+                  <input  type ="file" placeholder="Imagen de la caratula " id ="img" name="img">
+                  <span>
               <input class="inputs" type="submit" value="Validar">
               <input class="inputs" type="reset" value="Reset">
             </span>
-        </form>
+          </form>
       <script> 
       function verificador(event){ 
         var alerta="";
@@ -77,7 +77,7 @@
       </script>
 
     </div> 
-    <div id="texto"> </div>
+    
     <footer>
       <h3>Participantes:</h3>
       <ul>
