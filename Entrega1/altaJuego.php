@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
-    <header> <img class="logo" src="./images/GamerPulse.jpg" alt="logo"></header>
-    <div class="alta" >
+    <header> 
+      <a href = 'index.php'><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></header></a>
+          <div class="alta" >
       <div>
         <h3>Agregar Juego</h3>
       </div>
