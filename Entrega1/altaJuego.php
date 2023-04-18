@@ -10,7 +10,7 @@
 <body>
     <header> <img class="logo" src=./images/GamerPulse.jpg" alt="logo"></header>
     <div class="alta" >
-        <form  action="altaJuego.php" method="get">
+        <form  action="altaJuego.php" method="get" id="formulario">
 
 
                 <input class="inputs" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
@@ -19,11 +19,24 @@
 
                 <input class="inputs" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
 
-                <input class="inputs" type ="text" placeholder="Plataforma" id ="plataforma" name="plataforma">
+                <select class="inputs"id="plataforma" name="plataforma">
+                    <option value="defaultPlat">Seleccione una plataforma</option>
+                    <option value="pc">PC</option>
+                    <option value="ps4">PlayStation 4</option>
+                    <option value="xbox">Xbox One</option>
+                    <option value="switch">Nintendo Switch</option>
+                </select>
 
            <input class="inputs" type ="text" placeholder="URL del juego" id ="url" name="url">
 
-        <input class="inputs" type ="text" placeholder="G&eacute;nero" id ="genero" name="genero">
+            <select class="inputs" id="genero" name="genero">
+              <option value="defaultGen">Seleccione un g&eacute;nero</option>
+              <option value="accion">Accion</option>
+              <option value="aventura">Aventura</option>
+              <option value="fantasia">Fantasia</option>
+              <option value="peleas">Peleas</option>
+            </select>
+            <input class="inputs" type='submit' value='Validar'>
         </form>
     </div> 
 
