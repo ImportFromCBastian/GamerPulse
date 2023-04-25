@@ -174,4 +174,7 @@ div form .inputFilter{
   padding: 10px; 
   
 }
-
+.msjError {
+  color  : rgb(219, 33, 33);
+  font-size: small;
+}
