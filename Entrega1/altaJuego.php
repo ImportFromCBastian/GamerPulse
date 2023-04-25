@@ -26,11 +26,7 @@
                 
                 <select class="inputFilter"id="plataforma" name="plataforma">
                   <option value="defaultPlat">Seleccione una plataforma</option>
-                  <option value="pc">PC</option>
-                    <option value="ps4">PlayStation 4</option>
-                    <option value="xbox">Xbox One</option>
-                    <option value="switch">Nintendo Switch</option>
-                  </select>
+                </select>
                 
                   <select class="inputFilter" id="genero" name="genero">
                     <option value="defaultGen">Seleccione un g&eacute;nero</option>
