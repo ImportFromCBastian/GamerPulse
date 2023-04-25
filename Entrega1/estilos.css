@@ -24,8 +24,8 @@ footer ul li a{
   
   display: grid;
   justify-content: space-evenly;
-  grid-template-columns: repeat(3, 2fr);
-  grid-auto-rows: 340px;
+  grid-template-columns: repeat(3, 1fr);
+  
   
   margin: 15px 0px 15px 0px;  
   padding: 0px;
