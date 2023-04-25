@@ -1,3 +1,7 @@
+<?php 
+  require_once "conexionBDD.php";
+  $conexion = conectar();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,26 +28,43 @@
                 
                 <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url">
                 
+
+                <?php
+                  $sqlQueryPlatform = "SELECT * FROM plataformas";
+                  $platforms = $conexion -> query($sqlQueryPlatform);
+                ?>
                 <select class="inputFilter"id="plataforma" name="plataforma">
-                  <option value="defaultPlat">Seleccione una plataforma</option>
+                <option value="defaultPlat">Seleccione una plataforma</option>
+                <?php       
+                    while ($rowPlatform = $platforms ->fetch_assoc()){?>
+                    <option value = "<?php echo $rowPlatform ["id"]?>">
+                    <?php echo $rowPlatform["nombre"]?></option>
+
+
+                 <?php   } ?>
                 </select>
                 
-                  <select class="inputFilter" id="genero" name="genero">
-                    <option value="defaultGen">Seleccione un g&eacute;nero</option>
-                    <option value="accion">Accion</option>
-                    <option value="aventura">Aventura</option>
-                    <option value="fantasia">Fantasia</option>
-                    <option value="peleas">Peleas</option>
-                  </select>
+              <?php
+                $sqlQueryGender = "SELECT * FROM generos";
+                $genders = $conexion -> query($sqlQueryGender);
+              ?>
+                <select class ="inputFilter"  name="inputGender">
+                <option value="defaultGen">Seleccione un G&eacute;nero</option>
+                <?php while($rowGender = $genders -> fetch_assoc()){ ?>
+                <option value="<?php echo $rowGender["id"]?>"> <?php echo $rowGender["nombre"] ?></option>  
+              <?php 
+              }
+              ?>
             
-                  <input  type ="file" placeholder="Imagen de la caratula " id ="img" name="img">
-            
-                <div id='error' class="msjError" ></div> 
+                  <input  type ="file" placeholder="Imagen de la caratula " id ="img" name="img">  
             <span>
               <input class="inputs" type="submit" value="Validar">
               <input class="inputs" type="reset" value="Reset">
             </span>
+              <div id='error' class="msjError" ></div> 
+            
           </form>
+         
       <script>
         document.getElementById('formulario').addEventListener('submit', verificador); 
       </script>
