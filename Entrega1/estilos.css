@@ -1,3 +1,10 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 body{
   padding : 0px;
   margin : 0px 0px 0px 5px;
@@ -19,6 +26,7 @@ footer ul li a{
   text-decoration: none;
   color: black;
 }
+
 
 .divBox{
   
@@ -87,7 +95,6 @@ header{
   font-size:13.33px;
   padding:1px 4px 1px 4px;
   text-align: center;
-  
 }
 
 
@@ -113,19 +120,23 @@ header{
   margin-left: 102px;
 }
 
+
+.msjError {
+  color  : rgb(219, 33, 33);
+  font-size: small;
+}
 .alta form{
 
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
   display: grid;
-  justify-content: center;
   align-items: center;
+  justify-items: center;
   grid-gap:10px;
   border-bottom: 2.75px solid rgb(0, 255, 170);
   border-left: 2.75px solid rgb(0, 255, 170);
-  border-right: 2.75px solid rgb(0, 255, 170);
-  
+  border-right: 2.75px solid rgb(0, 255, 170); 
   border-bottom-left-radius: 0.75rem;
   border-bottom-right-radius: 0.75rem;
   padding:10px;
@@ -156,6 +167,7 @@ div form .inputFilter{
   height: 52px;
   width: 350px;
   padding: 0px;
+  display: grid;
 }
 
 .alta form select{
@@ -177,7 +189,4 @@ div form .inputFilter{
   padding: 10px; 
   
 }
-.msjError {
-  color  : rgb(219, 33, 33);
-  font-size: small;
-}
+
