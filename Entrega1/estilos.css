@@ -24,9 +24,9 @@ footer ul li a{
   
   display: grid;
   justify-content: space-evenly;
-  grid-template-columns: repeat(3, 450px);
+  grid-template-columns: repeat(3, 2fr);
   grid-auto-rows: 340px;
-  align-items: center;
+  
   margin: 15px 0px 15px 0px;  
   padding: 0px;
 }
@@ -36,7 +36,7 @@ footer ul li a{
   letter-spacing: -2px;
   border-radius: 8%;
   background-color: rgb(91, 249, 196);
-  margin: 0px 15px 0px 15px;
+  margin: 0px 15px 15px 15px;
   
 }
 
