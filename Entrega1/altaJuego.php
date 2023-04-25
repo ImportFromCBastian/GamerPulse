@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamerPulse</title>
     <link rel="stylesheet" href="estilos.css"></link>
-    <script src = 'verificar.js'> </script>    
+    <script src = 'Verificar.js'> </script>    
 </head>
 <body>
     <header> 
