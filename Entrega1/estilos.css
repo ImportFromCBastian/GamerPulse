@@ -149,7 +149,9 @@ header{
 
 .alta form span{
   display: grid;
+  width: 60%;
   grid-template-columns: repeat(2,1fr);
+  grid-gap: 80px;
 }
 
 
