@@ -17,7 +17,7 @@ if (isset($_POST) && isset($_FILES)) {
         $insertar= $conexion -> query($queryInsersion); 
     }
     if($insertar ===TRUE){
-        window.location.href = "index.php";
+        header("Location: index.php");
         echo "insercion realizada correctamente";
     }
     else{
