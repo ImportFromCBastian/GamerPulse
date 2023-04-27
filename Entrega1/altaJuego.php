@@ -70,7 +70,7 @@
               <input class="inputs" type="reset" value="Reset">
             </span>
 
-              <div id='error' class="msjError"> 
+              <div id='error' class="msjError">  
                 <!--<?php/*
                 $consulta= "select imagen from juegos where id = 3";
                 $consultar = $conexion -> query($consulta);
