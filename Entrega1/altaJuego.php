@@ -20,7 +20,7 @@
       <div>
         <h3>Agregar Juego</h3>
       </div>
-        <form method="post" id="formulario">
+        <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()">
 
           <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
       
@@ -71,7 +71,7 @@
           <input  type ="file" placeholder="Imagen de la caratula " id ="img" name="img">  
 
           <span>
-            <input class="inputs" type="button" onclick="verificador()" value="Validar">
+            <input class="inputs" type="submit" value="Validar">
             <input class="inputs" type="reset" value="Reset">
           </span>
 
