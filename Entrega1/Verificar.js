@@ -20,39 +20,9 @@ function verificador(){
     }
      
   if (alerta !==''){
-    document.getElementById('error').innerHTML=alerta; }
-    else {
-
-     var dataForm = new FormData();
-
-     dataForm.append('nombre', document.getElementById('nombre').value);
-
-     dataForm.append('descripcion', document.getElementById('descripcion').value);
-
-     dataForm.append('url', document.getElementById('url').value);
-
-     dataForm.append('plataforma', document.getElementById('plataforma').value);
-
-     dataForm.append('genero', document.getElementById('genero').value);
-
-     var inputFile = document.getElementById('img');
-     dataForm.append('img', inputFile.files[0]);
-
-     fetch('addJuego.php', {
-       method: 'POST',
-       body: dataForm
-     })
-    .then(function(response) {
-    if(response.ok) {
-           alert("Operación realizada con éxito");
-           window.location.href = "index.php";
-       } else {
-            throw "Error en la llamada Ajax";
-        } 
-     })     
-     .catch(function(error) {
-      console.error(error);
-      alert("No se pudo realizar la operación. Por favor, inténtelo de nuevo más tarde.");
-    });
-    }
+    document.getElementById('error').innerHTML=alerta; 
+    return false
+  }else {
+    return true ;
   }
+ }
