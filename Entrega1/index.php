@@ -1,7 +1,8 @@
 <?php 
   require_once "conexionBDD.php";
+  require_once "querys.php";
   $conexion = conectar();
- 
+  
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +32,12 @@
           <?php 
           }
           ?>
-
         </select>
 <!-- query for plataforms --> 
         <?php 
           $sqlQueryPlatform = "SELECT * FROM plataformas";
-          $platforms = $conexion -> query($sqlQueryPlatform);        
+          $platforms = $conexion -> query($sqlQueryPlatform);
+
         ?>
         <select class ="inputFilter"  name="inputConsole">
           <option value="defaultPlat"> Seleccione una Plataforma</option>
@@ -55,18 +56,18 @@
 
     </form>
     <div class="divBox">
-      
-    <?php 
-      
 
+    <!--query for games-->
+
+    <?php 
       $sqlQueryGames = returnQuery();
       
 
       $games = $conexion -> query($sqlQueryGames);
 
-      
       //file_get_contents(rutaArchivo,base64_encode()); -> return
-      //add_slashes();    
+      //add_slashes();
+      if($games-> num_rows > 0){
       while($rowGames = $games -> fetch_assoc()){
     ?>
         <div class ="staticData">
@@ -76,9 +77,18 @@
           <Strong><p><?php echo $rowGames["descripcion"] ?></p></Strong>
         </div>
     <?php
+        }
+      }else{
+    ?>
+    </div>
+    <div class ="divBox" style="justify-content:center; grid-template-columns:auto;">
+      <p><img class="img_in_box" src="./images/CallOfDuty.jpg" alt="CallOfDuty"></p>
+      <p>No se encontraron resultados.</p>
+      <?php
+
       } 
     ?>
-  </div>
+      </div>
     <footer>
       <h3>Participantes:</h3>
       <ul>
@@ -93,46 +103,6 @@
 
 
 <?php
- function returnQuery(){
-      $sqlQuery = "SELECT j.nombre,j.imagen,j.url,j.descripcion,p.id, p.nombre AS nombrePlataforma , g.id, g.nombre AS nombreGenero FROM juegos j INNER JOIN plataformas p  ON j.id_plataforma = p.id INNER JOIN generos g ON j.id_genero = g.id";
-      
-    if(($_GET == null) || (($_GET['inputName'] == "")) && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole']) == "defaultPlat"){
-
-    }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole'] == "defaultPlat")){
-
-      $input = $_GET['inputName'];
-      $sqlQuery = $sqlQuery." WHERE j.nombre  LIKE '%$input%'";
-
-    }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] == "defaultPlat")){
-
-      $input = $_GET['inputGender'];
-      $sqlQuery = $sqlQuery." WHERE j.id_genero  LIKE '$input'";
-
-    }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
-
-      $input = $_GET['inputConsole'];
-      $sqlQuery = $sqlQuery." WHERE j.id_plataforma  LIKE '$input'";
-
-    }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] == "defaultPlat")){
-
-      $inputName = $_GET['inputName'];
-      $inputGender = $_GET['inputGender'];
-      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_genero LIKE '$inputGender'";
-    }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
-
-      $inputName = $_GET['inputName'];
-      $inputConsole = $_GET['inputConsole'];
-      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_plataforma LIKE '$inputConsole'";
-
-    }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
-
-      $inputGender = $_GET['inputGender'];
-      $inputConsole = $_GET['inputConsole'];
-      $sqlQuery = $sqlQuery . " WHERE j.id_genero LIKE '$inputGender' AND j.id_plataforma LIKE '$inputConsole'";
-
-    }
-    
-    return $sqlQuery." ORDER BY j.nombre ASC";
-  }
+ 
   $conexion-> close();
 ?>
