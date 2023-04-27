@@ -20,7 +20,7 @@
       <div>
         <h3>Agregar Juego</h3>
       </div>
-        <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()">
+        <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()" enctype="multipart/form-data>
 
           <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
       
