@@ -16,9 +16,10 @@ if (isset($_POST) && isset($_FILES)) {
         $queryInsersion= "INSERT INTO juegos (nombre, imagen, descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$descripcion','$url','$genero','$plataforma')";
         $insertar= $conexion -> query($queryInsersion); 
     }
+
     if($insertar === TRUE && $conexion->affected_rows > 0){
         $conexion-> close();
-        echo "Operación realizada con éxito";
+        header ("Location: index.php");
     }
     else{  
         $conexion-> close();
