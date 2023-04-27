@@ -18,11 +18,11 @@ function verificador(){
     if (document.getElementById('genero').value == -1) {
       alerta += "Seleccione un genero válido. ";
     }
-    
+     
   if (alerta !==''){
     document.getElementById('error').innerHTML=alerta; }
     else {
-      document.getElementById('error').innerHTML="valido";
+
      var dataForm = new FormData();
 
      dataForm.append('nombre', document.getElementById('nombre').value);
@@ -42,22 +42,17 @@ function verificador(){
        method: 'POST',
        body: dataForm
      })
-    //  .then(function(response) {
-    //     if(response) {
-    //         return response.text()
-    //     } else {
-    //         throw "Error en la llamada Ajax";
-    //     } 
-    //  })
-    //  .then(function(texto) {
-    //   if(texto=='ok')
-      
-    //     console.log(texto);
-    //     //
-    //  })
-    //  .catch(function(err) {
-    //     console.log(err);
-    //  });
-     
-   }
+    .then(function(response) {
+    if(response.ok) {
+           alert("Operación realizada con éxito");
+           window.location.href = "index.php";
+       } else {
+            throw "Error en la llamada Ajax";
+        } 
+     })     
+     .catch(function(error) {
+      console.error(error);
+      alert("No se pudo realizar la operación. Por favor, inténtelo de nuevo más tarde.");
+    });
     }
+  }
