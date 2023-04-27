@@ -16,11 +16,11 @@
     <header> 
       <a href='index.php'><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a>
     </header>
-          <div class="alta" >
+    <div class="alta" >
       <div>
         <h3>Agregar Juego</h3>
       </div>
-        <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()">
+      <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()">
 
           <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
       
@@ -86,9 +86,8 @@
                 }
                 echo "<img src='data:JPEG;base64,$imagen'>";*/
             ?>-->
-          </div> 
-            
-        </form>
+        </div>
+      </form>
     </div> 
     
     <footer>
