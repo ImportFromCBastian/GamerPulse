@@ -20,7 +20,7 @@
       <div>
         <h3>Agregar Juego</h3>
       </div>
-       <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()">
+       <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()"enctype="multipart/form-data">
 
          <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
       
@@ -59,7 +59,7 @@
            }
          ?>
 
-         <select class ="inputFilter"  name="inputGender" id='genero'>
+         <select class ="inputFilter"  name="genero" id='genero'>
            <option value="-1">Seleccione un G&eacute;nero</option>
            <?php foreach ($genderResults as $gender) { ?>
            <option value="<?php echo $gender['id'] ?>"><?php echo $gender['nombre'] ?></option>
@@ -68,7 +68,7 @@
            ?>
          </select>
 
-         <input  type ="file" placeholder="Imagen de la caratula " id ="img" name="img">  
+         <input  type ="file" id ="img" name="imagen">  
          
          <span>
            <input class="inputs" type="submit" value="Validar">
