@@ -16,16 +16,13 @@ if (isset($_POST) && isset($_FILES)) {
         $queryInsersion= "INSERT INTO juegos (nombre, imagen, descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$descripcion','$url','$genero','$plataforma')";
         $insertar= $conexion -> query($queryInsersion); 
     }
-    if($insertar ===TRUE){
-        header("Location: index.php");
-        echo "insercion realizada correctamente";
+    if($insertar === TRUE && $conexion->affected_rows > 0){
+        $conexion-> close();
+        echo "Operación realizada con éxito";
     }
-    else{
-        echo "Error";
+    else{  
+        $conexion-> close();
+        echo "No se pudo realizar la operación";
     }
-  exit;
-} else {
-    echo 'fallo';
-    return false;
 }
 ?>
