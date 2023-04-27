@@ -66,7 +66,7 @@
       while($rowGames = $games -> fetch_assoc()){
     ?>
         <div class ="staticData">
-          <p><a href="<?php echo $rowGames["url"]?>" target="_blank"><img class="img_in_box" src="data:image/<?php $rowGames["tipo_imagen"] ?>;base64,<?php echo base64_encode($rowGames["imagen"]) ?>" alt="logo"/></a></p>
+          <p><a href="<?php echo $rowGames["url"]?>" target="_blank"><img class="img_in_box" src="data:image/<?php $rowGames["tipo_imagen"] ?>;base64,<?php echo ($rowGames["imagen"]) ?>" alt="logo"/></a></p>
           <p><?php echo $rowGames["nombre"]." - ". $rowGames["nombrePlataforma"]?></p>
           <p><?php echo $rowGames["nombreGenero"] ?></p>
           <Strong><p><?php echo $rowGames["descripcion"] ?></p></Strong>
