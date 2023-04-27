@@ -14,8 +14,7 @@
   <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
-  <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a></header>
-
+  <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.jpg" alt="logo">  </a>  </header>
   <form action="index.php" method="get">
     <div class="form">
       <input class ="inputFilter" type="text" name="inputName"  placeholder="Nombre">
@@ -52,11 +51,9 @@
           <a class="inputs" href="altaJuego.php">Agregar Juego</a>
         </span>
       </div>
-
-
     </form>
+  
     <div class="divBox">
-
     <!--query for games-->
 
     <?php 
@@ -65,8 +62,6 @@
 
       $games = $conexion -> query($sqlQueryGames);
 
-      //file_get_contents(rutaArchivo,base64_encode()); -> return
-      //add_slashes();
       if($games-> num_rows > 0){
       while($rowGames = $games -> fetch_assoc()){
     ?>
@@ -84,11 +79,10 @@
     <div class ="divBox" style="justify-content:center; grid-template-columns:auto;">
       <p><img class="img_in_box" src="./images/CallOfDuty.jpg" alt="CallOfDuty"></p>
       <p>No se encontraron resultados.</p>
-      <?php
-
+    <?php
       } 
     ?>
-      </div>
+    </div>
     <footer>
       <h3>Participantes:</h3>
       <ul>
@@ -96,12 +90,8 @@
         <strong><li><a href="https://github.com/ImportFromCBastian">Sebastian Hernandez 2023</a></li></strong>   
       </ul>
     </footer>
-    
   </body>
 </html>
-
-
-
 <?php
  
   $conexion-> close();
