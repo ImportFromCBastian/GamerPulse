@@ -65,7 +65,8 @@
       $games = $conexion -> query($sqlQueryGames);
 
       
-
+      //file_get_contents(rutaArchivo,base64_encode()); -> return
+      //add_slashes();    
       while($rowGames = $games -> fetch_assoc()){
     ?>
         <div class ="staticData">
