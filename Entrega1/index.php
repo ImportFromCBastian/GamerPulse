@@ -4,7 +4,13 @@
   $conexion = conectar();
   
 ?>
-
+<?php
+if(isset($_COOKIE['mensaje'])) {
+    $mensaje = $_COOKIE['mensaje'];
+    setcookie('mensaje', '', time() - 3600); // Elimina la cookie
+    echo "<script>window.onload= function() {alert('$mensaje')};</script>";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
