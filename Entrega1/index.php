@@ -20,7 +20,7 @@ if(isset($_COOKIE['mensaje'])) {
   <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
-  <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.jpg" alt="logo">  </a>  </header>
+  <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.png" alt="logo">  </a>  </header>
   <form action="index.php" method="get">
     <div class="form">
       <input class ="inputFilter" type="text" name="inputName"  placeholder="Nombre">
