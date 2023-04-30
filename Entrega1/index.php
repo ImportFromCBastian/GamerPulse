@@ -83,7 +83,7 @@ if(isset($_COOKIE['mensaje'])) {
     ?>
     </div>
     <div class ="divBox" style="justify-content:center; grid-template-columns:auto;">
-      <p><img class="img_in_box" src="./images/CallOfDuty.jpg" alt="CallOfDuty"></p>
+      <p><img class="img_in_box" src="https://images.emojiterra.com/twitter/v13.1/512px/1f6ab.png" alt="CallOfDuty"></p>
       <p>No se encontraron resultados.</p>
     <?php
       } 
