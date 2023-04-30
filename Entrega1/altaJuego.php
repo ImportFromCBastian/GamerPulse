@@ -14,7 +14,7 @@
 </head>
 <body>
     <header> 
-      <a href='index.php'><img class="logo" src="./images/GamerPulse.jpg" alt="logo"></a>
+      <a href='index.php'><img class="logo" src="./images/GamerPulse.png" alt="logo"></a>
     </header>
     <div class="alta" >
       <div>
