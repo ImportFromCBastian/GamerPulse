@@ -14,7 +14,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         $tipo= $_FILES["imagen"]["type"];
         $imagenblob= base64_encode((file_get_contents($img)));   
 
-        if (($nombre !=='') && (strlen($url)<80) && (strlen($descripcion)<255) &&($genero > -1) && ($plataforma > -1) && (!empty($imagenblob) && (strpos($tipo,"image/") != false))){
+        if (($nombre !=='') && (strlen($url)<80) && (strlen($descripcion)<255) &&($genero > -1) && ($plataforma > -1) && (!empty($imagenblob) && (strpos($tipo,"image/") !== false))){
             $queryInsersion= "INSERT INTO juegos (nombre, imagen, tipo_imagen,descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$tipo','$descripcion','$url','$genero','$plataforma')";
             $insertar= $conexion -> query($queryInsersion); 
         }
