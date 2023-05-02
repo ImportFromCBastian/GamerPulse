@@ -3,8 +3,7 @@
   require_once "querys.php";
   $conexion = conectar();
   
-?>
-<?php
+
 if(isset($_COOKIE['mensaje'])) {
     $mensaje = $_COOKIE['mensaje'];
     setcookie('mensaje', '', time() - 3600); // Elimina la cookie
@@ -20,7 +19,7 @@ if(isset($_COOKIE['mensaje'])) {
   <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
-  <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.png" alt="logo">  </a>  </header>
+  <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.png" alt="logo">  </a></header>
   <form action="index.php" method="get">
     <div class="form">
       <input class ="inputFilter" type="text" name="inputName"  placeholder="Nombre">
@@ -72,7 +71,7 @@ if(isset($_COOKIE['mensaje'])) {
       while($rowGames = $games -> fetch_assoc()){
     ?>
         <div class ="staticData">
-          <p><a href="<?php echo $rowGames["url"]?>" target="_blank"><img class="img_in_box" src="data:image/<?php $rowGames["tipo_imagen"] ?>;base64,<?php echo ($rowGames["imagen"]) ?>" alt="logo"/></a></p>
+          <p><a href="<?php echo $rowGames["url"]?>" target="_blank"><img class="img_in_box" src="data:<?php echo $rowGames["tipo_imagen"] ?>;base64,<?php echo ($rowGames["imagen"]) ?>" alt="logo"/></a></p>
           <p><?php echo $rowGames["nombre"]." - ". $rowGames["nombrePlataforma"]?></p>
           <p><?php echo $rowGames["nombreGenero"] ?></p>
           <Strong><p><?php echo $rowGames["descripcion"] ?></p></Strong>
@@ -83,7 +82,7 @@ if(isset($_COOKIE['mensaje'])) {
     ?>
     </div>
     <div class ="divBox" style="justify-content:center; grid-template-columns:auto;">
-      <p><img class="img_in_box" src="https://images.emojiterra.com/twitter/v13.1/512px/1f6ab.png" alt="CallOfDuty"></p>
+      <p><img class="img_in_box" src="https://images.emojiterra.com/twitter/v13.1/512px/1f6ab.png" alt=""></p>
       <p>No se encontraron resultados.</p>
     <?php
       } 

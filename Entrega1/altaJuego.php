@@ -6,7 +6,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamerPulse</title>
     <link rel="stylesheet" href="estilos.css"></link>
@@ -20,7 +19,7 @@
       <div>
         <h3>Agregar Juego</h3>
       </div>
-       <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()"enctype="multipart/form-data">
+       <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()" enctype="multipart/form-data">
 
          <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
       
@@ -89,3 +88,9 @@
 
 </body>
 </html>
+
+<?php 
+
+  $conexion -> close();
+
+?>
