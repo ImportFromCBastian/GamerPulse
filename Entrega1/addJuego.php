@@ -34,32 +34,37 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         if ((empty($imagenblob))&&(strpos($tipo,"image/")) === false){
             $alerta.="La imagen no es correcta. ";
         }
-        if ($alerta == ""){
+        if ($alerta === ""){
             $queryInsersion= "INSERT INTO juegos (nombre, imagen, tipo_imagen,descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$tipo','$descripcion','$url','$genero','$plataforma')";
             $insertar= $conexion -> query($queryInsersion); 
         }
         else{
-            setcookie("mensaje", $alerta, time()+5);
-            $conexion-> close();
-            header ("Location: index.php");
+            session_start();
+            $_SESSION["mensaje"] = $alerta;
+            $conexion->close();
+            header("Location: index.php");
         }
         if ($insertar === TRUE && $conexion->affected_rows > 0){
-            setcookie("mensaje", "Juego cargado con éxito", time()+5);
-            $conexion-> close();
-            header ("Location: index.php");
+            session_start();
+            $_SESSION["mensaje"] = "Juego cargado con éxito";
+            $conexion->close();
+            header("Location: index.php");
         } else {  
-            setcookie("mensaje", "Ha ocurrido un error", time()+5);
-            $conexion-> close();
-            header ("Location: index.php");
+            session_start();
+            $_SESSION["mensaje"] = "Ha ocurrido un error";
+            $conexion->close();
+            header("Location: index.php");
         }
     }else{  
-            setcookie("mensaje", "Ha ocurrido un error", time()+5);
-            $conexion-> close();
-            header ("Location: index.php");
+        session_start();
+        $_SESSION["mensaje"] = "Ha ocurrido un error";
+        $conexion->close();
+        header("Location: index.php");
     }
 }else{  
-    setcookie("mensaje", "Ha ocurrido un error", time()+5);
-    $conexion-> close();
-    header ("Location: index.php");
+    session_start();
+    $_SESSION["mensaje"] = "Ha ocurrido un error";
+    $conexion->close();
+    header("Location: index.php");
 }
 ?>

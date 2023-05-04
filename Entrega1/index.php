@@ -1,12 +1,13 @@
 <?php 
+  session.start();
   require_once "conexionBDD.php";
   require_once "querys.php";
   $conexion = conectar();
   
 
-if(isset($_COOKIE['mensaje'])) {
-    $mensaje = $_COOKIE['mensaje'];
-    setcookie('mensaje', '', time() - 3600); // Elimina la cookie
+  if(isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    unset($_SESSION['mensaje']); // Elimina la variable de sesión
     echo "<script>window.onload= function() {alert('$mensaje')};</script>";
 }
 ?>
