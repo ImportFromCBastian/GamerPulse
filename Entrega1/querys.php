@@ -29,13 +29,20 @@ function returnQuery(){
       $inputName = $_GET['inputName'];
       $inputConsole = $_GET['inputConsole'];
       $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_plataforma = '$inputConsole'";
-
+      
     }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
-
+      
       $inputGender = $_GET['inputGender'];
       $inputConsole = $_GET['inputConsole'];
       $sqlQuery = $sqlQuery . " WHERE j.id_genero = '$inputGender' AND j.id_plataforma = '$inputConsole'";
-
+      
+    }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
+      
+      $inputName = $_GET['inputName'];
+      $inputGender = $_GET['inputGender'];
+      $inputConsole = $_GET['inputConsole'];
+      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_genero = '$inputGender' AND j.id_plataforma = '$inputConsole'";
+      
     }
     return $sqlQuery." ORDER BY j.nombre ASC";
   }

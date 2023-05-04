@@ -1,5 +1,6 @@
 <?php 
 require_once "conexionBDD.php";
+
 $conexion = conectar();
 if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) && isset($_POST['descripcion']) && isset($_POST['plataforma']) && isset($_FILES['imagen'])) {
     if ( (!empty($_POST['nombre'])) && (!empty($_POST['url'])) && (!empty($_POST['genero'])) && (!empty($_POST['descripcion'])) && (!empty($_POST['plataforma'])) && (!empty($_FILES['imagen']))){ 
@@ -33,7 +34,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         if ((empty($imagenblob))&&(strpos($tipo,"image/")) === false){
             $alerta.="La imagen no es correcta. ";
         }
-        if ($alerta !== ""){
+        if ($alerta == ""){
             $queryInsersion= "INSERT INTO juegos (nombre, imagen, tipo_imagen,descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$tipo','$descripcion','$url','$genero','$plataforma')";
             $insertar= $conexion -> query($queryInsersion); 
         }
