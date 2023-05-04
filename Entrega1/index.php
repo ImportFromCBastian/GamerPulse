@@ -1,5 +1,5 @@
 <?php 
-  session.start();
+  session_start();
   require_once "conexionBDD.php";
   require_once "querys.php";
   $conexion = conectar();
