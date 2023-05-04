@@ -67,7 +67,7 @@
            ?>
          </select>
 
-         <input  type ="file" id ="img" name="imagen">  
+         <input  type ="file" accept="image/*" id ="img" name="imagen">  
          
          <span>
            <input class="inputs" type="submit" value="Validar">
