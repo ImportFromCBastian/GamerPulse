@@ -13,10 +13,34 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         $img = $_FILES ['imagen']["tmp_name"]; 
         $tipo= $_FILES["imagen"]["type"];
         $imagenblob= base64_encode((file_get_contents($img)));   
+        $alerta="";
 
-        if (($nombre !=='') && (strlen($url)<80) && (strlen($descripcion)<255) &&($genero > -1) && ($plataforma > -1) && (!empty($imagenblob) && (strpos($tipo,"image/") !== false))){
+        if ($nombre ===''){
+            $alerta.="El nombre es obligatorio. ";
+        }
+        if (strlen($url)>80){
+            $alerta.="La URL es demasiado larga. ";
+        }
+        if (strlen($descripcion)>255){
+            $alerta.="La descripcion es demasiado larga. ";
+        }
+        if ($genero === -1){
+            $alerta.="No se selecciono un genero. ";
+        }
+        if ($plataforma === -1){
+            $alerta.="No se selecciono una plataforma. ";
+        }
+        if ((empty($imagenblob))&&(strpos($tipo,"image/")) === false){
+            $alerta.="La imagen no es correcta. ";
+        }
+        if ($alerta !== ""){
             $queryInsersion= "INSERT INTO juegos (nombre, imagen, tipo_imagen,descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$tipo','$descripcion','$url','$genero','$plataforma')";
             $insertar= $conexion -> query($queryInsersion); 
+        }
+        else{
+            setcookie("mensaje", $alerta, time()+5);
+            $conexion-> close();
+            header ("Location: index.php");
         }
         if ($insertar === TRUE && $conexion->affected_rows > 0){
             setcookie("mensaje", "Juego cargado con éxito", time()+5);

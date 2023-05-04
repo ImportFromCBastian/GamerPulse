@@ -12,29 +12,29 @@ function returnQuery(){
     }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] == "defaultPlat")){
 
       $input = $_GET['inputGender'];
-      $sqlQuery = $sqlQuery." WHERE j.id_genero  LIKE '$input'";
+      $sqlQuery = $sqlQuery." WHERE j.id_genero  = '$input'";
 
     }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
 
       $input = $_GET['inputConsole'];
-      $sqlQuery = $sqlQuery." WHERE j.id_plataforma  LIKE '$input'";
+      $sqlQuery = $sqlQuery." WHERE j.id_plataforma  = '$input'";
 
     }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] == "defaultPlat")){
 
       $inputName = $_GET['inputName'];
       $inputGender = $_GET['inputGender'];
-      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_genero LIKE '$inputGender'";
+      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_genero = '$inputGender'";
     }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
 
       $inputName = $_GET['inputName'];
       $inputConsole = $_GET['inputConsole'];
-      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_plataforma LIKE '$inputConsole'";
+      $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_plataforma = '$inputConsole'";
 
     }else if(($_GET['inputName'] == "") && ($_GET['inputGender'] != "defaultGen") && ($_GET['inputConsole'] != "defaultPlat")){
 
       $inputGender = $_GET['inputGender'];
       $inputConsole = $_GET['inputConsole'];
-      $sqlQuery = $sqlQuery . " WHERE j.id_genero LIKE '$inputGender' AND j.id_plataforma LIKE '$inputConsole'";
+      $sqlQuery = $sqlQuery . " WHERE j.id_genero = '$inputGender' AND j.id_plataforma = '$inputConsole'";
 
     }
     return $sqlQuery." ORDER BY j.nombre ASC";
