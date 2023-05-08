@@ -67,14 +67,16 @@ header{
 
 .img_in_box{
   border-radius: 8%;
-  width: 235px;
+  max-width: 235px;
   margin: 15px;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
 .img_in_box:hover{
-  width: 248px;
+  height: auto;
   margin: 15px;
-    
+  transform:scale(1.2);
 }
 
 .inputs{
@@ -184,3 +186,8 @@ div form .inputFilter{
   
 }
 
+.divBoxNaVF{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto;
+}

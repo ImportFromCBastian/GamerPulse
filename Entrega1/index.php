@@ -86,7 +86,7 @@
       }else{
     ?>
     </div>
-    <div class ="divBox" style="justify-content:center; grid-template-columns:auto;">
+    <div class ="divBoxNaVF">
       <p><img class="img_in_box" src="https://images.emojiterra.com/twitter/v13.1/512px/1f6ab.png" alt=""></p>
       <p>No se encontraron resultados.</p>
     <?php
