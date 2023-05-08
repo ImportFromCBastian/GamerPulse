@@ -23,7 +23,7 @@
   <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.png" alt="logo">  </a></header>
   <form action="index.php" method="get">
     <div class="form">
-      <input class ="inputFilter" type="text" name="inputName"  placeholder="Nombre">
+      <input class ="inputFilter" type="text" name="inputName"  placeholder="Nombre" value="<?php echo isset($_GET["inputName"])?$_GET["inputName"]:''; ?>">
       <!-- query for genders --> 
         <?php
           $sqlQueryGender = "SELECT * FROM generos";
@@ -33,7 +33,9 @@
         <select class ="inputFilter"  name="inputGender">
           <option value="defaultGen">Seleccione un G&eacute;nero</option>
           <?php while($rowGender = $genders -> fetch_assoc()){ ?>
-          <option value="<?php echo $rowGender["id"]?>"> <?php echo $rowGender["nombre"] ?></option>  
+          <option value="<?php echo $rowGender["id"]?>" 
+          <?php if(isset($_GET["inputGender"]) && ($_GET["inputGender"] === $rowGender["id"])){
+            echo 'selected';}?>  > <?php echo $rowGender["nombre"] ?></option>  
           <?php 
           }
           ?>
@@ -47,7 +49,9 @@
         <select class ="inputFilter"  name="inputConsole">
           <option value="defaultPlat"> Seleccione una Plataforma</option>
           <?php while($rowPlatform = $platforms -> fetch_assoc()){ ?>
-          <option value="<?php echo $rowPlatform["id"]?>"> <?php echo $rowPlatform["nombre"]?> </option>
+          <option value="<?php echo $rowPlatform["id"]?>" 
+          <?php if(isset($_GET["inputConsole"]) && ($_GET["inputConsole"] === $rowPlatform["id"])){
+            echo 'selected';}?>  > <?php echo $rowPlatform["nombre"]?> </option>
           <?php
           }
           ?>
@@ -60,7 +64,7 @@
     </form>
   
     <div class="divBox">
-    <!--query for games-->
+<!--query for games-->
 
     <?php 
       $sqlQueryGames = returnQuery();
