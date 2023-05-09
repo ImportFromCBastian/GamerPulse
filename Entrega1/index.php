@@ -8,6 +8,7 @@
     $mensaje = $_SESSION['mensaje'];
     unset($_SESSION['mensaje']); // Elimina la variable de sesión
     // falta echo del mensaje
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
