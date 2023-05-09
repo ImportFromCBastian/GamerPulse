@@ -23,7 +23,7 @@
 
          <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
       
-         <input class="inputFilter" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
+         <textarea class="inputFilter" placeholder="Descripci&oacute;n" id="descripcion" name="descripcion"></textarea>
                   
          <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url">
 
