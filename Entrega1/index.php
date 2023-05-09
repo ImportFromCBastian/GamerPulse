@@ -10,6 +10,8 @@
     unset($_SESSION['mensaje']); // Elimina la variable de sesión
   
 ?>
+
+sda
 <DOCTYPE html>
 <html>
 <head>
