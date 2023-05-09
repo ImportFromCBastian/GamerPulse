@@ -3,13 +3,18 @@
   require_once "conexionBDD.php";
   require_once "querys.php";
   $conexion = conectar();
-  
-
   if(isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
-    unset($_SESSION['mensaje']); // Elimina la variable de sesión
-    echo "<script>window.onload= function() {alert('$mensaje')};</script>";
-}
+    ?> 
+    <script type="text/javascript" > 
+      window.onload = function() {
+            var mensaje = "<?php echo $mensaje; ?>";
+            alert(mensaje);
+        }
+        </script>
+    <?php
+    unset($_SESSION['mensaje']);
+  }
 ?>
 <!DOCTYPE html>
 <html>

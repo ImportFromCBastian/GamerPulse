@@ -1,6 +1,39 @@
 <?php 
+
   require_once "conexionBDD.php";
   $conexion = conectar();
+
+  session_start();
+
+  if(isset($_SESSION['alerta'])) {
+    $mensaje = $_SESSION['alerta'];
+    ?> 
+    <script type="text/javascript" > 
+      window.onload = function() {
+            var mensaje = "<?php echo $mensaje; ?>";
+            alert(mensaje);
+        }
+        </script>
+    <?php
+    unset($_SESSION['alerta']);
+  }
+
+  if (isset ($_SESSION['datos'])){
+    $nombre = isset($_SESSION['datos']['nombre']) ? $_SESSION['datos']['nombre'] : '';
+    $url = isset($_SESSION['datos']['url']) ? $_SESSION['datos']['url'] : '';
+    $descripcion = isset($_SESSION['datos']['descripcion']) ? $_SESSION['datos']['descripcion'] : '';
+    $genero = isset($_SESSION['datos']['genero']) ? $_SESSION['datos']['genero'] : '';
+    $plataforma = isset($_SESSION['datos']['plataforma']) ? $_SESSION['datos']['plataforma'] : '';
+    unset($_SESSION['datos']);
+    }
+  else{
+    $nombre = '';
+    $url = '';
+    $descripcion = '';
+    $genero = -1;
+    $plataforma = -1;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,51 +54,35 @@
       </div>
        <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()" enctype="multipart/form-data">
 
-         <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre">
+         <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre" value="<?php echo $nombre; ?>" >
       
-         <input class="inputFilter" type ="text" placeholder="Descripcion" id="descripcion" name="descripcion">
+         <input class="inputFilter" type ="textArea" placeholder="Descripcion" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>">
                   
-         <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url">
+         <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url" value="<?php echo $url; ?>">
 
-         <!--QUERY PARA OBTENER ID Y NOMBRE DE LAS PLATAFORMAS-->
-         <?php
-           $sqlQueryPlatform = "SELECT * FROM plataformas";
-           $platforms = $conexion -> query($sqlQueryPlatform);          
-           $platformResults = array(); // Array para almacenar los nombres de las plataformas
-           while ($rowPlatform = $platforms ->fetch_assoc()){
-             $platformResults [] = $rowPlatform ; // Añadir el nombre de la plataforma al array
-           }         
-          ?>
+          <select class="inputFilter" id="plataforma" name="plataforma">
+              <option value="-1">Seleccione una plataforma</option>
+              <?php
+                  $sqlQueryPlatform = "SELECT * FROM plataformas";
+                  $platforms = $conexion -> query($sqlQueryPlatform);          
+                  while ($rowPlatform = $platforms ->fetch_assoc()){
+                      $selected = ($rowPlatform['id'] == $plataforma) ? "selected" : "";
+                      echo '<option value="'.$rowPlatform['id'].'" '.$selected.'>'.$rowPlatform['nombre'].'</option>';
+                  }
+              ?>
+          </select>
 
-         <select class="inputFilter"id="plataforma" name="plataforma">
-           <option value="-1">Seleccione una plataforma</option>
-           <?php       
-             foreach($platformResults as $platform){
-           ?>
-           <option value="<?php echo $platform['id'] ?>"><?php echo $platform['nombre'] ?></option>
-           <?php   
-             } 
-           ?>
-         </select>
-
-         <!--QUERY PARA OBTENER ID Y NOMBRE DE LOS GENEROS-->
-         <?php
-           $sqlQueryGender = "SELECT * FROM generos";
-           $genders = $conexion -> query($sqlQueryGender);
-           $genderResults = array(); // Array para almacenar los nombres de las plataformas
-           while ($rowGender = $genders ->fetch_assoc()){
-             $genderResults [] = $rowGender; // Añadir el nombre de la plataforma al array
-           }
-         ?>
-
-         <select class ="inputFilter"  name="genero" id='genero'>
-           <option value="-1">Seleccione un G&eacute;nero</option>
-           <?php foreach ($genderResults as $gender) { ?>
-           <option value="<?php echo $gender['id'] ?>"><?php echo $gender['nombre'] ?></option>
-           <?php 
-             } 
-           ?>
-         </select>
+          <select class="inputFilter" name="genero" id='genero'>
+              <option value="-1">Seleccione un G&eacute;nero</option>
+              <?php
+                  $sqlQueryGender = "SELECT * FROM generos";
+                  $genders = $conexion -> query($sqlQueryGender);
+                  while ($rowGender = $genders ->fetch_assoc()){
+                      $selected = ($rowGender['id'] == $genero) ? "selected" : "";
+                      echo '<option value="'.$rowGender['id'].'" '.$selected.'>'.$rowGender['nombre'].'</option>';
+                  }
+              ?>
+          </select>
 
          <input  type ="file" accept="image/*" id ="img" name="imagen">  
          
