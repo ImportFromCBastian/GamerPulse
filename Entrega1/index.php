@@ -11,7 +11,7 @@
     echo "<script>window.onload= function() {alert('$mensaje')};</script>";
 }
 ?>
-<!DOCTYPE html>
+<DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">

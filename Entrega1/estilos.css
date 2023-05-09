@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+textarea{
+  resize: none;
+  text-align: center;
+
+}
+
+textarea::placeholder{
+  text-align: center;
+  line-height: 45px;
+}
+
 
 body{
   padding : 0px;
@@ -18,7 +29,7 @@ body{
 footer{
 
   width: 100%;  
-  
+
 }
 
 
@@ -29,12 +40,9 @@ footer ul li a{
 
 
 .divBox{
-  
   display: grid;
   justify-content: space-evenly;
   grid-template-columns: repeat(3, 1fr);
-  
-  
   margin: 15px 0px 15px 0px;  
   padding: 0px;
 }
@@ -45,13 +53,11 @@ footer ul li a{
   border-radius: 8%;
   background-color: rgb(91, 249, 196);
   margin: 0px 15px 15px 15px;
-  
 }
 
 .staticData p{
   margin: 0px 10px 9px 10px;
   text-align: center;
-  
 }
 
 
@@ -191,3 +197,4 @@ div form .inputFilter{
   justify-content: center;
   grid-template-columns: auto;
 }
+
