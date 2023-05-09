@@ -88,7 +88,6 @@
          
          <span>
            <input class="inputs" type="submit" value="Validar">
-           <input class="inputs" type="reset" value="Reset">
          </span>
          <div id='error' class="msjError">
          </div>

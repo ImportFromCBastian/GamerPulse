@@ -38,7 +38,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
             $alerta.="La imagen no es correcta. ";
         }
 
-        if ($alerta === ""){
+        if ($alerta === "" && FALSE){
             $queryInsersion= "INSERT INTO juegos (nombre, imagen, tipo_imagen,descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$tipo','$descripcion','$url','$genero','$plataforma')";
             $insertar= $conexion -> query($queryInsersion); 
         }
