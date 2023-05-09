@@ -3,7 +3,6 @@
   require_once "conexionBDD.php";
   require_once "querys.php";
   $conexion = conectar();
-<<<<<<< HEAD
   if(isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     ?> 
@@ -15,13 +14,6 @@
         </script>
     <?php
     unset($_SESSION['mensaje']);
-=======
-
-  if(isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    unset($_SESSION['mensaje']); // Elimina la variable de sesión
-    // falta echo del mensaje
->>>>>>> 15d2e5886d003054994d4385c4f8444d8f81e6fb
   }
 ?>
 <!DOCTYPE html>
