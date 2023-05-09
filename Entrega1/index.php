@@ -8,8 +8,7 @@
   if(isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     unset($_SESSION['mensaje']); // Elimina la variable de sesión
-    echo "<script>window.onload= function() {alert('$mensaje')};</script>";
-}
+  
 ?>
 <DOCTYPE html>
 <html>
@@ -20,6 +19,10 @@
   <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
+  <script> window.onload= function() {alert(<?php echo $mensaje?>)}; </script>
+<?php 
+  };  
+?>
   <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.png" alt="logo">  </a></header>
   <form action="index.php" method="get">
     <div class="form">
