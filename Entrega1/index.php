@@ -3,7 +3,7 @@
   require_once "conexionBDD.php";
   require_once "querys.php";
   $conexion = conectar();
-  
+  //prueba
 
   if(isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
