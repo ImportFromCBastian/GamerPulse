@@ -44,6 +44,6 @@ function returnQuery(){
       $sqlQuery = $sqlQuery . " WHERE j.nombre LIKE '%$inputName%' AND j.id_genero = '$inputGender' AND j.id_plataforma = '$inputConsole'";
       
     }
-    return $sqlQuery." ORDER BY j.nombre ASC";
+    return $sqlQuery." ORDER BY j.nombre ASC"; 
   }
 ?>
