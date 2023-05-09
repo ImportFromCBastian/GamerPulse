@@ -16,7 +16,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         $img = $_FILES ['imagen']["tmp_name"]; 
         $tipo= $_FILES["imagen"]["type"];
         $imagenblob= base64_encode((file_get_contents($img)));          
-        $prueba=FALSE;
+
         $alerta="";
         if ($nombre ===''){
             $alerta.="El nombre es obligatorio. ";
@@ -24,7 +24,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         if (strlen($url)>80){
             $alerta.="La URL es demasiado larga. ";
         }
-        //falta validar por imagen
+
         if (strlen($descripcion)>255){
             $alerta.="La descripcion es demasiado larga. ";
         }
@@ -38,7 +38,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
             $alerta.="La imagen no es correcta. ";
         }
 
-        if ($alerta === "" && $prueba){
+        if ($alerta === ""){
             $queryInsersion= "INSERT INTO juegos (nombre, imagen, tipo_imagen,descripcion, url, id_genero, id_plataforma ) VALUES ('$nombre', '$imagenblob','$tipo','$descripcion','$url','$genero','$plataforma')";
             $insertar= $conexion -> query($queryInsersion); 
         }
@@ -77,7 +77,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
     }
 }else{  
     session_start();
-    $_SESSION["mensaje"] = "Ha ocurrido un error";
+    $_SESSION["mensaje"] = "ERROR FATAL";
     $conexion->close();
     header("Location: index.php");
 }
