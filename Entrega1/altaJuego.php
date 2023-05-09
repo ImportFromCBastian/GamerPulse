@@ -1,9 +1,9 @@
 <?php 
   require_once "conexionBDD.php";
   $conexion = conectar();
-  
+
 ?>
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">

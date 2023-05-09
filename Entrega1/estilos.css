@@ -6,8 +6,6 @@
 
 textarea{
   resize: none;
-  text-align: center;
-
 }
 
 textarea::placeholder{
@@ -125,8 +123,9 @@ header{
   color  : rgb(219, 33, 33);
   font-size: small;
 }
-.alta form{
 
+
+.alta form{
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -153,7 +152,6 @@ header{
   grid-template-columns: repeat(2,1fr);
   grid-gap: 80px;
 }
-
 
 
 .form span {
@@ -188,8 +186,7 @@ div form .inputFilter{
   border: 2.75px solid rgb(0, 255, 170);
   border-top-right-radius: 0.75rem;
   border-top-left-radius: 0.75rem;
-  padding: 10px; 
-  
+  padding: 10px;
 }
 
 .divBoxNaVF{

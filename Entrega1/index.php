@@ -8,12 +8,10 @@
   if(isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
     unset($_SESSION['mensaje']); // Elimina la variable de sesión
-  
+    // falta echo del mensaje
 ?>
-
-
-<DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +19,6 @@
   <link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body>
-  <script> window.onload= function() {alert(<?php echo $mensaje?>)}; </script>
-<?php 
-  };  
-?>
   <header> <a href="index.php"> <img class="logo" src="./images/GamerPulse.png" alt="logo">  </a></header>
   <form action="index.php" method="get">
     <div class="form">
