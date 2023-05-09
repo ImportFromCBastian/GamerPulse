@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+textarea{
+  resize: none;
+}
+
+textarea::placeholder{
+  text-align: center;
+  line-height: 45px;
+}
+
 
 body{
   padding : 0px;
@@ -18,7 +27,7 @@ body{
 footer{
 
   width: 100%;  
-  
+
 }
 
 
@@ -29,12 +38,9 @@ footer ul li a{
 
 
 .divBox{
-  
   display: grid;
   justify-content: space-evenly;
   grid-template-columns: repeat(3, 1fr);
-  
-  
   margin: 15px 0px 15px 0px;  
   padding: 0px;
 }
@@ -45,13 +51,11 @@ footer ul li a{
   border-radius: 8%;
   background-color: rgb(91, 249, 196);
   margin: 0px 15px 15px 15px;
-  
 }
 
 .staticData p{
   margin: 0px 10px 9px 10px;
   text-align: center;
-  
 }
 
 
@@ -119,8 +123,9 @@ header{
   color  : rgb(219, 33, 33);
   font-size: small;
 }
-.alta form{
 
+
+.alta form{
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -147,7 +152,6 @@ header{
   grid-template-columns: repeat(2,1fr);
   grid-gap: 80px;
 }
-
 
 
 .form span {
@@ -182,8 +186,7 @@ div form .inputFilter{
   border: 2.75px solid rgb(0, 255, 170);
   border-top-right-radius: 0.75rem;
   border-top-left-radius: 0.75rem;
-  padding: 10px; 
-  
+  padding: 10px;
 }
 
 .divBoxNaVF{
@@ -191,3 +194,4 @@ div form .inputFilter{
   justify-content: center;
   grid-template-columns: auto;
 }
+

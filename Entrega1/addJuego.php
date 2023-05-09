@@ -24,6 +24,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         if (strlen($url)>80){
             $alerta.="La URL es demasiado larga. ";
         }
+        //falta validar por imagen
         if (strlen($descripcion)>255){
             $alerta.="La descripcion es demasiado larga. ";
         }
@@ -65,7 +66,7 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
             session_start();
             $_SESSION["mensaje"] = "ERROR FATAL";
             $conexion->close();
-            header("Location: index.php");
+            header("Location: altaJuego.php");
         }
 
      } else{
@@ -73,13 +74,11 @@ if (isset($_POST['nombre']) && isset($_POST['url']) && isset($_POST['genero']) &
         $_SESSION["mensaje"] = "ERROR FATAL";
         $conexion->close();
         header("Location: index.php");
-     }
-
-    } else{
-        session_start();
-        $_SESSION["mensaje"] = "ERROR FATAL";
-        $conexion->close();
-        header("Location: index.php");
     }
-
+}else{  
+    session_start();
+    $_SESSION["mensaje"] = "Ha ocurrido un error";
+    $conexion->close();
+    header("Location: index.php");
+}
 ?>
