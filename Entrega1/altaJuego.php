@@ -1,6 +1,7 @@
 <?php 
   require_once "conexionBDD.php";
   $conexion = conectar();
+  
 ?>
 <DOCTYPE html>
 <html lang="en">
