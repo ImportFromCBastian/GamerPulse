@@ -56,7 +56,7 @@
 
          <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre" value="<?php echo $nombre; ?>" >
       
-         <input class="inputFilter" type ="textArea" placeholder="Descripcion" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>">
+         <textArea class="inputFilter"  placeholder="Descripcion" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>"></textArea>
                   
          <input class="inputFilter" type ="text" placeholder="URL del juego" id ="url" name="url" value="<?php echo $url; ?>">
 
