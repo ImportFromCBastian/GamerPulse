@@ -110,5 +110,6 @@
 <?php 
 
   $conexion -> close();
+  session_destroy();
 
 ?>
