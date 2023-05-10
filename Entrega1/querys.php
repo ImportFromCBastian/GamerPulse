@@ -1,9 +1,9 @@
 <?php 
 function returnQuery(){
-      $sqlQuery = "SELECT j.nombre,j.imagen,j.tipo_imagen,j.url,j.descripcion,p.id, p.nombre AS nombrePlataforma , g.id, g.nombre AS nombreGenero FROM juegos j INNER JOIN plataformas p  ON j.id_plataforma = p.id INNER JOIN generos g ON j.id_genero = g.id";
-      
+    $sqlQuery = "SELECT j.nombre,j.imagen,j.tipo_imagen,j.url,j.descripcion,p.id, p.nombre AS nombrePlataforma , g.id, g.nombre AS nombreGenero FROM juegos j INNER JOIN plataformas p  ON j.id_plataforma = p.id INNER JOIN generos g ON j.id_genero = g.id";
+    
     if(($_GET == null) || (($_GET['inputName'] == "")) && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole']) == "defaultPlat"){
-
+      return $sqlQuery." ORDER BY j.nombre ASC";
     }else if(($_GET['inputName'] != "") && ($_GET['inputGender'] == "defaultGen") && ($_GET['inputConsole'] == "defaultPlat")){
 
       $input = $_GET['inputName'];

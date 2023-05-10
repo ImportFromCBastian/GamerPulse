@@ -7,8 +7,4 @@ function conectar(){
   }
   return $conexion;
 }
-
-
-
-
 ?>

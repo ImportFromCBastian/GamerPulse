@@ -63,28 +63,28 @@
           <select class="inputFilter" id="plataforma" name="plataforma">
               <option value="-1">Seleccione una plataforma</option>
               <?php
-                  $sqlQueryPlatform = "SELECT * FROM plataformas";
-                  $platforms = $conexion -> query($sqlQueryPlatform);          
-                  while ($rowPlatform = $platforms ->fetch_assoc()){
-                    $selected = ($rowPlatform['id'] == $plataforma) ? "selected" : "";                 
-                  ?>
-                  <option value="<?php echo $rowPlatform['id'];?>" <?php echo $selected;?> > <?php echo $rowPlatform['nombre'];?></option>
+                $sqlQueryPlatform = "SELECT * FROM plataformas";
+                $platforms = $conexion -> query($sqlQueryPlatform);          
+                while ($rowPlatform = $platforms ->fetch_assoc()){
+                  $selected = ($rowPlatform['id'] == $plataforma) ? "selected" : "";                 
+              ?>
+              <option value="<?php echo $rowPlatform['id'];?>" <?php echo $selected;?> > <?php echo $rowPlatform['nombre'];?></option>
           </select>
               <?php 
-                  } 
+                } 
               ?>
 
           <select class="inputFilter" name="genero" id='genero'>
               <option value="-1">Seleccione un G&eacute;nero</option>
               <?php
-                  $sqlQueryGender = "SELECT * FROM generos";
-                  $genders = $conexion -> query($sqlQueryGender);
-                  while ($rowGender = $genders ->fetch_assoc()){
-                    $selected = ($rowGender['id'] == $genero) ? "selected" : "";                  
+                $sqlQueryGender = "SELECT * FROM generos";
+                $genders = $conexion -> query($sqlQueryGender);
+                while ($rowGender = $genders ->fetch_assoc()){
+                  $selected = ($rowGender['id'] == $genero) ? "selected" : "";                  
               ?>
               <option value="<?php echo $rowGender['id'];?>" <?php echo $selected;?> > <?php echo $rowGender['nombre'];?></option>
               <?php
-                  } 
+                } 
               ?>
           </select>
 

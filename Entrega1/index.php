@@ -34,7 +34,7 @@
           $sqlQueryGender = "SELECT * FROM generos";
           $genders = $conexion -> query($sqlQueryGender);
 
-          ?>
+        ?>
         <select class ="inputFilter"  name="inputGender">
           <option value="defaultGen">Seleccione un G&eacute;nero</option>
           <?php while($rowGender = $genders -> fetch_assoc()){ ?>
@@ -76,19 +76,16 @@
 
     <?php 
       $sqlQueryGames = returnQuery();
-      
-
       $games = $conexion -> query($sqlQueryGames);
 
       if($games-> num_rows > 0){
-      while($rowGames = $games -> fetch_assoc()){
-    ?>
-        <div class ="staticData">
-          <p><a href="<?php echo $rowGames["url"]?>" target="_blank"><img class="img_in_box" src="data:<?php echo $rowGames["tipo_imagen"] ?>;base64,<?php echo ($rowGames["imagen"]) ?>" alt="logo"/></a></p>
-          <p><?php echo $rowGames["nombre"]." - ". $rowGames["nombrePlataforma"]?></p>
-          <p><?php echo $rowGames["nombreGenero"] ?></p>
-          <Strong><p><?php echo $rowGames["descripcion"] ?></p></Strong>
-        </div>
+        while($rowGames = $games -> fetch_assoc()){?>
+          <div class ="staticData">
+            <p><a href="<?php echo $rowGames["url"]?>" target="_blank"><img class="img_in_box" src="data:<?php echo $rowGames["tipo_imagen"] ?>;base64,<?php echo ($rowGames["imagen"]) ?>" alt="logo"/></a></p>
+            <p><?php echo $rowGames["nombre"]." - ". $rowGames["nombrePlataforma"]?></p>
+            <p><?php echo $rowGames["nombreGenero"] ?></p>
+            <Strong><p><?php echo $rowGames["descripcion"] ?></p></Strong>
+          </div>
     <?php
         }
       }else{
