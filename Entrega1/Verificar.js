@@ -1,11 +1,16 @@
 function verificador(){    
-  var alerta="";
-    if (document.getElementById("nombre").value === ""){
+  let alerta="";
+  let fileInput = document.getElementById('img');
+  let file = fileInput.files[0]; // Obtener el primer archivo seleccionado
+  
+   if (document.getElementById("nombre").value === ""){
       alerta += "El nombre es obligatorio. ";
     } 
-    if (document.getElementById("img").value.length === 0) {
-      alerta += "Seleccione una imagen. ";
-    }
+  if (!file) {
+    alerta += "Seleccione una imagen. ";
+  } else if (!file.type.startsWith('image/')) {
+    alerta += "El archivo seleccionado no es una imagen. ";
+  }
     if ((document.getElementById("descripcion").value.length>255)) {
       alerta += "El campo descripcion es incorrecto. ";
     }
