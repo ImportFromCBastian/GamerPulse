@@ -10,7 +10,7 @@ function verificador(){
     alerta += "Seleccione una imagen. ";
   } else if (!file.type.startsWith('image/')) {
     alerta += "El archivo seleccionado no es una imagen. ";
-  }
+  } 
   if (document.getElementById("descripcion").value.length>255){
     alerta += "El campo descripcion es incorrecto. ";
   }

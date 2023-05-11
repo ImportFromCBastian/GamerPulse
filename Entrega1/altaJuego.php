@@ -4,20 +4,6 @@
   $conexion = conectar();
 
   session_start();
-
-
-  if(isset($_SESSION['alerta'])) {
-    $mensaje = $_SESSION['alerta'];
-?> 
-    <script type="text/javascript" > 
-      let msg = "<?php echo $mensaje; ?>";
-      console.log(msg ==   null );
-      document.getElementById('error').innerHTML = msg; 
-    </script>
-<?php
-    unset($_SESSION['alerta']);
-  }
-
   if (isset ($_SESSION['datos'])){
     $nombre = isset($_SESSION['datos']['nombre']) ? $_SESSION['datos']['nombre'] : '';
     $url = isset($_SESSION['datos']['url']) ? $_SESSION['datos']['url'] : '';
@@ -52,7 +38,7 @@
       <div>
         <h3>Agregar Juego</h3>
       </div>
-       <form action='addJuego.php' method="post" id="formulario" onSubmit="" enctype="multipart/form-data">
+       <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()" enctype="multipart/form-data">
 
          <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre" value="<?php echo $nombre; ?>" >
       
@@ -90,7 +76,7 @@
 
         <input  type ="file" accept="image/*" id ="img" name="imagen">  
         <div id='error' class="msjError">
-          <p>""</p>
+          <p></p>
         </div> 
         <input class="inputs" type="submit" value="Validar">
       </form>
@@ -105,8 +91,19 @@
 
 </body>
 </html>
+<?php
+  if(isset($_SESSION['alerta'])) {
+    $mensaje = $_SESSION['alerta'];
+?> 
+    <script type="text/javascript" > 
+      let msg = "<?php echo $mensaje; ?>";
+      console.log(document.getElementById('error'));
+      document.getElementById('error').innerHTML = msg; 
+    </script>
+<?php
+    unset($_SESSION['alerta']);
+  }
 
-<?php 
   $conexion -> close();
  
 
