@@ -5,16 +5,16 @@
 
   session_start();
 
+
   if(isset($_SESSION['alerta'])) {
     $mensaje = $_SESSION['alerta'];
-    ?> 
+?> 
     <script type="text/javascript" > 
-      window.onload = function() {
-            var mensaje = "<?php echo $mensaje; ?>";
-            alert(mensaje);
-        }
-        </script>
-    <?php
+      let msg = "<?php echo $mensaje; ?>";
+      console.log(msg ==   null );
+      document.getElementById('error').innerHTML = msg; 
+    </script>
+<?php
     unset($_SESSION['alerta']);
   }
 
@@ -52,7 +52,7 @@
       <div>
         <h3>Agregar Juego</h3>
       </div>
-       <form action='addJuego.php' method="post" id="formulario" onSubmit="return verificador()" enctype="multipart/form-data">
+       <form action='addJuego.php' method="post" id="formulario" onSubmit="" enctype="multipart/form-data">
 
          <input class="inputFilter" type ="text" placeholder="Nombre del Juego" id ="nombre" name="nombre" value="<?php echo $nombre; ?>" >
       
@@ -69,10 +69,10 @@
                   $selected = ($rowPlatform['id'] == $plataforma) ? "selected" : "";                 
               ?>
               <option value="<?php echo $rowPlatform['id'];?>" <?php echo $selected;?> > <?php echo $rowPlatform['nombre'];?></option>
-          </select>
               <?php 
                 } 
               ?>
+          </select>
 
           <select class="inputFilter" name="genero" id='genero'>
               <option value="-1">Seleccione un G&eacute;nero</option>
@@ -89,13 +89,12 @@
           </select>
 
         <input  type ="file" accept="image/*" id ="img" name="imagen">  
-         
-       <input class="inputs" type="submit" value="Validar">
-       <div id='error' class="msjError">
-       </div>
+        <div id='error' class="msjError">
+          <p>""</p>
+        </div> 
+        <input class="inputs" type="submit" value="Validar">
       </form>
-    </div> 
-    
+    </div>
     <footer>
       <h3>Participantes:</h3>
       <ul>
@@ -108,7 +107,6 @@
 </html>
 
 <?php 
-
   $conexion -> close();
  
 
