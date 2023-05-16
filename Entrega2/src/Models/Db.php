@@ -6,10 +6,10 @@ namespace App\Models;
     public $conexion;
 
     function __construct(){
-      $this-> $conexion = new mySqli("localhost","root","","gamerpulse");
+      $this-> conexion = new mySqli("localhost","root","","gamerpulse");
 
-      if($this -> $conexion->connect_errno){
-        printError($this -> $conexion);
+      if($this -> conexion->connect_errno){
+        printError($this -> conexion);
       }
       
     }
