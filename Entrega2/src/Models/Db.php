@@ -1,26 +1,32 @@
-<?php
-
+<?php 
 namespace App\Models;
-use PDO;
 
-Class Db{
 
-  private $host = "localhost";
+class Db{
+  private $hostName = "localhost";
   private $dataBaseName = "gamerpulse";
-  private $user = "root";
   private $password = "";
+  private $userName = "root";
+  private $dataBase;
   
 
-  function construct(){
+  function __construct(){
     try{
 
-      $conection = new PDO("mysql:host = $this->host;dbname = $this->dataBaseName" , $this->user , $this->password);
-      $conection -> setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
-    }catch(PDOException $error){
+      $conn = new \PDO("mysql:host=$this->hostName;dbname=$this->dataBaseName",$this->userName,$this->password);
+      $conn -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+      $this-> dataBase = $conn;
 
-      echo "Error: ". $error -> getMessage() ." al conectarse.";
+    }catch(\PDOException $e){
 
+      echo "Error: ".$e->getMessage().".";
+      
     }
+
+  }
+
+  function conection(){
+    return $this->dataBase;
   }
 
 }
