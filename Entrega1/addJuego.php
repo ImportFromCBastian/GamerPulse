@@ -54,7 +54,7 @@ require_once "conexionBDD.php";
             "plataforma" => $plataforma,
         );
         $conexion->close();
-        header("Location: ".$_SERVER["HTTP_REFERER"]);
+        header("Location: altaJuego.php");
         exit();
     }
     
