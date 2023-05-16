@@ -4,16 +4,19 @@
   use Psr\Http\Message\ServerRequestInterface as Request;
   use Slim\Factory\AppFactory;
   use App\Models\Db as DataBase;
-  use App\Models\Platform;
+
   require __DIR__ . '/vendor/autoload.php';
 
   $app = AppFactory::create();
-
-  $conexion = new DataBase();
   
-  $app -> get('/games',function (Request $request, Response $response, $args){
-    $response -> getBody() -> write("Hello World!");
+  $conection = new DataBase();
+  
+
+
+  $app-> get('/GamerPulse/HelloWorld',function(Request $request, Response $response){
+    $response -> getBody() -> write("Hello World");
     return $response;
+   
   });
 
   $app -> run();

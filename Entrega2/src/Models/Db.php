@@ -1,26 +1,28 @@
-<?php 
+<?php
+
 namespace App\Models;
+use PDO;
 
-  Class Db{
+Class Db{
 
-    public $conexion;
+  private $host = "localhost";
+  private $dataBaseName = "gamerpulse";
+  private $user = "root";
+  private $password = "";
+  
 
-    function __construct(){
-      $this-> conexion = new mySqli("localhost","root","","gamerpulse");
+  function construct(){
+    try{
 
-      if($this -> conexion->connect_errno){
-        printError($this -> conexion);
-      }
-      
+      $conection = new PDO("mysql:host = $this->host;dbname = $this->dataBaseName" , $this->user , $this->password);
+      $conection -> setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+    }catch(PDOException $error){
+
+      echo "Error: ". $error -> getMessage() ." al conectarse.";
+
     }
-
-
-    function printError($conexion){
-      
-      echo "Fallo al conectar con SQL: " .$conexion -> connect_errno;
-
-    }
-
   }
+
+}
 
 ?>
