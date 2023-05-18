@@ -1,6 +1,7 @@
 <?php 
-namespace App\Models;
 
+namespace App\Models;
+use PDO;
 
 class Db{
   private $hostName = "localhost";
@@ -13,11 +14,11 @@ class Db{
   function __construct(){
     try{
 
-      $conn = new \PDO("mysql:host=$this->hostName;dbname=$this->dataBaseName",$this->userName,$this->password);
-      $conn -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+      $conn = new PDO("mysql:host=$this->hostName;dbname=$this->dataBaseName",$this->userName,$this->password);
+      $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this-> dataBase = $conn;
 
-    }catch(\PDOException $e){
+    }catch(PDOException $e){
 
       echo "Error: ".$e->getMessage().".";
       
