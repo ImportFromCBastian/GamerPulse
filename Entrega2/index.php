@@ -40,32 +40,40 @@
 
   });
 
-  
+
   //Add new gender == CREATE
-  $app->post('/GamerPulse/genders', function (Request $request, Response $response,$args) {
+  $app->post('/GamerPulse/genders', function (Request $request, Response $response) {
     try{
-      $genero = json_decode($request->getBody());
-      $sqlQuery = "INSERT INTO generos (id,nombre) VALUES (NULL,'$genero->nombre')";  
-      
       $dataBase = new DataBase();
       $conection = $dataBase->conection();
+      $valid = json_decode($request->getBody());
 
-      $query = $conection -> query($sqlQuery);
+      if($valid != NULL){
+        $genero = json_decode($request->getBody());
+        $sqlQuery = "INSERT INTO generos (id,nombre) VALUES (NULL,'$genero->nombre')";  
+      
 
-      $response->getBody()->write(json_encode(['mensaje'=>"Genero insertado con exito!."]));
+        $query = $conection -> query($sqlQuery);
 
-      $query = null;
-      $conection = null;
+        $response->getBody()->write(json_encode(['mensaje'=>"Genero insertado con exito!."]));
 
-      return $response->withHeader("Content-Type","application/json")->withStatus(200);
+        $query = null;
+        $conection = null;
 
+        return $response->withHeader("Content-Type","application/json")->withStatus(200);
+      }else{
+
+        $response->getBody()->write(json_encode(['mensaje'=>"No entro parametros."]));
+        $conection = null;
+        return $response->withHeader("content-type","application/json")->withStatus(400);
+      }
     }catch(PDOException $e){
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
       $query = null;
       $conection = null;
       
-      //Caso de ser una mala consulta devuelve 404 BAD REQUEST
-      return $response->withHeader("content-type","application/json")->withStatus(400);
+      //Caso de ser una mala consulta devuelve 400 BAD REQUEST
+      return $response->withHeader("content-type","application/json")->withStatus(404);
     }
 
   });
@@ -84,8 +92,9 @@
       
       $query = $conection->query($sqlQueryID);
       $valid = $query->fetch(PDO::FETCH_ASSOC);
-      
-      if($genderName->nombre != "" || !$valid){
+
+
+      if(!$valid || $genderName->nombre != "" || !empty($genderName)){
         
         $sqlQueryUpdate = "UPDATE generos SET nombre = '$genderName->nombre' WHERE id = $id";  
         
