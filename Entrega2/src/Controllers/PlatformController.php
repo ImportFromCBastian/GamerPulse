@@ -6,28 +6,30 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\Db as DataBase;
 use PDO;
 
-class GenderController{
+class PlatformController{
   private $dataBaseConnection;
-  private $status = 200;
+  private $status;
 
   function __construct(){
+
     $this->dataBaseConnection = new DataBase();
     $this->dataBaseConnection = $this->dataBaseConnection->conection();
+
   }
 
   function getStatus(){
     return $this->status;
   }
 
-  function getAllGenders(Request $request, Response &$response){
+  function getAllPlatforms(Request $request, Response &$response){
     try{
-      $sqlQuery = "SELECT * FROM generos";  
+      $sqlQuery = "SELECT * FROM plataformas";  
 
       $query = $this->dataBaseConnection -> query($sqlQuery);
 
-      $generos = $query -> fetchAll(PDO::FETCH_ASSOC);
+      $platforms = $query -> fetchAll(PDO::FETCH_ASSOC);
       
-      $response ->getBody()->write(json_encode($generos));
+      $response ->getBody()->write(json_encode($platforms));
 
 
       $query = null;
@@ -46,22 +48,23 @@ class GenderController{
   }
 
 
-  function postGender(Request $request,Response &$response){
+  function postPlatform(Request $request,Response &$response){
     try{
       $valid = json_decode($request->getBody());
 
       if($valid != null && $valid->nombre != ""){
-        $genero = json_decode($request->getBody());
-        $sqlQuery = "INSERT INTO generos (id,nombre) VALUES (NULL,'$genero->nombre')";  
+
+        $platform = json_decode($request->getBody());
+        $sqlQuery = "INSERT INTO plataformas (id,nombre) VALUES (NULL,'$platform->nombre')";  
       
 
         $query = $this->dataBaseConnection -> query($sqlQuery);
 
-        $response->getBody()->write(json_encode(['mensaje'=>"Genero insertado con exito!."]));
-
+        
         $query = null;
         $this->dataBaseConnection = null;
-
+        
+        $response->getBody()->write(json_encode(['mensaje'=>"Plataforma insertada con exito!."]));
         $response->withHeader("Content-Type","application/json")->withStatus(200);
       }else{
 
@@ -79,28 +82,29 @@ class GenderController{
     }
   }
 
-  function putGender(Request $request,Response &$response,$args){
+  function putPlatform(Request $request,Response &$response,$args){
     try{
 
       $id = $args['id'];
-      $genderName = json_decode($request->getBody());
+      $platformName = json_decode($request->getBody());
       
-      $sqlQueryID = "SELECT * FROM generos WHERE id = $id";
+      $sqlQueryID = "SELECT * FROM plataformas WHERE id = $id";
       
       $query = $this->dataBaseConnection->query($sqlQueryID);
       $valid = $query->fetch(PDO::FETCH_ASSOC);
 
 
-      if(!empty($valid) && !empty($genderName) && !empty($genderName->nombre)){
+      
+      if(!empty($valid) && !empty($platformName) && !empty($platformName->nombre)){
         
-        $sqlQueryUpdate = "UPDATE generos SET nombre = '$genderName->nombre' WHERE id = $id";  
+        $sqlQueryUpdate = "UPDATE plataformas SET nombre = '$platformName->nombre' WHERE id = $id";  
         
         $query = $this->dataBaseConnection -> query($sqlQueryUpdate);     
         
         $query = null;
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"Genero actualizado con exito!."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"Plataforma actualizado con exito!."]));
         $response->withHeader("Content-Type","application/json")->withStatus(200);
       }else{
         
@@ -109,8 +113,6 @@ class GenderController{
 
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
         $response->withHeader("Content-Type","application/json")->withStatus(400);
-        
-        
       }
       
     }catch(PDOException $e){
@@ -122,42 +124,40 @@ class GenderController{
     }
   }
 
-  function deleteGame(Request $request,Response &$response,$args){
+  function deletePlatform(Request $request,Response &$response,$args){
     try{
       $id = $args['id'];
-      $sqlQueryID = "SELECT * FROM generos WHERE id = $id";
+      $sqlQueryID = "SELECT * FROM plataformas WHERE id = $id";
+      $sqlQueryPlatformAssoc = "SELECT * FROM juegos WHERE id_plataforma = $id";
       
       $validID = $this->dataBaseConnection->query($sqlQueryID)->fetch(PDO::FETCH_ASSOC);
+      $validPlatform = $this->dataBaseConnection->query($sqlQueryPlatformAssoc)->fetch(PDO::FETCH_ASSOC);
 
-      echo"hola";
-      die;
-
-      if(empty($validID)){
+      if(!empty($validID) && !empty($validPlatform) || empty($validID)){
         
         $validID = null;
-        $validGender = null;
+        $validPlatform = null;
         $this->dataBaseConnection = null;
         
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
         $response->withHeader("Content-Type","application/json")->withStatus(400);
       }else{
-      
-        $sqlQueryUpdate = "DELETE FROM juegos WHERE id = $id";  
+
+        $sqlQueryUpdate = "DELETE FROM plataformas WHERE id = $id";  
         
         $query = $this->dataBaseConnection -> query($sqlQueryUpdate);     
         
         $query = null;
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"Juego borrado con exito!."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"Plataforma borrada con exito!."]));
         $response->withHeader("Content-Type","application/json")->withStatus(200);
-        
-        
       }
+
     }catch(PDOException $e){
       $this->dataBaseConnection = null;
       $query = null;
-      
+
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
       $response->withHeader("content-type","application/json")->withStatus(404);
     }
