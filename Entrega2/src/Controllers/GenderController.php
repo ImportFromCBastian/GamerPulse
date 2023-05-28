@@ -33,7 +33,6 @@ class GenderController{
       $query = null;
       $this->dataBaseConnection = null;
       
-      $response->withHeader("Content-Type","application/json")->withStatus(200);
 
     }catch(PDOException $e){
       
@@ -41,7 +40,7 @@ class GenderController{
       $this->dataBaseConnection = null;
       
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 
@@ -62,20 +61,19 @@ class GenderController{
         $query = null;
         $this->dataBaseConnection = null;
 
-        $response->withHeader("Content-Type","application/json")->withStatus(200);
       }else{
 
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $response->withHeader("content-type","application/json")->withStatus(400);
+        $this->status = 400;
       }
     }catch(PDOException $e){
       $query = null;
       $this->dataBaseConnection = null;
       
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 
@@ -101,14 +99,13 @@ class GenderController{
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"Genero actualizado con exito!."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(200);
       }else{
         
         $query = null;
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(400);
+        $this->status = 400;
         
         
       }
@@ -118,40 +115,37 @@ class GenderController{
       $query = null;
 
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 
-  function deleteGame(Request $request,Response &$response,$args){
+  function deleteGender(Request $request,Response &$response,$args){
     try{
       $id = $args['id'];
       $sqlQueryID = "SELECT * FROM generos WHERE id = $id";
+      $sqlQueryGenderAssoc = "SELECT * FROM juegos WHERE id_genero = $id";
       
       $validID = $this->dataBaseConnection->query($sqlQueryID)->fetch(PDO::FETCH_ASSOC);
+      $validGender = $this->dataBaseConnection->query($sqlQueryGenderAssoc)->fetch(PDO::FETCH_ASSOC);
 
-      echo"hola";
-      die;
-
-      if(empty($validID)){
+      if(!empty($validID) && !empty($validGender) || empty($validID)){
         
         $validID = null;
         $validGender = null;
         $this->dataBaseConnection = null;
         
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(400);
+        $this->status = 400;
       }else{
       
-        $sqlQueryUpdate = "DELETE FROM juegos WHERE id = $id";  
+        $sqlQueryUpdate = "DELETE FROM generos WHERE id = $id";  
         
-        $query = $this->dataBaseConnection -> query($sqlQueryUpdate);     
+        $query = $this->dataBaseConnection-> query($sqlQueryUpdate);     
         
         $query = null;
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"Juego borrado con exito!."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(200);
-        
         
       }
     }catch(PDOException $e){
@@ -159,7 +153,7 @@ class GenderController{
       $query = null;
       
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 }

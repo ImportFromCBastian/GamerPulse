@@ -35,15 +35,13 @@ class PlatformController{
       $query = null;
       $this->dataBaseConnection = null;
       
-      $response->withHeader("Content-Type","application/json")->withStatus(200);
-
     }catch(PDOException $e){
       
       $query = null;
       $this->dataBaseConnection = null;
       
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 
@@ -65,20 +63,19 @@ class PlatformController{
         $this->dataBaseConnection = null;
         
         $response->getBody()->write(json_encode(['mensaje'=>"Plataforma insertada con exito!."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(200);
       }else{
 
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $response->withHeader("content-type","application/json")->withStatus(400);
+        $this->status = 400;
       }
     }catch(PDOException $e){
       $query = null;
       $this->dataBaseConnection = null;
       
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 
@@ -105,14 +102,13 @@ class PlatformController{
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"Plataforma actualizado con exito!."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(200);
       }else{
         
         $query = null;
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(400);
+        $this->status = 400;
       }
       
     }catch(PDOException $e){
@@ -120,7 +116,7 @@ class PlatformController{
       $query = null;
 
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 
@@ -140,18 +136,17 @@ class PlatformController{
         $this->dataBaseConnection = null;
         
         $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(400);
+        $this->status = 400;
       }else{
 
         $sqlQueryUpdate = "DELETE FROM plataformas WHERE id = $id";  
         
-        $query = $this->dataBaseConnection -> query($sqlQueryUpdate);     
+        $query = $this->dataBaseConnection-> query($sqlQueryUpdate);     
         
         $query = null;
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"Plataforma borrada con exito!."]));
-        $response->withHeader("Content-Type","application/json")->withStatus(200);
       }
 
     }catch(PDOException $e){
@@ -159,7 +154,7 @@ class PlatformController{
       $query = null;
 
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $response->withHeader("content-type","application/json")->withStatus(404);
+      $this->status = 404;
     }
   }
 }
