@@ -45,7 +45,7 @@ class GenderController{
   }
 
 
-  function postGender(Request $request,Response &$response){
+  function postGender(Request $request,Response $response){
     try{
       $valid = json_decode($request->getBody());
 
