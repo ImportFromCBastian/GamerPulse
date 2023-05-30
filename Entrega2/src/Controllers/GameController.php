@@ -84,16 +84,48 @@ class GameController{
   function putGame (Request $request, Response $response, $args){
     try{
       $id = $args['id'];
-      $gameName = json_encode($request->getBody());
+      $game = json_encode($request->getBody());
       
       $sqlQuery = "SELECT * FROM juegos WHERE id = $id";
 
       $query = $this->dataBaseConnection->query($sqlQuery);
       $valid = $query->fetch(PDO::FETCH_ASSOC);
+      //AGREGAR VALIDACION PHP DE CAMPOS Y VALIDACION IMAGEN
+      if (!empty($valid)){
 
-      if (!empty($valid) && !empty($gameName) && !empty($gameName->nombre)){
+        if (empty($game->nombre)) {
+          $errorMessage .= 'No se recibió nombre.  ';
+        }
 
-        $sqlQueryUpdate = "UPDATE generos SET nombre = '$genderName->nombre' WHERE id=$id";
+        if (empty($game->imagen)) {
+          $errorMessage .= 'No se recibio imagen. ';
+        }
+
+        if (empty($game->url)) {
+          $errorMessage .= 'No se recibió url. ';
+        }
+
+        if (empty($game->descripcion)) {
+          $errorMessage .= 'No se recibió descripción. ';
+        }
+
+        if (empty($game->genero)) {
+          $errorMessage .= 'No se recibió genero. ';
+        }
+
+        if (empty($game->plataforma)) {
+          $errorMessage .= 'No se recibió plataforma. ';
+        }
+
+        if (!empty($errorMessage)) {
+            $response->getBody()->write(json_encode(['mensaje' => $errorMessage]));
+            $this->status = 400;
+            $query = null;
+            $this->dataBaseConnection = null;
+
+            return;
+        }
+        $sqlQueryUpdate = "UPDATE juegos SET nombre = '$game->nombre' descripcion = '$game->descripcion' url = '$game->url' imagen = '$game->imagen' id_plataforma = '$game->id_plataforma' id_genero = '$game->id_genero' tipo_imagen = '$game->tipo_imagen' WHERE id=$id";
 
         $query=$this->dataBaseConnection->query($sqlQueryUpdate);
 
@@ -125,26 +157,47 @@ class GameController{
         
         if(!empty($game)){
           $errorMessage = '';
-          
+                //AGREGAR VALIDACION PHP DE CAMPOS Y VALIDACION IMAGEN
+/*
+
+
+    $decodedData = base64_decode($GAME->IMAGEN, true);
+    
+     ($decodedData !== false && imagecreatefromstring($decodedData) !== false)
+
+
+
+*/
           if (empty($game->nombre)) {
-            $errorMessage .= 'El nombre del juego no puede estar vacío. ';
+            $errorMessage .= 'No se recibió nombre.  ';
           }
 
-          if (!strpos($game->imagen, '/image')) {
-            $errorMessage .= 'La imagen del juego debe contener "/image". ';
+          if (empty($game->imagen)) {
+            $errorMessage .= 'No se recibio imagen. ';
           }
 
-          if (strlen($game->url) > 80) {
-            $errorMessage .= 'La URL del juego no puede tener más de 80 caracteres. ';
+          if (empty($game->url)) {
+            $errorMessage .= 'No se recibió url. ';
           }
 
-          if (strlen($game->descripcion) > 255) {
-            $errorMessage .= 'La descripción del juego no puede tener más de 255 caracteres. ';
+          if (empty($game->descripcion)) {
+            $errorMessage .= 'No se recibió descripción. ';
+          }
+
+          if (empty($game->genero)) {
+            $errorMessage .= 'No se recibió genero. ';
+          }
+
+          if (empty($game->plataforma)) {
+            $errorMessage .= 'No se recibió plataforma. ';
           }
 
           if (!empty($errorMessage)) {
             $response->getBody()->write(json_encode(['mensaje' => $errorMessage]));
             $this->status = 400;
+            $query = null;
+            $this->dataBaseConnection = null;
+
             return;
           }
 
