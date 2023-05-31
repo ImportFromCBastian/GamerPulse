@@ -18,7 +18,7 @@
   
   //GET ALL GENDERS == READ
   $app->get('/GamerPulse/genders', function (Request $request, Response $response) {
-    $GLOBALS['genderController']->getAllGenders($request,$response);
+    $GLOBALS['genderController']->getGenders($request,$response);
     return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['genderController']->getStatus());
 
   });

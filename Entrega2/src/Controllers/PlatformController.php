@@ -50,7 +50,7 @@ class PlatformController{
     try{
       $valid = json_decode($request->getBody());
 
-      if($valid != null && $valid->nombre != ""){
+      if(!empty($valid) && !empty($valid->nombre)){
 
         $platform = json_decode($request->getBody());
         $sqlQuery = "INSERT INTO plataformas (id,nombre) VALUES (NULL,'$platform->nombre')";  
@@ -67,7 +67,7 @@ class PlatformController{
 
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS => BAD REQUEST."]));
         $this->status = 400;
       }
     }catch(PDOException $e){
@@ -75,7 +75,7 @@ class PlatformController{
       $this->dataBaseConnection = null;
       
       $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
-      $this->status = 404;
+      $this->status = 400;
     }
   }
 
@@ -83,17 +83,30 @@ class PlatformController{
     try{
 
       $id = $args['id'];
-      $platformName = json_decode($request->getBody());
       
       $sqlQueryID = "SELECT * FROM plataformas WHERE id = $id";
       
       $query = $this->dataBaseConnection->query($sqlQueryID);
       $valid = $query->fetch(PDO::FETCH_ASSOC);
-
-
       
-      if(!empty($valid) && !empty($platformName) && !empty($platformName->nombre)){
+      if(empty($valid)){
+        $query = null;
+        $this->dataBaseConnection = null;
         
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $this->status = 404;
+        
+      }else{
+        $platformName = json_decode($request->getBody());
+
+        if(empty($platformName) || empty($platformName->nombre)){
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN (EMPTY) PARAMETERS => BAD REQUEST."]));
+          $this->status = 400;
+          
+          return;
+
+        }
+
         $sqlQueryUpdate = "UPDATE plataformas SET nombre = '$platformName->nombre' WHERE id = $id";  
         
         $query = $this->dataBaseConnection -> query($sqlQueryUpdate);     
@@ -102,13 +115,7 @@ class PlatformController{
         $this->dataBaseConnection = null;
 
         $response->getBody()->write(json_encode(['mensaje'=>"Plataforma actualizado con exito!."]));
-      }else{
         
-        $query = null;
-        $this->dataBaseConnection = null;
-
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $this->status = 400;
       }
       
     }catch(PDOException $e){
@@ -124,20 +131,31 @@ class PlatformController{
     try{
       $id = $args['id'];
       $sqlQueryID = "SELECT * FROM plataformas WHERE id = $id";
-      $sqlQueryPlatformAssoc = "SELECT * FROM juegos WHERE id_plataforma = $id";
       
       $validID = $this->dataBaseConnection->query($sqlQueryID)->fetch(PDO::FETCH_ASSOC);
-      $validPlatform = $this->dataBaseConnection->query($sqlQueryPlatformAssoc)->fetch(PDO::FETCH_ASSOC);
-
-      if(!empty($validID) && !empty($validPlatform) || empty($validID)){
+      
+      if(empty($validID)){
         
         $validID = null;
-        $validPlatform = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $this->status = 400;
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $this->status = 404;
+        
       }else{
+        $sqlQueryPlatformAssoc = "SELECT * FROM juegos WHERE id_plataforma = $id";
+        $validPlatform = $this->dataBaseConnection->query($sqlQueryPlatformAssoc)->fetch(PDO::FETCH_ASSOC);
+        
+        if(!empty($validPlatform)){
+          $validPlatform = null;
+          $validID = null;
+          $this->dataBaseConnection = null;
+          
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR PLATFORM ASSOC TO GAME => BAD REQUEST."]));
+          $this->status = 400;
+          return;
+
+        }
 
         $sqlQueryUpdate = "DELETE FROM plataformas WHERE id = $id";  
         

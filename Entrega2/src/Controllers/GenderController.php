@@ -19,7 +19,7 @@ class GenderController{
     return $this->status;
   }
 
-  function getAllGenders(Request $request, Response &$response){
+  function getGenders(Request $request, Response &$response){
     try{
       $sqlQuery = "SELECT * FROM generos";  
 
@@ -49,7 +49,7 @@ class GenderController{
     try{
       $valid = json_decode($request->getBody());
 
-      if($valid != null && $valid->nombre != ""){
+      if(!empty($valid) && !empty($valid->nombre)){
         $genero = json_decode($request->getBody());
         $sqlQuery = "INSERT INTO generos (id,nombre) VALUES (NULL,'$genero->nombre')";  
       
@@ -65,7 +65,7 @@ class GenderController{
 
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS => BAD REQUEST."]));
         $this->status = 400;
       }
     }catch(PDOException $e){
@@ -79,17 +79,28 @@ class GenderController{
 
   function putGender(Request $request,Response &$response,$args){
     try{
-
       $id = $args['id'];
-      $genderName = json_decode($request->getBody());
       
       $sqlQueryID = "SELECT * FROM generos WHERE id = $id";
       
       $query = $this->dataBaseConnection->query($sqlQueryID);
       $valid = $query->fetch(PDO::FETCH_ASSOC);
 
+      if(empty($valid)){
+        $query = null;
+        $this->dataBaseConnection = null;
+        
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $this->status = 404;
+      }else{
+        $genderName = json_decode($request->getBody());
 
-      if(!empty($valid) && !empty($genderName) && !empty($genderName->nombre)){
+        if(empty($genderName) || empty($genderName->nombre)){ 
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN (EMPTY) PARAMETERS => BAD REQUEST."]));
+          $this->status = 400;
+          return;
+
+        }
         
         $sqlQueryUpdate = "UPDATE generos SET nombre = '$genderName->nombre' WHERE id = $id";  
         
@@ -97,15 +108,8 @@ class GenderController{
         
         $query = null;
         $this->dataBaseConnection = null;
-
+  
         $response->getBody()->write(json_encode(['mensaje'=>"Genero actualizado con exito!."]));
-      }else{
-        
-        $query = null;
-        $this->dataBaseConnection = null;
-
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $this->status = 400;
         
         
       }
@@ -123,21 +127,32 @@ class GenderController{
     try{
       $id = $args['id'];
       $sqlQueryID = "SELECT * FROM generos WHERE id = $id";
-      $sqlQueryGenderAssoc = "SELECT * FROM juegos WHERE id_genero = $id";
       
       $validID = $this->dataBaseConnection->query($sqlQueryID)->fetch(PDO::FETCH_ASSOC);
-      $validGender = $this->dataBaseConnection->query($sqlQueryGenderAssoc)->fetch(PDO::FETCH_ASSOC);
-
-      if(!empty($validID) && !empty($validGender) || empty($validID)){
+      
+      if(empty($validID)){
         
         $validID = null;
-        $validGender = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        $this->status = 400;
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $this->status = 404;
+        
       }else{
-      
+        $sqlQueryGenderAssoc = "SELECT * FROM juegos WHERE id_genero = $id";
+        $validGender = $this->dataBaseConnection->query($sqlQueryGenderAssoc)->fetch(PDO::FETCH_ASSOC);
+
+        if(!empty($validGender)){
+          $validID = null;
+          $validGender = null;
+          $this->dataBaseConnection = null;
+          
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR GENDER ASSOC TO GAME => BAD REQUEST."]));
+          $this->status = 400;
+
+          return;
+
+        }
         $sqlQueryUpdate = "DELETE FROM generos WHERE id = $id";  
         
         $query = $this->dataBaseConnection-> query($sqlQueryUpdate);     

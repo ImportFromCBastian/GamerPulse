@@ -57,9 +57,8 @@ class GameController{
         $validID = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
-        
-        $this->status = 400;
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR NOT FOUND."]));
+        $this->status = 404;
       }else{
 
         $sqlQueryUpdate = "DELETE FROM juegos WHERE id = $id";  
@@ -118,7 +117,7 @@ class GameController{
         }
 
         if (!empty($errorMessage)) {
-            $response->getBody()->write(json_encode(['mensaje' => $errorMessage]));
+            $response->getBody()->write(json_encode(['mensaje' => $errorMessage." => BAD REQUEST"]));
             $this->status = 400;
             $query = null;
             $this->dataBaseConnection = null;
@@ -137,8 +136,8 @@ class GameController{
         $query=null;
         $this->dataBaseConnection=null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"ERROR"]));
-        $this->status=400;
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $this->status=404;
 
       }
     }catch(PDOException $e){
@@ -206,15 +205,13 @@ class GameController{
           $query = $this->dataBaseConecction->query($sqlQuery);
 
           $response->getBody()->write(json_encode(['mensaje'=>'Juego agregado con exito!']));
-          
-          $this->status=200;
 
           $query = null;
           $this->dataBaseConnection = null;
 
         }else{
 
-          $response->getBody()->write(json_encode(['mensaje'=>"ERR BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS => BAD REQUEST."]));
           $this->status = 400;
           $this->dataBaseConnection = null;
 
@@ -229,10 +226,5 @@ class GameController{
 
       }
     }
-
-
-
-
-
 }
 ?>
