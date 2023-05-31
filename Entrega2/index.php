@@ -18,7 +18,7 @@
   
   //GET ALL GENDERS == READ
   $app->get('/GamerPulse/genders', function (Request $request, Response $response) {
-    $GLOBALS['genderController']->getGenders($request,$response);
+    $GLOBALS['genderController']->getAllGenders($request,$response);
     return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['genderController']->getStatus());
 
   });
@@ -75,9 +75,9 @@
 
   });
 
-  //GET ALL GAMES IN DB
+  //GET ALL GAMES IN DB OR IF THERE ARE PARAMETERS FETCH THOSE
   $app->get('/GamerPulse/games',function(Request $request, Response $response){
-    $GLOBALS['gameController']->getAllGames($request,$response);
+    $GLOBALS['gameController']->getGames($request,$response);
     return $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
   });
 

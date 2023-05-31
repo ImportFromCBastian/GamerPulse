@@ -19,7 +19,7 @@ class GenderController{
     return $this->status;
   }
 
-  function getGenders(Request $request, Response &$response){
+  function getAllGenders(Request $request, Response &$response){
     try{
       $sqlQuery = "SELECT * FROM generos";  
 

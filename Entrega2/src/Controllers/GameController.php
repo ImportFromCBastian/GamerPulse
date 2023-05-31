@@ -21,19 +21,94 @@ class GameController{
     return $this->status;
   }
 
-  function getAllGames(Request $request, Response &$response){
+  function getGames(Request $request, Response &$response){
     try{
       $sqlQuery = "SELECT * FROM juegos";  
 
+      if(!empty($request->getBody())){
+        $fetcher = json_decode($request->getBody());
+        
+        if(!empty($fetcher->nombre) && empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%'";
+
+        }else if(empty($fetcher->nombre) && !empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero'";
+
+        }else if(empty($fetcher->nombre) && empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->idPlataforma'";
+          
+        }else if(empty($fetcher->nombre) && empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+          if(strpos($fetcher->orden,"ASC") !== false){
+            $sqlQuery = $sqlQuery." ORDER BY nombre ASC";
+            
+          }else if(strpos($fetcher->orden,"DESC") !== false){
+            $sqlQuery = $sqlQuery." ORDER BY nombre DESC";
+            
+          }
+        }else if(!empty($fetcher->nombre) && !empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->idGenero'";
+          
+        }else if(!empty($fetcher->nombre) && empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_plataforma = '$fetcher->idPlataforma'";
+            
+        }else if(!empty($fetcher->nombre) && empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+          if(strpos($fetcher->orden,"ASC") !== false){
+            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre ASC ";
+            
+          }else if(strpos($fetcher->orden,"DESC") !== false){
+            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre DESC ";
+            
+          }
+          
+        }else if(empty($fetcher->nombre) && !empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero' AND id_plataforma = '$fetcher->idPlataforma'";
+          
+        }else if (empty($fetcher->nombre) && !empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+          if(strpos($fetcher->orden,"ASC") !== false){
+            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero' ORDER BY nombre ASC";  
+            
+          }else if(strpos($fetcher->orden,"DESC") !== false){
+            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero' ORDER BY nombre DESC";
+            
+          }
+
+        }else if(empty($fetcher->nombre) && empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+           if(strpos($fetcher->orden,"ASC") !== false){
+            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->idPlataforma' ORDER BY nombre ASC";  
+            
+          }else if(strpos($fetcher->orden,"DESC") !== false){
+            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->idPlataforma' ORDER BY nombre DESC";
+            
+          }
+
+        }else if(!empty($fetcher->nombre) && !empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->idGenero' AND id_plataforma = '$fetcher->idPlataforma' ORDER BY nombre";
+          if(strpos($fetcher->orden,"ASC") !== false){
+            $sqlQuery = $sqlQuery." ASC";  
+            
+          }else if(strpos($fetcher->orden,"DESC") !== false){
+            $sqlQuery = $sqlQuery." DESC";
+            
+          }
+
+        }
+
+      }
+      
       $query = $this->dataBaseConnection -> query($sqlQuery);
 
-      $platforms = $query -> fetchAll(PDO::FETCH_ASSOC);
-      
-      $response ->getBody()->write(json_encode($platforms));
-
-
+      $games = $query -> fetchAll(PDO::FETCH_ASSOC);
+      if(empty($games)){
+        $response-> getBody()->write(json_encode(['mensaje'=>'FETCHING DOESNT MATCH => EMPTY RESOURCE']));
+        $query = null;
+        $this->dataBaseConnection = null;
+        return;
+        
+      } 
       $query = null;
       $this->dataBaseConnection = null;
+      
+      $response ->getBody()->write(json_encode($games));
 
     }catch(PDOException $e){
       
