@@ -28,16 +28,16 @@ class GameController{
       if(!empty($request->getBody())){
         $fetcher = json_decode($request->getBody());
         
-        if(!empty($fetcher->nombre) && empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && empty($fetcher->orden)){
+        if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%'";
 
-        }else if(empty($fetcher->nombre) && !empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero'";
+        }else if(empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero'";
 
-        }else if(empty($fetcher->nombre) && empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->idPlataforma'";
+        }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma'";
           
-        }else if(empty($fetcher->nombre) && empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+        }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." ORDER BY nombre ASC";
             
@@ -45,13 +45,13 @@ class GameController{
             $sqlQuery = $sqlQuery." ORDER BY nombre DESC";
             
           }
-        }else if(!empty($fetcher->nombre) && !empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->idGenero'";
+        }else if(!empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->id_genero'";
           
-        }else if(!empty($fetcher->nombre) && empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && empty($fetcher->orden)){
-            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_plataforma = '$fetcher->idPlataforma'";
+        }else if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
+            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_plataforma = '$fetcher->id_plataforma'";
             
-        }else if(!empty($fetcher->nombre) && empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+        }else if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre ASC ";
             
@@ -60,29 +60,29 @@ class GameController{
             
           }
           
-        }else if(empty($fetcher->nombre) && !empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero' AND id_plataforma = '$fetcher->idPlataforma'";
+        }else if(empty($fetcher->nombre) && !empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' AND id_plataforma = '$fetcher->id_plataforma'";
           
-        }else if (empty($fetcher->nombre) && !empty($fetcher->idGenero) && empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+        }else if (empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero' ORDER BY nombre ASC";  
+            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' ORDER BY nombre ASC";  
             
           }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->idGenero' ORDER BY nombre DESC";
+            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' ORDER BY nombre DESC";
             
           }
 
-        }else if(empty($fetcher->nombre) && empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
+        }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
            if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->idPlataforma' ORDER BY nombre ASC";  
+            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre ASC";  
             
           }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->idPlataforma' ORDER BY nombre DESC";
+            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre DESC";
             
           }
 
-        }else if(!empty($fetcher->nombre) && !empty($fetcher->idGenero) && !empty($fetcher->idPlataforma) && !empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->idGenero' AND id_plataforma = '$fetcher->idPlataforma' ORDER BY nombre";
+        }else if(!empty($fetcher->nombre) && !empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
+          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->id_genero' AND id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre";
           if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." ASC";  
             
