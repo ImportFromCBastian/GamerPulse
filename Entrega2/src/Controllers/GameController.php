@@ -159,14 +159,14 @@ class GameController{
     try{
       $id = $args['id'];
 
-      $game = json_encode($request->getBody());
-      
       $sqlQuery = "SELECT * FROM juegos WHERE id = $id";
-
+      
       $query = $this->dataBaseConnection->query($sqlQuery);
       $valid = $query->fetch(PDO::FETCH_ASSOC);
-      $errorMessage="";
+      
       if (!empty($valid)){
+        $game = json_decode($request->getBody());
+        $errorMessage="";
         if(!empty($game)){
           if (empty($game->nombre)) {
               $errorMessage .= 'No se recibió nombre.  ';
@@ -190,27 +190,20 @@ class GameController{
               }
             }
 
-            if (empty($game->url)) {
-              $errorMessage .= 'No se recibió url. ';
-            }else{
-              if (strlen($game->url)>80){
-                $alerta.="La URL es demasiado larga. ";
-              }
-            }
 
-            if (empty($game->descripcion)) {
-              $errorMessage .= 'No se recibió descripción. ';
-            }else{
-              if (strlen($game->descripcion)>255){
-                $alerta.="La descripcion es demasiado larga. ";
-              }
+            if (strlen($game->url)>80){
+              $alerta.="La URL es demasiado larga. ";
             }
-
-            if (empty($game->genero)) {
+          
+            if (strlen($game->descripcion)>255){
+              $alerta.="La descripcion es demasiado larga. ";
+            }
+          
+            if (empty($game->id_genero)) {
               $errorMessage .= 'No se recibió genero. ';
             }
 
-            if (empty($game->plataforma)) {
+            if (empty($game->id_plataforma)) {
               $errorMessage .= 'No se recibió plataforma. ';
             }
         }else{
@@ -224,7 +217,7 @@ class GameController{
 
             return;
         }
-        $sqlQueryUpdate = "UPDATE juegos SET nombre = '$game->nombre' descripcion = '$game->descripcion' url = '$game->url' imagen = '$game->imagen' id_plataforma = '$game->id_plataforma' id_genero = '$game->id_genero' tipo_imagen = '$game->tipo_imagen' WHERE id=$id";
+        $sqlQueryUpdate = "UPDATE juegos SET nombre = '$game->nombre', descripcion = '$game->descripcion' , url = '$game->url' , imagen = '$game->imagen' , id_plataforma = '$game->id_plataforma' , id_genero = '$game->id_genero' , tipo_imagen = '$game->tipo_imagen' WHERE id = $id";
 
         $query=$this->dataBaseConnection->query($sqlQueryUpdate);
 
@@ -249,7 +242,7 @@ class GameController{
     }
   }
 
-    function postGame (Request $request, Response $response,$args){
+    function postGame (Request $request, Response $response){
       try{
         $game= json_decode($request->getBody());
         if(!empty($game)){
@@ -258,7 +251,7 @@ class GameController{
           if (empty($game->nombre)) {
             $errorMessage .= 'No se recibió nombre.  ';
           }else{
-            if ($game->nombre ===''){
+            if ($game->nombre === ''){
               $errorMessage .="El nombre recibido está vacío. ";
             }
           }
@@ -277,27 +270,22 @@ class GameController{
             }
           }
 
-          if (empty($game->url)) {
-            $errorMessage .= 'No se recibió url. ';
-          }else{
-            if (strlen($game->url)>80){
-              $alerta.="La URL es demasiado larga. ";
-            }
+    
+          if (strlen($game->url)>80){
+            $alerta.="La URL es demasiado larga. ";
           }
 
-          if (empty($game->descripcion)) {
-            $errorMessage .= 'No se recibió descripción. ';
-          }else{
-            if (strlen($game->descripcion)>255){
-              $alerta.="La descripcion es demasiado larga. ";
-            }
+      
+          if (strlen($game->descripcion)>255){
+            $alerta.="La descripcion es demasiado larga. ";
           }
+          
 
-          if (empty($game->genero)) {
+          if (empty($game->id_genero)) {
             $errorMessage .= 'No se recibió genero. ';
           }
 
-          if (empty($game->plataforma)) {
+          if (empty($game->id_plataforma)) {
             $errorMessage .= 'No se recibió plataforma. ';
           }
 
@@ -310,7 +298,7 @@ class GameController{
             return;
           }
 
-          $sqlQuery = "INSERT INTO juegos(id,nombre,imagen, descripcion, plataforma,URL,genero) VALUES (NULL,'$game->nombre','$game->imagen','$game->descripcion','$game->plataforma','$game->url','$game->genero')";
+          $sqlQuery = "INSERT INTO juegos(id,nombre,imagen,tipo_imagen, descripcion, url,id_genero,id_plataforma) VALUES (NULL,'$game->nombre','$game->imagen','$game->tipo_imagen','$game->descripcion','$game->url','$game->id_genero','$game->id_plataforma')";
 
           $query = $this->dataBaseConnection->query($sqlQuery);
 
@@ -320,7 +308,7 @@ class GameController{
           $this->dataBaseConnection = null;
 
         }else{
-          $response->getBody()->write(json_encode(['mensaje'=>"ERROR IN PARAMETERS => BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERROR (EMPTY) PARAMETERS => BAD REQUEST."]));
           $this->status = 400;
           $this->dataBaseConnection = null;
         }
