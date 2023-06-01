@@ -88,6 +88,19 @@
     return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
   });
 
+  $app->post('/GamerPulse/games', function(Request $request, Response $response){
+    $GLOBALS['gameController']->postGame($request,$response);
+    return $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
+  });
+
+  $app->put('/GamerPulse/games/{id}', function(Request $request, Response $response){
+    $GLOBALS['gameController']->putGame($request,$response);
+    return $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
+  });
+
+
+
+
   $app->run();
   
 ?>
