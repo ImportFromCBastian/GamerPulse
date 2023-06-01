@@ -27,16 +27,16 @@ class GameController{
 
       if(!empty($request->getBody())){
         $fetcher = json_decode($request->getBody());
-        
+        //only name
         if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%'";
-
+        //only gender
         }else if(empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero'";
-
+        //only platform
         }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma'";
-          
+        //only order
         }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." ORDER BY nombre ASC";
@@ -45,12 +45,13 @@ class GameController{
             $sqlQuery = $sqlQuery." ORDER BY nombre DESC";
             
           }
+        // name and gender
         }else if(!empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->id_genero'";
-          
+        //name and platform
         }else if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
             $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_plataforma = '$fetcher->id_plataforma'";
-            
+        //name and order
         }else if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre ASC ";
@@ -59,10 +60,10 @@ class GameController{
             $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre DESC ";
             
           }
-          
+        //gender and platform  
         }else if(empty($fetcher->nombre) && !empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' AND id_plataforma = '$fetcher->id_plataforma'";
-          
+        // gender and order  
         }else if (empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' ORDER BY nombre ASC";  
@@ -71,7 +72,7 @@ class GameController{
             $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' ORDER BY nombre DESC";
             
           }
-
+          //platform and order
         }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
            if(strpos($fetcher->orden,"ASC") !== false){
             $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre ASC";  
@@ -80,7 +81,7 @@ class GameController{
             $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre DESC";
             
           }
-
+        // all combined
         }else if(!empty($fetcher->nombre) && !empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
           $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->id_genero' AND id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre";
           if(strpos($fetcher->orden,"ASC") !== false){
@@ -98,6 +99,7 @@ class GameController{
       $query = $this->dataBaseConnection -> query($sqlQuery);
 
       $games = $query -> fetchAll(PDO::FETCH_ASSOC);
+      
       if(empty($games)){
         $response-> getBody()->write(json_encode(['mensaje'=>'FETCHING DOESNT MATCH => EMPTY RESOURCE']));
         $query = null;
