@@ -180,23 +180,24 @@ class GameController{
               $errorMessage .= 'No se recibio imagen. ';
             }else{
               if(strpos($game->tipo_imagen,"image/") === false){
-                $alerta.= "El documento seleccionado no es imagen.";
-              }else{  
+                $errorMessage.= "El documento seleccionado no es imagen o esta vacia.";
+
+              }else{ 
                 $decodedData = base64_decode($game->imagen, true);
                 //se verifica si la decodificacion fue exitosa  y si se pudo construir una imagen a partir de estos datos
-                if ($decodedData !== true && imagecreatefromstring($decodedData) !== true) {
-                  $alerta .= "La imagen no está codificada en Base64.";
+                if ($decodedData !== true) {
+                  $errorMessage .= "La imagen no está codificada en Base64.";
                   } 
               }
             }
-
+            
 
             if (strlen($game->url)>80){
-              $alerta.="La URL es demasiado larga. ";
+              $errorMessage.="La URL es demasiado larga. ";
             }
           
             if (strlen($game->descripcion)>255){
-              $alerta.="La descripcion es demasiado larga. ";
+              $errorMessage .="La descripcion es demasiado larga. ";
             }
           
             if (empty($game->id_genero)) {
@@ -264,7 +265,7 @@ class GameController{
             }else{  
               $decodedData = base64_decode($game->imagen, true);
               //se verifica si la decodificacion fue exitosa  y si se pudo construir una imagen a partir de estos datos
-              if ($decodedData !== true && imagecreatefromstring($decodedData) !== true) {
+              if ($decodedData !== true) {
                 $alerta .= "La imagen no está codificada en Base64.";
                 } 
             }

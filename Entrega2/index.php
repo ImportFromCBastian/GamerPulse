@@ -15,6 +15,9 @@
   $genderController = new GenderController();
   $platformController = new PlatformController();
   $gameController = new GameController();
+
+  $app->addRoutingMiddleware();
+  $app->addErrorMiddleware(false,true,false);
   
   //GET ALL GENDERS == READ
   $app->get('/GamerPulse/genders', function (Request $request, Response $response) {
@@ -97,9 +100,6 @@
     $GLOBALS['gameController']->putGame($request,$response,$args);
     return $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
   });
-
-
-
 
   $app->run();
   
