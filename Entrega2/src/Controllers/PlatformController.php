@@ -8,7 +8,7 @@ use PDO;
 
 class PlatformController{
   private $dataBaseConnection;
-  private $status;
+  private $status = 200;
 
   function __construct(){
 

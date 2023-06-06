@@ -23,77 +23,33 @@ class GameController{
 
   function getGames(Request $request, Response &$response){
     try{
-      $sqlQuery = "SELECT * FROM juegos";  
+      $sqlQuery = "SELECT * FROM juegos WHERE 1 = 1";  
 
       if(!empty($request->getBody())){
         $fetcher = json_decode($request->getBody());
-        //only name
-        if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%'";
-        //only gender
-        }else if(empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero'";
-        //only platform
-        }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma'";
-        //only order
-        }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
+
+        if(!empty($fetcher->nombre)){
+          $sqlQuery.=" AND nombre LIKE '%$fetcher->nombre%'";
+        }
+
+        if(!empty($fetcher->id_genero)){
+          $sqlQuery.=" AND id_genero = $fetcher->id_genero";
+        }
+        
+        if(!empty($fetcher->id_plataforma)){
+          $sqlQuery.=" AND id_platafoma = $fetcher->id_plataforma";
+        }
+
+        if(!empty($fetcher->orden)){
           if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." ORDER BY nombre ASC";
+            $sqlQuery .= " ORDER BY nombre ASC";
             
           }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." ORDER BY nombre DESC";
-            
-          }
-        // name and gender
-        }else if(!empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->id_genero'";
-        //name and platform
-        }else if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
-            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_plataforma = '$fetcher->id_plataforma'";
-        //name and order
-        }else if(!empty($fetcher->nombre) && empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
-          if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre ASC ";
-            
-          }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' ORDER BY nombre DESC ";
-            
-          }
-        //gender and platform  
-        }else if(empty($fetcher->nombre) && !empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' AND id_plataforma = '$fetcher->id_plataforma'";
-        // gender and order  
-        }else if (empty($fetcher->nombre) && !empty($fetcher->id_genero) && empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
-          if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' ORDER BY nombre ASC";  
-            
-          }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_genero = '$fetcher->id_genero' ORDER BY nombre DESC";
-            
-          }
-          //platform and order
-        }else if(empty($fetcher->nombre) && empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
-           if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre ASC";  
-            
-          }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." WHERE id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre DESC";
-            
-          }
-        // all combined
-        }else if(!empty($fetcher->nombre) && !empty($fetcher->id_genero) && !empty($fetcher->id_plataforma) && !empty($fetcher->orden)){
-          $sqlQuery = $sqlQuery." WHERE nombre LIKE '%$fetcher->nombre%' AND id_genero = '$fetcher->id_genero' AND id_plataforma = '$fetcher->id_plataforma' ORDER BY nombre";
-          if(strpos($fetcher->orden,"ASC") !== false){
-            $sqlQuery = $sqlQuery." ASC";  
-            
-          }else if(strpos($fetcher->orden,"DESC") !== false){
-            $sqlQuery = $sqlQuery." DESC";
+            $sqlQuery .= " ORDER BY nombre DESC";
             
           }
 
         }
-
       }
       
       $query = $this->dataBaseConnection -> query($sqlQuery);
@@ -263,24 +219,24 @@ class GameController{
             $errorMessage .= 'No se recibio imagen. ';
           }else{
             if(strpos($game->tipo_imagen,"image/") === false){
-              $alerta.= "El documento seleccionado no es imagen.";
+              $errorMessage.= "El documento seleccionado no es imagen.";
             }else{  
               $decodedData = base64_decode($game->imagen, true);
               //se verifica si la decodificacion fue exitosa  y si se pudo construir una imagen a partir de estos datos
-              if ($decodedData !== true) {
-                $alerta .= "La imagen no está codificada en Base64.";
+              if (!$decodedData) {
+                $errorMessage .= "La imagen no está codificada en Base64.";
                 } 
             }
           }
 
     
           if (strlen($game->url)>80){
-            $alerta.="La URL es demasiado larga. ";
+            $errorMessage.="La URL es demasiado larga. ";
           }
 
       
           if (strlen($game->descripcion)>255){
-            $alerta.="La descripcion es demasiado larga. ";
+            $errorMessage.="La descripcion es demasiado larga. ";
           }
           
 

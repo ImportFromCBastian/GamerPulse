@@ -10,14 +10,14 @@
   
   require __DIR__ . '/vendor/autoload.php';
   
-  
+  //cambiar el get por params a post
   $app = AppFactory::create();
   $genderController = new GenderController();
   $platformController = new PlatformController();
   $gameController = new GameController();
 
   $app->addRoutingMiddleware();
-  $app->addErrorMiddleware(false,true,false);
+  $app->addErrorMiddleware(true,true,true);
   
   //GET ALL GENDERS == READ
   $app->get('/GamerPulse/genders', function (Request $request, Response $response) {
