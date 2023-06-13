@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import endpoints from './endpoints';
+import endpoints from '../../config/endpoints';
 
 const GenreListPage = () =>{
 
