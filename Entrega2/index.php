@@ -12,6 +12,7 @@
   
   //cambiar el get por params a post
   $app = AppFactory::create();
+  header("Access-Control-Allow-Origin: *");
   $genderController = new GenderController();
   $platformController = new PlatformController();
   $gameController = new GameController();
