@@ -40,6 +40,12 @@
 
   });
 
+  $app->get('/GamerPulse/genders/{id}', function (Request $request, Response $response, $args) {
+    $GLOBALS['genderController']->fetchGender($request,$response,$args);
+    return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['genderController']->getStatus());
+
+  });
+
   //Add new gender == CREATE
   $app->post('/GamerPulse/genders', function (Request $request, Response $response) {
     $GLOBALS['genderController']->postGender($request,$response);
@@ -50,9 +56,7 @@
   //Update new gender == UPDATE
   $app->put('/GamerPulse/genders/{id}', function (Request $request, Response $response,$args) {
     $GLOBALS['genderController']->putGender($request,$response,$args);
-    return  $response
-    ->withHeader("Content-Type","application/json")
-    ->withStatus($GLOBALS['genderController']->getStatus());
+    return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['genderController']->getStatus());
     
   });
   
@@ -66,6 +70,12 @@
   //GET PLATAFORMS
   $app -> get('/GamerPulse/plataformas', function(Request $request, Response $response){
     $GLOBALS['platformController']->getAllPlatforms($request,$response);
+    return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['platformController']->getStatus());
+    
+  });
+
+  $app -> get('/GamerPulse/plataformas/{id}', function(Request $request, Response $response, $args){
+    $GLOBALS['platformController']->fetchPlatform($request,$response,$args);
     return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['platformController']->getStatus());
     
   });
@@ -97,6 +107,11 @@
   //GET ALL GAMES IN DB OR IF THERE ARE PARAMETERS FETCH THOSE
   $app->get('/GamerPulse/games',function(Request $request, Response $response){
     $GLOBALS['gameController']->getGames($request,$response);
+    return $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
+  });
+
+  $app->get('/GamerPulse/games/{id}',function(Request $request, Response $response , $args){
+    $GLOBALS['gameController']->fetchGame($request,$response,$args);
     return $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['gameController']->getStatus());
   });
 

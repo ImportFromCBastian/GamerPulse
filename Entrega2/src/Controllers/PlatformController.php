@@ -45,6 +45,31 @@ class PlatformController{
     }
   }
 
+  function fetchPlatform(Request $request, Response &$response , $args){
+    try{
+      $id = $args['id'];
+      $sqlQuery = "SELECT * FROM plataformas WHERE id = $id";  
+
+      $query = $this->dataBaseConnection -> query($sqlQuery);
+
+      $platforms = $query -> fetch(PDO::FETCH_ASSOC);
+      
+      $response ->getBody()->write(json_encode($platforms));
+
+
+      $query = null;
+      $this->dataBaseConnection = null;
+      
+    }catch(PDOException $e){
+      
+      $query = null;
+      $this->dataBaseConnection = null;
+      
+      $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
+      $this->status = 404;
+    }
+  }
+
 
   function postPlatform(Request $request,Response &$response){
     try{

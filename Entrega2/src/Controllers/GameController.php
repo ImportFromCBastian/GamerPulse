@@ -78,6 +78,36 @@ class GameController{
     }
   }
 
+
+  function fetchGame(Request $request, Response &$response, $args){
+    try{
+      $id = $args['id'];
+      $sqlQuery = "SELECT * FROM juegos WHERE id = $id";  
+
+      $query = $this->dataBaseConnection -> query($sqlQuery);
+
+      $games = $query -> fetch(PDO::FETCH_ASSOC);
+      if(!$games){
+        $response ->getBody()->write(json_encode(['mensaje'=> "no existe un juego con ese id"]));
+        $query = null;
+        $this->dataBaseConnection = null;
+        return;
+      } 
+      $query = null;
+      $this->dataBaseConnection = null;
+      
+      $response ->getBody()->write(json_encode($games));
+
+    }catch(PDOException $e){
+      
+      $query = null;
+      $this->dataBaseConnection = null;
+      
+      $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
+      $this->status = 404;
+    }
+  }
+
   function deleteGame(Request $request,Response &$response,$args){
     try{
       $id = $args['id'];

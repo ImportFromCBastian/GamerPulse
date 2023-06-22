@@ -44,6 +44,32 @@ class GenderController{
     }
   }
 
+  function fetchGender(Request $request, Response &$response, $args){
+    try{
+      $id = $args['id'];
+      $sqlQuery = "SELECT * FROM generos WHERE id = $id";  
+
+      $query = $this->dataBaseConnection -> query($sqlQuery);
+
+      $generos = $query -> fetch(PDO::FETCH_ASSOC);
+      
+      $response ->getBody()->write(json_encode($generos));
+
+
+      $query = null;
+      $this->dataBaseConnection = null;
+      
+
+    }catch(PDOException $e){
+      
+      $query = null;
+      $this->dataBaseConnection = null;
+      
+      $response-> getBody()->write(json_encode(['mensaje'=>$e->getMessage()]));
+      $this->status = 404;
+    }
+  }
+
 
   function postGender(Request $request,Response $response){
     try{
