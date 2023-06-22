@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -6,14 +6,29 @@ import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 
 
 const PlatformDelete = () => {
-  const { id, name } = useParams("");
-  const [message, setMessage] = useState(`Desea borrar el elemento ${name}?`);
+  const { id } = useParams("");
+  const [message, setMessage] = useState("");
+  const [platformName, setPlatformName] = useState("");
   const navigate = useNavigate();
 
+
+  useEffect(()=>{
+    try {
+      axios
+        .get(`${endpoints.platform.fetch}${id}`)
+        .then(response=>{
+          setPlatformName(response.data.nombre);
+
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    setMessage(`Seguro borrar el elemento ${platformName}`);
+  },[id]);
   const clickCheckMarkHandler = () => {
 
     axios
-      .delete(`${endpoints.platform.delete}/${id}`, { header: ('Access-Control-Allow-Origin', '*') })
+      .delete(`${endpoints.platform.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
       .then(response => {
         setMessage(response.data.mensaje);
       })

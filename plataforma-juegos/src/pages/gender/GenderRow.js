@@ -12,13 +12,13 @@ const GenderRow = (props)=>{
 
           <p> {props.elem.index} - {props.elem.nombre}  </p>
 
-          <Link to={`/genders/edit_gender/${props.elem.id}/${props.elem.nombre}`}>
+          <Link to={`/genders/edit_gender/${props.elem.id}`}>
             <button className="Update-Button">
               <IoIosBuild />
             </button>
           </Link>
 
-          <Link to={`/genders/delete_gender/${props.elem.id}/${props.elem.nombre}`}>
+          <Link to={`/genders/delete_gender/${props.elem.id}`}>
             <button className="Delete-Button">
               <IoIosTrash/>
             </button>

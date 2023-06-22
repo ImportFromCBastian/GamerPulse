@@ -11,13 +11,13 @@ const PlatformRow = (props) => {
       <div className="Row">
         <span>
           <p> {props.elem.index} - {props.elem.nombre}  </p>
-          <Link to={`/platforms/edit_platform/${props.elem.id}/${props.elem.nombre}`}>
+          <Link to={`/platforms/edit_platform/${props.elem.id}`}>
             <button className="Update-Button">
               <IoIosBuild />
             </button>
           </Link>
 
-          <Link to={`/platforms/delete_platform/${props.elem.id}/${props.elem.nombre}`}>
+          <Link to={`/platforms/delete_platform/${props.elem.id}`}>
             <button className="Delete-Button">
               <IoIosTrash />
             </button>

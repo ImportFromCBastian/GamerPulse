@@ -17,6 +17,13 @@ const PlatformListPage = () => {
     fetchPlatformData();
   }, []);
 
+
+  const messageFromChildren = (message)=>{
+    if(message != ""){
+      alert(message);
+    }
+  }
+
   const fetchPlatformData = async () => {
     try {
       const response = await axios
@@ -41,7 +48,7 @@ const PlatformListPage = () => {
       </Link>
       <div className="List">
         {platforms.map(({ id, nombre }, index) =>
-          <PlatformRow key={id} elem={{ id,nombre, index }} />
+          <PlatformRow key={id} elem={{ id,nombre, index }} messageToChildren={ messageFromChildren }/>
         )}
       </div>
       <Footer />

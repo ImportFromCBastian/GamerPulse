@@ -23,12 +23,12 @@ function App() {
         <Route path={'/'} element={<DashboardPage/>} />
         <Route path={'/genders'} element={<GenderListPage/>} />
         <Route path={'/genders/new_gender'} element={<NewGender/>} />
-        <Route path={'/genders/edit_gender/:id/:name'} element={<EditGender/>} />
-        <Route path={'/genders/delete_gender/:id/:name'} element={<GenderDelete/>} />
+        <Route path={'/genders/edit_gender/:id'} element={<EditGender/>} />
+        <Route path={'/genders/delete_gender/:id'} element={<GenderDelete/>} />
         <Route path={'/platforms'} element={<PlatformListPage/>} />
         <Route path={'/platforms/new_platform'} element={<NewPlatform/>} />
-        <Route path={'/platforms/edit_platform/:id/:name'} element={<EditPlatform/>} />
-        <Route path={'/platforms/delete_platform/:id/:name'} element={<PlatformDelete/>} />
+        <Route path={'/platforms/edit_platform/:id'} element={<EditPlatform/>} />
+        <Route path={'/platforms/delete_platform/:id'} element={<PlatformDelete/>} />
 
 
       </Routes>

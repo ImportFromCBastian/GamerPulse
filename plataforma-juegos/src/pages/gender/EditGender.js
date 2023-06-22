@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -7,18 +7,35 @@ import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 
 const EditGender = () => {
 
-  const { id , name} = useParams("");
-  const navigate = useNavigate();
-  const [inputValue,setInputValue] = useState(name);
+  const { id } = useParams("");
+  const [inputValue,setInputValue] = useState("");
   const [selected, setSelected] = useState("")
-  const [message,setMessage] = useState(`Modificando elemento ${name}`);
+  const [genderName,setGenderName] = useState("");
+  const [message,setMessage] = useState("");
+  const navigate = useNavigate();
+
+
+  useEffect(()=>{
+    try {
+      axios
+        .get(`${endpoints.gender.fetch}${id}`)
+        .then(response =>{
+          setGenderName(response.data.nombre);
+          
+        })
+      } catch (error) {
+        console.log(error);
+      };
+    setInputValue(genderName);
+    setMessage(`Modificando elemento ${genderName}`)
+  },[id]);
 
   const submitHandler = event => {
     event.preventDefault();
     if(selected && inputValue !== ""){
       try{
         axios
-          .put(`${endpoints.gender.put}/${id}`, { nombre: inputValue }, { header: ('Access-Control-Allow-Origin', '*') })
+          .put(`${endpoints.gender.put}${id}`, { nombre: inputValue }, { header: ('Access-Control-Allow-Origin', '*') })
           .then(response => {
             setMessage(response.data.mensaje);
           });
@@ -26,11 +43,12 @@ const EditGender = () => {
       }catch(error){
         console.log(error);
       }
-      navigate("/genders");
-
+      
     }else{
-      navigate("/genders");
+      setMessage("No se actualizo el genero");
     } 
+
+    navigate("/genders");
   }
 
   const changeHandler = event =>{
@@ -40,11 +58,11 @@ const EditGender = () => {
   return (
     <div>
       <p>{ message }</p>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={ submitHandler }>
         <input type="text" value={ inputValue } onChange={ changeHandler }/>
         <div className="Submit-Buttons">
-          <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark/> </button>
-          <button onClick={() => { setSelected(false) }}> <IoIosClose/>     </button>
+            <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark/> </button>
+            <button onClick={() => { setSelected(false) }}> <IoIosClose/>     </button>
         </div>
       </form>
     </div>
