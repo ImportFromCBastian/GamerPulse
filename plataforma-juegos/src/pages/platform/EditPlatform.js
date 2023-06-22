@@ -8,7 +8,7 @@ const EditPlatform = () => {
 
   const { id, name } = useParams("");
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(name);
   const [selected, setSelected] = useState("")
   const [message, setMessage] = useState(`Modificando elemento ${name}`);
 
@@ -26,8 +26,11 @@ const EditPlatform = () => {
         console.log(error);
       }
 
+      navigate("/platforms");
+
     } else {
-      navigate("/platforms")
+      navigate("/platforms");
+
     }
   }
 
@@ -38,8 +41,8 @@ const EditPlatform = () => {
   return (
     <div>
       <p>{message}</p>
-      <form onSubmit={submitHandler}>
-        <input type="text" placeholder={`${name}`} onChange={changeHandler} />
+      <form onSubmit={ submitHandler }>
+        <input type="text" value={ inputValue } onChange={ changeHandler } />
         <div className="Submit-Buttons">
           <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark /> </button>
           <button onClick={() => { setSelected(false) }}> <IoIosClose />     </button>

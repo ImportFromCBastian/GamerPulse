@@ -9,7 +9,7 @@ const DashboardPage = () => {
     <div>
       <Header/>
       <NavBar/>
-      <form method="get">
+      <form>
         <input type="text" placeholder="Texto de ejemplo"/>
         <input type="text" placeholder="Texto de ejemplo"/>
         <input type="text" placeholder="Texto de ejemplo"/>

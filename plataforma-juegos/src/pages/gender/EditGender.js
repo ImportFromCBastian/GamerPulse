@@ -9,7 +9,7 @@ const EditGender = () => {
 
   const { id , name} = useParams("");
   const navigate = useNavigate();
-  const [inputValue,setInputValue] = useState("");
+  const [inputValue,setInputValue] = useState(name);
   const [selected, setSelected] = useState("")
   const [message,setMessage] = useState(`Modificando elemento ${name}`);
 
@@ -18,17 +18,18 @@ const EditGender = () => {
     if(selected && inputValue !== ""){
       try{
         axios
-          .put(`${endpoints.gender.put}/${id}`,{ nombre:inputValue })
+          .put(`${endpoints.gender.put}/${id}`, { nombre: inputValue }, { header: ('Access-Control-Allow-Origin', '*') })
           .then(response => {
-            setMessage("Mensaje devuelto por api");
+            setMessage(response.data.mensaje);
           });
 
       }catch(error){
         console.log(error);
       }
+      navigate("/genders");
 
     }else{
-      navigate("/genders")
+      navigate("/genders");
     } 
   }
 
@@ -40,7 +41,7 @@ const EditGender = () => {
     <div>
       <p>{ message }</p>
       <form onSubmit={submitHandler}>
-        <input type="text" placeholder={`${name}`} onChange={changeHandler}/>
+        <input type="text" value={ inputValue } onChange={ changeHandler }/>
         <div className="Submit-Buttons">
           <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark/> </button>
           <button onClick={() => { setSelected(false) }}> <IoIosClose/>     </button>

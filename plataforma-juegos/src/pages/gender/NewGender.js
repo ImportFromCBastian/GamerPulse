@@ -17,19 +17,20 @@ const NewGender = ()=>{
         axios
           .post(`${endpoints.gender.post}`,{ nombre: inputValue})
           .then(response =>{
-            setMessage("Respuesta devuelta por la api aqui");
+            setMessage(response.data.mensaje);
           })
       } catch (error) {
         console.log(error);
       }
-
+      navigate("/genders");
+      
     }else{
       navigate("/genders");
     }
   }
 
   const changeHandler = event =>{
-    setInputValue(event.target.inputValue)
+    setInputValue(event.target.value)
   }
 
   return (

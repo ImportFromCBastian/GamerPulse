@@ -15,27 +15,30 @@ const NewPlatform = () => {
     if (selected && inputValue !== "") {
       try {
         axios
-          .post(`${endpoints.gender.post}`, { nombre: inputValue })
+          .post(`${endpoints.platform.post}`, { nombre: inputValue })
           .then(response => {
-            setMessage("Respuesta devuelta por la api aqui");
+            setMessage(response.data.mensaje);
           })
       } catch (error) {
         console.log(error);
       }
 
+      navigate("/platforms");
+
     } else {
       navigate("/platforms");
+
     }
   }
 
   const changeHandler = event => {
-    setInputValue(event.target.inputValue)
+    setInputValue(event.target.inputValue);
   }
 
   return (
     <form onSubmit={submitHandler}>
-      <p>{message}</p>
-      <input type="text" placeholder="Nombre de la plataforma" onChange={changeHandler} />
+      <p>{ message }</p>
+      <input type="text" placeholder="Nombre de la plataforma" onChange={ changeHandler } />
       <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
       <button onClick={() => { setSelected(false) }}><IoIosClose /></button>
     </form>

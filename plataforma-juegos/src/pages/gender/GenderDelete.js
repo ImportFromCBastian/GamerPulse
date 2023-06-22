@@ -13,9 +13,9 @@ const GenderDelete = ()=>{
   const clickCheckMarkHandler = () => {
 
     axios
-      .delete(`${endpoints.gender.delete}/${id}`)
+      .delete(`${endpoints.gender.delete}/${id}`, { header: ('Access-Control-Allow-Origin', '*') })
       .then(response =>{
-        setMessage("Mensaje devuelto por api");
+        setMessage(response.data.mensaje);
       })
       navigate("/genders");
 

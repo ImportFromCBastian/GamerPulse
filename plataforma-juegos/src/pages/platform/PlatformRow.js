@@ -6,7 +6,7 @@ import { IoIosTrash, IoIosBuild } from 'react-icons/io';
 
 const PlatformRow = (props) => {
 
-  return (
+    return (
     <>
       <div className="Row">
         <span>
@@ -17,7 +17,7 @@ const PlatformRow = (props) => {
             </button>
           </Link>
 
-          <Link to={`/platforms/edit_platform/${props.elem.id}/${props.elem.nombre}`}>
+          <Link to={`/platforms/delete_platform/${props.elem.id}/${props.elem.nombre}`}>
             <button className="Delete-Button">
               <IoIosTrash />
             </button>

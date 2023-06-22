@@ -28,7 +28,7 @@ function App() {
         <Route path={'/platforms'} element={<PlatformListPage/>} />
         <Route path={'/platforms/new_platform'} element={<NewPlatform/>} />
         <Route path={'/platforms/edit_platform/:id/:name'} element={<EditPlatform/>} />
-        <Route path={'/paltforms/delete_gender/:id/:name'} element={<PlatformDelete/>} />
+        <Route path={'/platforms/delete_platform/:id/:name'} element={<PlatformDelete/>} />
 
 
       </Routes>

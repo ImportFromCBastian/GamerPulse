@@ -13,7 +13,7 @@ const GenderListPage = () =>{
   const [gender, setGender] = useState(null);
 
   useEffect(() => {
-    fetchGenderData();
+      fetchGenderData();
   },[]);
 
   const fetchGenderData = async () =>{

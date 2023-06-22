@@ -11,14 +11,27 @@
   require __DIR__ . '/vendor/autoload.php';
   
   //cambiar el get por params a post
+  // crear el endpoint para los get
+  
   $app = AppFactory::create();
-  header("Access-Control-Allow-Origin: *");
+  if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: *");
+  }
+
+  if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");         
+
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+  }
+
   $genderController = new GenderController();
   $platformController = new PlatformController();
   $gameController = new GameController();
 
-  $app->addRoutingMiddleware();
-  $app->addErrorMiddleware(true,true,true);
+
   
   //GET ALL GENDERS == READ
   $app->get('/GamerPulse/genders', function (Request $request, Response $response) {
@@ -37,7 +50,9 @@
   //Update new gender == UPDATE
   $app->put('/GamerPulse/genders/{id}', function (Request $request, Response $response,$args) {
     $GLOBALS['genderController']->putGender($request,$response,$args);
-    return  $response->withHeader("Content-Type","application/json")->withStatus($GLOBALS['genderController']->getStatus());
+    return  $response
+    ->withHeader("Content-Type","application/json")
+    ->withStatus($GLOBALS['genderController']->getStatus());
     
   });
   
