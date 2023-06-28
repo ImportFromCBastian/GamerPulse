@@ -23,5 +23,4 @@ const GenderRow = (props)=>{
   )
 }
 
-
 export default GenderRow;

@@ -1,0 +1,22 @@
+.fondo {
+    background-color: aquamarine;
+  }
+  
+  .juegos {
+    background-color: aqua;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    flex-grow: 1; /* Permitir que los elementos crezcan en anchura */
+    flex-shrink: 0; /* Evitar que los elementos se encojan en anchura */
+    width: auto; /* Ajustar el ancho al contenido */
+    box-sizing: border-box;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
