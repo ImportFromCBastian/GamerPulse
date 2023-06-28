@@ -25,29 +25,35 @@ class GameController{
     try{
       $sqlQuery = "SELECT * FROM juegos WHERE 1 = 1";  
 
-      if(!empty($request->getBody())){
-        $fetcher = json_decode($request->getBody());
+      if(!empty($request->getQueryParams())){
+        $params = $request->getQueryParams();
 
-        if(!empty($fetcher->nombre)){
-          $sqlQuery.=" AND nombre LIKE '%$fetcher->nombre%'";    
+        $nombre = !empty($params['nombre']) ? $params['nombre'] : "" ;
+        $id_plataforma = !empty($params['plataforma']) ? $params['plataforma'] : "";
+        $id_genero = !empty($params['genero']) ? $params['genero'] : "";
+        $orden = !empty($params['orden']) ? $params['orden'] : "";
+
+
+        if(!empty($nombre)){
+          $sqlQuery.=" AND nombre LIKE '%$nombre%'";    
         }
 
-        if(!empty($fetcher->id_genero)){
-          $sqlQuery.=" AND id_genero = $fetcher->id_genero";
+        if(!empty($id_genero)){
+          $sqlQuery.=" AND id_genero = $id_genero";
         }
         
-        if(!empty($fetcher->id_plataforma)){
-          $sqlQuery.=" AND id_plataforma = $fetcher->id_plataforma";
+        if(!empty($id_plataforma)){
+          $sqlQuery.=" AND id_plataforma = $id_plataforma";
         }
 
-        if(!empty($fetcher->orden)){
-          if(strpos($fetcher->orden,"ASC") !== false){
+        if(!empty($orden)){
+          if(strpos($orden,"ASC") !== false)
             $sqlQuery .= " ORDER BY nombre ASC";
             
-          }else if(strpos($fetcher->orden,"DESC") !== false){
+          if(strpos($orden,"DESC") !== false)
             $sqlQuery .= " ORDER BY nombre DESC";
             
-          }
+          
 
         }
       }
