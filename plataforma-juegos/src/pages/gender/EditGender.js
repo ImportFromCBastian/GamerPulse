@@ -9,7 +9,7 @@ const EditGender = () => {
 
   const { id } = useParams("");
   const [inputValue,setInputValue] = useState("");
-  const [selected, setSelected] = useState("")
+  const [selected, setSelected] = useState("");
   const [genderName,setGenderName] = useState("");
   const [message,setMessage] = useState("");
   const navigate = useNavigate();
@@ -21,13 +21,13 @@ const EditGender = () => {
         .get(`${endpoints.gender.fetch}${id}`)
         .then(response =>{
           setGenderName(response.data.nombre);
+          setInputValue(response.data.nombre);
+          setMessage(`Modificando elemento ${response.data.nombre}`)
           
         })
       } catch (error) {
         console.log(error);
       };
-    setInputValue(genderName);
-    setMessage(`Modificando elemento ${genderName}`)
   },[id]);
 
   const submitHandler = event => {

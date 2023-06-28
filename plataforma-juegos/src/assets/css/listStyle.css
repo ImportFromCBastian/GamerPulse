@@ -1,0 +1,28 @@
+.Create-Button{
+  float:right;
+
+}
+
+.List{
+  background-color: grey;
+  margin: 0px;
+  display: inline-table;
+
+}
+
+.Row{
+  padding: 1cqi;
+  border: 0.25rem solid;
+  margin: 50px 10px 10px 10px;
+  
+}
+
+
+.Change-Button{
+  float:right;
+
+}
+
+.Plus{
+  font-size: 2.5rem;
+}

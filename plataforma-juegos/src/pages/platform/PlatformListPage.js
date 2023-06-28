@@ -7,7 +7,7 @@ import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import PlatformRow from './PlatformRow';
 
-import { IoIosCreate } from 'react-icons/io';
+import { IoIosAdd } from 'react-icons/io';
 
 const PlatformListPage = () => {
 
@@ -43,10 +43,10 @@ const PlatformListPage = () => {
     <>
       <Header />
       <NavBar />
-      <Link to="/platforms/new_platform">
-        <button> <IoIosCreate /> </button>
-      </Link>
       <div className="List">
+        <Link className="Create-Button" to="/platforms/new_platform">
+          <IoIosAdd className="Plus"/>
+        </Link>
         {platforms.map(({ id, nombre }, index) =>
           <PlatformRow key={id} elem={{ id,nombre, index }} messageToChildren={ messageFromChildren }/>
         )}

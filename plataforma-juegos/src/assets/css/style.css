@@ -1,0 +1,46 @@
+*{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0px;
+  margin: 0px;
+  font-size: 1.225rem;
+}
+
+p {
+  display: inline;
+  margin: 0px;
+  
+}
+
+a{
+  text-decoration: none;
+}
+
+a svg{
+  font-size: 1.55ric;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+a:link {
+  color: black;
+}
+
+.NavBar{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 1rem;
+  border: 0.25rem solid;
+  padding: 0.5rem;
+
+}
+
+.Header-Logo{
+  justify-content: center;
+  display: flex;
+  
+}

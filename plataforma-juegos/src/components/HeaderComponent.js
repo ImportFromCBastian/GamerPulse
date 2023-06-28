@@ -5,7 +5,7 @@ import GamerPulseLogo from '../assets/images/GamerPulse.png';
 const Header = () =>{
   return(
     <header className="Header-Logo"> 
-      <img className="logo" src={GamerPulseLogo} alt="logo"/>
+      <img className="Logo" src={GamerPulseLogo} alt="logo"/>
     </header>
   )
 }

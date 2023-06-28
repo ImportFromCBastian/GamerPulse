@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import { IoIosTrash, IoIosBuild } from 'react-icons/io';
+import { IoMdTrash } from 'react-icons/io';
+import { IoPencil } from 'react-icons/io5';
+
 
 
 const PlatformRow = (props) => {
@@ -10,17 +12,14 @@ const PlatformRow = (props) => {
     <>
       <div className="Row">
         <span>
-          <p> {props.elem.index} - {props.elem.nombre}  </p>
-          <Link to={`/platforms/edit_platform/${props.elem.id}`}>
-            <button className="Update-Button">
-              <IoIosBuild />
-            </button>
+          <p> {props.elem.index+1} - {props.elem.nombre}  </p>
+
+          <Link className="Change-Button" to={`/platforms/edit_platform/${props.elem.id}`}>
+            <IoPencil />
           </Link>
 
-          <Link to={`/platforms/delete_platform/${props.elem.id}`}>
-            <button className="Delete-Button">
-              <IoIosTrash />
-            </button>
+          <Link className="Change-Button"  to={`/platforms/delete_platform/${props.elem.id}`}>
+            <IoMdTrash />
           </Link>
 
         </span>

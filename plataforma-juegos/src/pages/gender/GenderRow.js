@@ -1,32 +1,24 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-
-import { IoIosTrash, IoIosBuild } from 'react-icons/io';
+import { IoMdTrash } from 'react-icons/io';
+import { IoPencil } from 'react-icons/io5';
 
 const GenderRow = (props)=>{
   
   return(
     <>
       <div className="Row">
-        <span>
+        <p> {props.elem.index+1} - {props.elem.nombre}  </p>
 
-          <p> {props.elem.index} - {props.elem.nombre}  </p>
+        <Link className="Change-Button" to={`/genders/edit_gender/${props.elem.id}`}>
+          <IoPencil />
+        </Link>
 
-          <Link to={`/genders/edit_gender/${props.elem.id}`}>
-            <button className="Update-Button">
-              <IoIosBuild />
-            </button>
-          </Link>
-
-          <Link to={`/genders/delete_gender/${props.elem.id}`}>
-            <button className="Delete-Button">
-              <IoIosTrash/>
-            </button>
-          </Link>
-
-        </span>
+        <Link className="Change-Button"  to={`/genders/delete_gender/${props.elem.id}`}>
+            <IoMdTrash/>
+        </Link>
       </div>
-      <hr/>
+      
     </>
   )
 }
