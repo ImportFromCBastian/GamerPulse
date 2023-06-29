@@ -9,7 +9,6 @@ const PlatformDelete = () => {
 
   const { message , changeMessage} = useContext(MessageContext);
   const { id } = useParams("");
-  const [platformName, setPlatformName] = useState("");
   const navigate = useNavigate();
 
 
@@ -18,7 +17,6 @@ const PlatformDelete = () => {
       axios
         .get(`${endpoints.platform.fetch}${id}`)
         .then(response=>{
-          setPlatformName(response.data.nombre);
           changeMessage(`Seguro borrar el elemento ${response.data.nombre}`);
 
         });
@@ -29,19 +27,29 @@ const PlatformDelete = () => {
 
 
   const clickCheckMarkHandler = () => {
-
-    axios
-      .delete(`${endpoints.platform.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
-      .then(response => {
-        changeMessage(response.data.mensaje);
-      })
+    changeMessage("");
+    try {
+      axios
+        .delete(`${endpoints.platform.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
+        .then(response => {
+          changeMessage(response.data.mensaje);
+          
+        });
+      
+    } catch (error) {
+      if (error.response.status === 400) {
+        changeMessage(error.response.data.mensaje);
+      }    
+    }
     navigate("/platforms");
 
   }
+
   const clickCloseMarkHandler = () => {
-    changeMessage("No se borro platforma");
+    changeMessage("No se borro plataforma");
     navigate("/platforms");
   }
+
   return (
     <div>
       <p>{ message }</p>

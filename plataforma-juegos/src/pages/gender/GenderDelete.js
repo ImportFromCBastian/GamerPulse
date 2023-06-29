@@ -25,19 +25,30 @@ const GenderDelete = ()=>{
   },[id])
 
   const clickCheckMarkHandler = () => {
-
-    axios
-      .delete(`${endpoints.gender.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
-      .then(response =>{
-        changeMessage(response.data.mensaje);
-      })
-      navigate("/genders");
+    changeMessage("");
+    try {
+      axios
+        .delete(`${endpoints.gender.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
+        .then(response =>{
+          changeMessage(response.data.mensaje);
+        });
+      
+    } catch (error) {
+      if(error.response.status === 400){
+        changeMessage(error.response.data.mensaje);
+      }  
+    }
+    navigate("/genders");
 
   }
+
+
   const clickCloseMarkHandler = ()=>{ 
     changeMessage("No se borro genero");
     navigate("/genders");
   }
+
+
   return(
     <div>
       <p>{ message } </p>

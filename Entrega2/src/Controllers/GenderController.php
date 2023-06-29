@@ -186,7 +186,7 @@ class GenderController{
         $query = null;
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"Juego borrado con exito!."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"Genero borrado con exito!."]));
         
       }
     }catch(PDOException $e){

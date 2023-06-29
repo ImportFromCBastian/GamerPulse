@@ -30,6 +30,7 @@ const EditPlatform = () => {
   },[id])
 
   const submitHandler = event => {
+    changeMessage("");
     event.preventDefault();
     if (selected && inputValue !== "") {
       try {

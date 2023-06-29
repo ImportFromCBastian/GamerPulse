@@ -1,29 +1,24 @@
-.Filter-Form{
-  padding: 1rem;
-  border: 5px solid;
-  display: inline-block;
-  margin: 0px 25px 0px 25px;
-  border-radius: 1rem;
-  position: relative;
-}
 
 .Dropdown{
   border: 2px solid ;
   margin-right: 15px;  
+  background: none;
 }
 
 .Name-Input{
   border: 2px solid;
   margin-right: 15px;
+  background: none;
 }
 
 .Name-Input::placeholder{
   color: black;
+  text-align: center;
 }
 
 .Filter-Marker {
   position: absolute;
-  
+  background: white;
   color: black;
   padding: 5px;
   top: -22px;
@@ -37,4 +32,14 @@
 .Flex-Center{
   display: flex;
   justify-content: center;
+}
+
+.Filter-Form{
+  padding: 1rem;
+  border: 5px solid;
+  display: inline-block;
+  margin: 0px 25px 0px 25px;
+  border-radius: 1rem;
+  position: relative;
+  
 }

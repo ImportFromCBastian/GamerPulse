@@ -1,7 +1,7 @@
 
   
 .juegos {
-  background-color: aqua;
+  background: rgb(255, 243, 189);
   border: 1px solid #000;
   border-radius: 10px;
   margin-right: 10px;
@@ -10,7 +10,10 @@
   width: auto; 
   box-sizing: border-box;
 }
-.juegos img {
+.juegos a {
+  background: none;
+}
+.juegos a img{
   background: none;
 }
 
@@ -23,4 +26,8 @@
   flex-wrap: wrap;
   margin: 25px;
 }
-  
+
+.Delete-Form{
+  display: inline-grid;
+
+}

@@ -3,7 +3,7 @@
   padding: 0px;
   margin: 0px;
   font-size: 1.225rem;
-  background-color: cadetblue;
+  
 }
 
 p {
@@ -54,11 +54,15 @@ button:hover{
   margin-bottom: 1rem;
   border: 0.25rem solid;
   padding: 0.5rem;
+  background: rgb(251, 228, 126) ;
 
 }
+
 
 .Header-Logo{
   justify-content: center;
   display: flex;
   
 }
+
+

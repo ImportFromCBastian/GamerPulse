@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import {  useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
+import { MessageContext } from '../../config/messageContext';
 
 const NewGender = ()=>{
-  const [message,setMessage] = useState("Herramienta de Agregado");
+  const { message,changeMessage} = useContext(MessageContext);
   const [inputValue, setInputValue] = useState("");
   const [selected,setSelected] = useState("");
   const navigate = useNavigate();
@@ -17,16 +18,14 @@ const NewGender = ()=>{
         axios
           .post(`${endpoints.gender.post}`,{ nombre: inputValue})
           .then(response =>{
-            setMessage(response.data.mensaje);
+            changeMessage(response.data.mensaje);
           })
       } catch (error) {
         console.log(error);
       }
-      navigate("/genders");
-      
-    }else{
-      navigate("/genders");
     }
+    
+    navigate("/genders");
   }
 
   const changeHandler = event =>{
@@ -34,11 +33,15 @@ const NewGender = ()=>{
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <p>{message}</p>
+    <form className="Delete-Form"  onSubmit={submitHandler}>
+      <p>Herramienta de agregado</p>
+      
       <input type="text" placeholder="Nombre del genero" onChange={changeHandler}/>
-      <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
-      <button onClick={() => { setSelected(false) }}><IoIosClose/></button>
+      <span>
+        <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
+        <button onClick={() => { setSelected(false) }}><IoIosClose/></button>
+
+      </span>
     </form>
     )
   }

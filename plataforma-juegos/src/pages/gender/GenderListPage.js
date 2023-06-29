@@ -15,12 +15,14 @@ const GenderListPage = () =>{
   const [gender, setGender] = useState(null);
 
   useEffect(() => {
-    if(message) alert(message);
-    changeMessage("");
+    if(message) {
+      alert(message);
+      changeMessage("");
+    }
 
     fetchGenderData();
     
-  },[]);
+  },[message]);
 
   const fetchGenderData = async () =>{
     try {

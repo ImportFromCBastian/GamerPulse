@@ -11,18 +11,16 @@ const PlatformRow = (props) => {
     return (
     <>
       <div className="Row">
-        <span>
-          <p> {props.elem.index+1} - {props.elem.nombre}  </p>
+        <p> {props.elem.index+1} - {props.elem.nombre}  </p>
 
-          <Link className="Change-Button" to={`/platforms/edit_platform/${props.elem.id}`}>
-            <IoPencil />
-          </Link>
+        <Link className="Change-Button" to={`/platforms/edit_platform/${props.elem.id}`}>
+          <IoPencil />
+        </Link>
 
-          <Link className="Change-Button"  to={`/platforms/delete_platform/${props.elem.id}`}>
-            <IoMdTrash />
-          </Link>
+        <Link className="Change-Button"  to={`/platforms/delete_platform/${props.elem.id}`}>
+          <IoMdTrash />
+        </Link>
 
-        </span>
       </div>
     </>
   )

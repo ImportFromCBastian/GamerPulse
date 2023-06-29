@@ -15,10 +15,13 @@ const PlatformListPage = () => {
   const [platforms, setPlatforms] = useState(null);
 
   useEffect(() => {
-    if(message) alert(message);
-    changeMessage("");
+
+    if(message) {
+      alert(message);
+      changeMessage("");
+    }
     fetchPlatformData();
-  }, []);
+  }, [message]);
 
 
   

@@ -1,46 +1,51 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
+import { MessageContext } from '../../config/messageContext';
 
 const NewPlatform = () => {
-  const [message, setMessage] = useState("Herramienta de Agregado");
   const [inputValue, setInputValue] = useState("");
+  const { message, changeMessage} =useContext(MessageContext);
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
 
+
   const submitHandler = event => {
+    changeMessage("");
     event.preventDefault();
     if (selected && inputValue !== "") {
       try {
         axios
           .post(`${endpoints.platform.post}`, { nombre: inputValue })
           .then(response => {
-            setMessage(response.data.mensaje);
+            changeMessage(response.data.mensaje);
           })
       } catch (error) {
         console.log(error);
       }
 
-      navigate("/platforms");
 
-    } else {
-      navigate("/platforms");
+    };
+    navigate("/platforms");
 
-    }
+    
   }
 
   const changeHandler = event => {
-    setInputValue(event.target.inputValue);
+    setInputValue(event.target.value);
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <p>{ message }</p>
+    <form className="Delete-Form" onSubmit={ submitHandler }>
+      <p>Herramienta de agregado</p>
       <input type="text" placeholder="Nombre de la plataforma" onChange={ changeHandler } />
-      <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
-      <button onClick={() => { setSelected(false) }}><IoIosClose /></button>
+      <span>
+        <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
+        <button onClick={() => { setSelected(false) }}><IoIosClose /></button>
+
+      </span>
     </form>
   )
 }
