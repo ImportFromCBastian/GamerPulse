@@ -28,6 +28,23 @@ a:link {
   color: black;
 }
 
+button{
+  background: none;
+  border: none ;
+  font-size: 1.225rem;
+}
+
+
+button svg{
+  font-size: 1.55ric;
+  float:none;
+}
+
+button:hover{
+  cursor:pointer;
+
+}
+
 .NavBar{
   display: flex;
   justify-content: space-evenly;

@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
+import { MessageContext } from '../../config/messageContext';
 
 
 const EditGender = () => {
-
+  const { message,changeMessage } = useContext(MessageContext);
   const { id } = useParams("");
-  const [inputValue,setInputValue] = useState("");
+  const [ inputValue,setInputValue ] = useState("");
   const [selected, setSelected] = useState("");
-  const [genderName,setGenderName] = useState("");
-  const [message,setMessage] = useState("");
   const navigate = useNavigate();
-
+  
 
   useEffect(()=>{
     try {
       axios
         .get(`${endpoints.gender.fetch}${id}`)
         .then(response =>{
-          setGenderName(response.data.nombre);
           setInputValue(response.data.nombre);
-          setMessage(`Modificando elemento ${response.data.nombre}`)
+          changeMessage(`Modificando elemento ${response.data.nombre}`);
           
         })
-      } catch (error) {
-        console.log(error);
-      };
+    } catch (error) {
+      console.log(error);
+    };
   },[id]);
 
   const submitHandler = event => {
@@ -37,7 +35,7 @@ const EditGender = () => {
         axios
           .put(`${endpoints.gender.put}${id}`, { nombre: inputValue }, { header: ('Access-Control-Allow-Origin', '*') })
           .then(response => {
-            setMessage(response.data.mensaje);
+            changeMessage(response.data.mensaje);
           });
 
       }catch(error){
@@ -45,7 +43,7 @@ const EditGender = () => {
       }
       
     }else{
-      setMessage("No se actualizo el genero");
+      changeMessage("No se actualizo el genero");
     } 
 
     navigate("/genders");

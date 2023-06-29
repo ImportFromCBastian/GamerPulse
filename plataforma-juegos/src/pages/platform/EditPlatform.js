@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
+import { MessageContext } from '../../config/messageContext';
+
 
 const EditPlatform = () => {
-
+  const { message,changeMessage } = useContext(MessageContext);
   const { id } = useParams("");
   const [inputValue, setInputValue] = useState();
   const [selected, setSelected] = useState("")
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -18,13 +19,13 @@ const EditPlatform = () => {
         .get(`${endpoints.platform.fetch}${id}`)
         .then(response=>{
           setInputValue(response.data.nombre);
-          setMessage(`Modificando el elemento "${response.data.nombre}"`);
+          changeMessage(`Modificando el elemento "${response.data.nombre}"`);
           
         })
     }catch(error){
       console.log(error);
         
-    }
+    };
   },[id])
 
   const submitHandler = event => {
@@ -34,7 +35,7 @@ const EditPlatform = () => {
         axios
           .put(`${endpoints.platform.put}${id}`, { nombre: inputValue })
           .then(response => {
-            setMessage(response.data.mensaje);
+            changeMessage(response.data.mensaje);
 
           });
 
@@ -44,7 +45,7 @@ const EditPlatform = () => {
 
 
     } else {
-      setMessage("No se actualizo la plataforma");
+      changeMessage("No se actualizo la plataforma");
     }
     navigate("/platforms");
   }

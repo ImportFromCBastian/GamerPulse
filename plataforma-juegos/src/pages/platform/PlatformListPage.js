@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from '../../components/HeaderComponent';
 import NavBar from '../../components/NavBarComponent';
 import Footer from '../../components/FooterComponent';
@@ -8,21 +8,20 @@ import endpoints from '../../config/endpoints';
 import PlatformRow from './PlatformRow';
 
 import { IoIosAdd } from 'react-icons/io';
+import { MessageContext } from '../../config/messageContext';
 
 const PlatformListPage = () => {
-
+  const { message,changeMessage } = useContext(MessageContext);
   const [platforms, setPlatforms] = useState(null);
 
   useEffect(() => {
+    if(message) alert(message);
+    changeMessage("");
     fetchPlatformData();
   }, []);
 
 
-  const messageFromChildren = (message)=>{
-    if(message != ""){
-      alert(message);
-    }
-  }
+  
 
   const fetchPlatformData = async () => {
     try {
@@ -48,7 +47,7 @@ const PlatformListPage = () => {
           <IoIosAdd className="Plus"/>
         </Link>
         {platforms.map(({ id, nombre }, index) =>
-          <PlatformRow key={id} elem={{ id,nombre, index }} messageToChildren={ messageFromChildren }/>
+          <PlatformRow key={id} elem={{ id,nombre, index }}/>
         )}
       </div>
       <Footer />

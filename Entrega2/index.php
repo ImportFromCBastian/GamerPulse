@@ -9,10 +9,7 @@
   use App\Controllers\GameController;
   
   require __DIR__ . '/vendor/autoload.php';
-  
-  //cambiar el get por params a post
-  // crear el endpoint para los get
-  
+
   $app = AppFactory::create();
   if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: *");
@@ -21,10 +18,10 @@
   if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");         
+      header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
-        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+      header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
   }
 
   $genderController = new GenderController();
