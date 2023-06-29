@@ -29,11 +29,11 @@ const Game = (props)=>{
       <div key={props.elem.id} className='juegos'>
           <p>{props.elem.nombre}</p>
           <br></br>
-          <img src={`data:${props.elem.tipo_imagen};base64, ${props.elem.imagen}`} />
+          <a href={props.elem.url} target='_blank'>
+            <img src={`data:${props.elem.tipo_imagen};base64, ${props.elem.imagen}`}/>
+          </a>
           <br></br>
           <p>{props.elem.descripcion}</p>
-          <br></br>
-          <p>{props.elem.url}</p>
           <br></br>
           <p>{responseGender}</p>
           <br></br>

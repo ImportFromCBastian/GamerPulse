@@ -131,6 +131,7 @@ const DashboardPage = () => {
           <button className="Form-Submit" type='submit'>Filtrar</button>
 
           <button type='button' onClick={handleOrdenClick}>
+            {filtro.orden}
             {filtro.orden === 'ASC' && <FaArrowUp />}
             {filtro.orden === 'DESC' && <FaArrowDown />}
           </button>
