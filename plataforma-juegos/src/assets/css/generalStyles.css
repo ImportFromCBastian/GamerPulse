@@ -7,9 +7,7 @@
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 20px;
-    flex-grow: 1; /* Permitir que los elementos crezcan en anchura */
-    flex-shrink: 0; /* Evitar que los elementos se encojan en anchura */
-    width: auto; /* Ajustar el ancho al contenido */
+    width: auto; 
     box-sizing: border-box;
   }
   
