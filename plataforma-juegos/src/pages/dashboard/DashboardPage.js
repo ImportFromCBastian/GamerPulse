@@ -118,14 +118,15 @@ const DashboardPage = () => {
     <div className='fondo'>
       <Header />
       <NavBar />
-      <form onSubmit={handleSubmit}>
-        <input type='text' name='nombre' placeholder='Filtrar por nombre' value={filtro.nombre} onChange={handleInputChange}/>      
+      <form className="Filter-Form" onSubmit={handleSubmit}>
+        <p className="sobre-borde">Filtro</p>
+        <input className="Name-Input"type='text' name='nombre' placeholder='Filtrar por nombre' value={filtro.nombre} onChange={handleInputChange}/>      
 
         <Dropdown name='id_genero' placeholder='Filtrar por género' value={filtro.id_genero} options={generos} onChange={handleInputChange}/>
 
         <Dropdown name='id_plataforma' placeholder='Filtrar por plataforma' value={filtro.id_plataforma} options={plataformas} onChange={handleInputChange}/>
 
-        <button type='submit'>Filtrar</button>
+        <button className="Form-Submit" type='submit'>Filtrar</button>
 
         <button type='button' onClick={handleOrdenClick}>
           {filtro.orden === 'ASC' && <FaArrowUp />}

@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 import { MessageContext } from '../../config/messageContext';
 
+// Tira warning sin sentido, porque es lo mismo que el componente EditGender 
 
 const EditPlatform = () => {
   const { message,changeMessage } = useContext(MessageContext);

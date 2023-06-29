@@ -1,0 +1,32 @@
+.Filter-Form{
+  padding: 1rem;
+  border: 5px solid;
+  display: inline-block;
+  margin: 0px 25px 0px 25px;
+  border-radius: 1rem;
+}
+
+.Dropdown{
+  background-color: aquamarine;
+  border: 2px solid ;
+  margin-right: 15px;  
+}
+
+.Name-Input{
+  background-color: aquamarine;
+  border: 2px solid;
+  margin-right: 15px;
+}
+
+.sobre-borde {
+  position: absolute;
+  background-color: aquamarine;
+  color: black;
+  padding: 5px;
+  top: 248px;
+  left: 80px;
+}
+
+.Form-Submit{
+  margin-right: 15px;
+}
