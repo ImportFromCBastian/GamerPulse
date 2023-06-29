@@ -17,9 +17,13 @@
   margin-right: 15px;
 }
 
+.Name-Input::placeholder{
+  color: black;
+}
+
 .Filter-Marker {
   position: absolute;
-  background-color: white;
+  
   color: black;
   padding: 5px;
   top: -22px;
