@@ -4,27 +4,26 @@
   display: inline-block;
   margin: 0px 25px 0px 25px;
   border-radius: 1rem;
+  position: relative;
 }
 
 .Dropdown{
-  background-color: aquamarine;
   border: 2px solid ;
   margin-right: 15px;  
 }
 
 .Name-Input{
-  background-color: aquamarine;
   border: 2px solid;
   margin-right: 15px;
 }
 
-.sobre-borde {
+.Filter-Marker {
   position: absolute;
-  background-color: aquamarine;
+  background-color: white;
   color: black;
   padding: 5px;
-  top: 248px;
-  left: 80px;
+  top: -22px;
+  left: 50px;
 }
 
 .Form-Submit{

@@ -119,7 +119,7 @@ const DashboardPage = () => {
       <Header />
       <NavBar />
       <form className="Filter-Form" onSubmit={handleSubmit}>
-        <p className="sobre-borde">Filtro</p>
+        <p className="Filter-Marker">Filtro</p>
         <input className="Name-Input"type='text' name='nombre' placeholder='Filtrar por nombre' value={filtro.nombre} onChange={handleInputChange}/>      
 
         <Dropdown name='id_genero' placeholder='Filtrar por género' value={filtro.id_genero} options={generos} onChange={handleInputChange}/>
