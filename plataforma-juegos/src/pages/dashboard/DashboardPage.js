@@ -16,7 +16,7 @@ const DashboardPage = () => {
     nombre: '',
     id_genero: '',
     id_plataforma: '',
-    orden: 'medio'
+    orden: 'ASC'
   });
 
   const [juegos, setJuegos] = useState([]);
@@ -57,7 +57,7 @@ const DashboardPage = () => {
     if (id_plataforma) {
       url += `${nombre || id_genero ? '&' : '?'}plataforma=${id_plataforma}`;
     }
-    if (orden!=='medio') {
+    if (orden) {
       url += `${nombre || id_genero || id_plataforma ? '&' : '?'}orden=${orden}`;
     }
   
@@ -79,10 +79,6 @@ const DashboardPage = () => {
     let nuevoOrden;
     if (filtro.orden === 'ASC') {
       nuevoOrden = 'DESC';
-    } else if (filtro.orden === 'DESC') {
-      nuevoOrden = 'medio';
-    } else if (filtro.orden === 'medio') {
-      nuevoOrden = 'ASC';
     } else {
       nuevoOrden = 'ASC';
     }
@@ -134,7 +130,6 @@ const DashboardPage = () => {
         <button type='button' onClick={handleOrdenClick}>
           {filtro.orden === 'ASC' && <FaArrowUp />}
           {filtro.orden === 'DESC' && <FaArrowDown />}
-          {filtro.orden === 'medio' && <FaArrowsAltV />}
         </button>
 
       </form>
