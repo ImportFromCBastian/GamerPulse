@@ -118,22 +118,25 @@ const DashboardPage = () => {
     <div className='fondo'>
       <Header />
       <NavBar />
-      <form className="Filter-Form" onSubmit={handleSubmit}>
-        <p className="Filter-Marker">Filtro</p>
-        <input className="Name-Input"type='text' name='nombre' placeholder='Filtrar por nombre' value={filtro.nombre} onChange={handleInputChange}/>      
+      <div className="Flex-Center">
 
-        <Dropdown name='id_genero' placeholder='Filtrar por género' value={filtro.id_genero} options={generos} onChange={handleInputChange}/>
+        <form className="Filter-Form" onSubmit={handleSubmit}>
+          <p className="Filter-Marker">Filtro</p>
+          <input className="Name-Input"type='text' name='nombre' placeholder='Filtrar por nombre' value={filtro.nombre} onChange={handleInputChange}/>      
 
-        <Dropdown name='id_plataforma' placeholder='Filtrar por plataforma' value={filtro.id_plataforma} options={plataformas} onChange={handleInputChange}/>
+          <Dropdown name='id_genero' placeholder='Filtrar por género' value={filtro.id_genero} options={generos} onChange={handleInputChange}/>
 
-        <button className="Form-Submit" type='submit'>Filtrar</button>
+          <Dropdown name='id_plataforma' placeholder='Filtrar por plataforma' value={filtro.id_plataforma} options={plataformas} onChange={handleInputChange}/>
 
-        <button type='button' onClick={handleOrdenClick}>
-          {filtro.orden === 'ASC' && <FaArrowUp />}
-          {filtro.orden === 'DESC' && <FaArrowDown />}
-        </button>
+          <button className="Form-Submit" type='submit'>Filtrar</button>
 
-      </form>
+          <button type='button' onClick={handleOrdenClick}>
+            {filtro.orden === 'ASC' && <FaArrowUp />}
+            {filtro.orden === 'DESC' && <FaArrowDown />}
+          </button>
+
+        </form>
+      </div>
       <div className='container'>
       {Array.isArray(juegos) && juegos.map(({id,nombre,imagen,tipo_imagen,descripcion,url,id_genero,id_plataforma}) => (
           <Game key={id} elem={{nombre,imagen,tipo_imagen,descripcion,url,id_genero,id_plataforma}} />

@@ -29,3 +29,8 @@
 .Form-Submit{
   margin-right: 15px;
 }
+
+.Flex-Center{
+  display: flex;
+  justify-content: center;
+}
