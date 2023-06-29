@@ -1,14 +1,16 @@
 import React from 'react';
 import '../../assets/css/generalStyles.css';
+
+
 const Game = (props)=>{
   return(
     <>
-      <div key={props.id} className='juegos'>
-          <p>{props.nombre}</p>
+      <div key={props.elem.id} className='juegos'>
+          <p>{props.elem.nombre}</p>
           <br></br>
-          <img src={`data:image/jpeg;base64, ${props.imagen}`} />
+          <img src={`data:${props.elem.tipo_imagen};base64, ${props.elem.imagen}`} />
           <br></br>
-          <p>{props.descripcion}</p>
+          <p>{props.elem.descripcion}</p>
         </div>
     </>
   )
