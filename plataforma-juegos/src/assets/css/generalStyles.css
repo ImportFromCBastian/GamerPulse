@@ -1,7 +1,7 @@
 
   
 .juegos {
-  background: linear-gradient(220.55deg, #FFC328 0%, #E20000 100%);
+  background: linear-gradient(220.55deg, #FFF500 0%, #FF00B8 100%);
   border: 1px solid #000;
   border-radius: 10px;
   margin-right: 10px;
@@ -61,5 +61,6 @@
   justify-items: center;
   justify-content: center;
   padding: 20px ;
+  background: linear-gradient(220.55deg, #FFC328 0%, #E20000 100%);
 
 }
