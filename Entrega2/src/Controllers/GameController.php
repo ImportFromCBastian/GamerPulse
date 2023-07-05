@@ -23,7 +23,7 @@ class GameController{
 
   function getGames(Request $request, Response &$response){
     try{
-      $sqlQuery = "SELECT j.id,j.nombre,j.imagen,j.tipo_imagen,j.descripcion,j.url,p.nombre,g.nombre FROM juegos j join plataformas p on j.id_plataforma=p.id join generos g on j.id_genero=g.id WHERE 1 = 1";  
+      $sqlQuery = "SELECT j.id,j.nombre,j.imagen,j.tipo_imagen,j.descripcion,j.url,j.id_genero,j.id_plataforma ,p.nombre,g.nombre FROM juegos j join plataformas p on j.id_plataforma=p.id join generos g on j.id_genero=g.id WHERE 1 = 1";  
 
       if(!empty($request->getQueryParams())){
         $params = $request->getQueryParams();
