@@ -60,7 +60,6 @@ const DashboardPage = () => {
     if (orden) {
       url += `${nombre || id_genero || id_plataforma ? '&' : '?'}orden=${orden}`;
     }
-  
     try {
       const response = await axios.get(url);
       setJuegos(response.data);
