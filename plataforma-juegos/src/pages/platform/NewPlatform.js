@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import { useNavigate } from 'react-router-dom';
@@ -10,13 +10,18 @@ import Footer from '../../components/FooterComponent';
 
 const NewPlatform = () => {
   const [inputValue, setInputValue] = useState("");
-  const { message, changeMessage} =useContext(MessageContext);
+  const { message, changeMessage} = useContext(MessageContext);
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if(message) alert(message);
+    changeMessage("");
+  }, [message])
+  
 
   const submitHandler = event => {
-    changeMessage("");
+    
     event.preventDefault();
     if (selected && inputValue !== "") {
       try {
@@ -29,16 +34,25 @@ const NewPlatform = () => {
         console.log(error);
       }
 
+      navigate("/platforms");
+
 
     };
-    if (inputValue){
-      navigate("/platforms");
-    }
-    else{
-      changeMessage("No se obtuvo ningún nombre a modificar");
-      alert(message);
-    }
 
+    if (inputValue === "" && selected){
+      changeMessage("El nombre de la plataforma no puede estar vacio");
+
+
+    }else{
+      if(!selected){
+        changeMessage("No se obtuvo una plataforma para agregar");
+        navigate("/platforms");
+      }
+    }
+      
+    
+    
+    
     
   }
 

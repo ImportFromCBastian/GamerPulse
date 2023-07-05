@@ -15,6 +15,7 @@ const EditGender = () => {
   const [ inputValue,setInputValue ] = useState("");
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
+  const [initialState, setInitialState] = useState("");
   
 
   useEffect(()=>{
@@ -22,14 +23,20 @@ const EditGender = () => {
       axios
         .get(`${endpoints.gender.fetch}${id}`)
         .then(response =>{
+          setInitialState(`Modificando el elemento "${response.data.nombre}"`);
           setInputValue(response.data.nombre);
-          changeMessage(`Modificando elemento ${response.data.nombre}`);
           
         })
     } catch (error) {
       console.log(error);
     };
   },[id]);
+
+
+  useEffect(() => {
+    if (message) alert(message);
+    changeMessage("");
+  }, [message]);
 
   const submitHandler = event => {
     changeMessage("");
@@ -45,17 +52,26 @@ const EditGender = () => {
       }catch(error){
         console.log(error);
       }
+      navigate("/genders");
       
-    }else{
-      changeMessage("No se actualizo el genero");
-    } 
+    }
+    
+    if (inputValue === "" && selected) {
+      changeMessage("El nombre del genero a modificar no puede ser vacio");
 
-    if (inputValue){
-      navigate("/platforms");
+
+    }else{
+
+      if (!selected) {
+        changeMessage("No se obtuvo ningún nombre a modificar");
+        navigate("/genders");
+        
+      }
     }
-    else{
-      changeMessage("No se obtuvo ningún nombre a modificar");
-    }
+
+    
+    
+    
   }
 
   const changeHandler = event =>{
@@ -68,7 +84,7 @@ const EditGender = () => {
       <NavBar/>
         <div className="Create-Form">
           <form className="Prueba" onSubmit={ submitHandler }>
-            <p>{ message }</p>
+            <p>{ initialState }</p>
             <input type="text" value={ inputValue } onChange={ changeHandler } />
             <div className="Submit-Buttons">
               <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark /> </button>

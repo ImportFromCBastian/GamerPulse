@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import {  useNavigate } from 'react-router-dom';
@@ -13,6 +13,12 @@ const NewGender = ()=>{
   const [inputValue, setInputValue] = useState("");
   const [selected,setSelected] = useState("");
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (message) alert(message);
+    changeMessage("");
+  }, [message]);
+
 
   const submitHandler = event =>{
     event.preventDefault();
@@ -26,14 +32,18 @@ const NewGender = ()=>{
       } catch (error) {
         console.log(error);
       }
+      navigate("/genders")
     }
     
-    if (inputValue){
-      navigate("/platforms");
-    }
-    else{
-      changeMessage("No se obtuvo ningún nombre a modificar");
-      alert(message);
+    if (inputValue === "" && selected) {
+      changeMessage("El nombre del genero no puede ser vacio");
+
+
+    } else {
+      if (!selected) {
+        changeMessage("No se obtuvo un genero para agregar");
+        navigate("/genders");
+      }
     }
   }
 

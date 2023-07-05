@@ -16,14 +16,15 @@ const EditPlatform = () => {
   const [inputValue, setInputValue] = useState();
   const [selected, setSelected] = useState("")
   const navigate = useNavigate();
+  const [initialState, setInitialState] = useState("");
 
   useEffect(()=>{
     try{
       axios
         .get(`${endpoints.platform.fetch}${id}`)
         .then(response=>{
+          setInitialState(`Modificando el elemento "${response.data.nombre}"`);
           setInputValue(response.data.nombre);
-          changeMessage(`Modificando el elemento "${response.data.nombre}"`);
           
         })
     }catch(error){
@@ -31,6 +32,11 @@ const EditPlatform = () => {
         
     };
   },[id])
+
+  useEffect(()=>{
+    if(message) alert(message);
+    changeMessage("");
+  },[message]);
 
   const submitHandler = event => {
     changeMessage("");
@@ -49,14 +55,19 @@ const EditPlatform = () => {
       }
 
 
+    } 
+
+    if (inputValue === "" && selected) {
+      changeMessage("El nombre de la plataforma a modificar no puede ser vacio");
+
+
     } else {
-      changeMessage("No se actualizo la plataforma");
-    }
-    if (inputValue){
-      navigate("/platforms");
-    }
-    else{
-      changeMessage("No se obtuvo ningún nombre a modificar");
+
+      if (!selected) {
+        changeMessage("No se obtuvo ningún nombre a modificar");
+        navigate("/platforms");
+
+      }
     }
   }
 
@@ -70,7 +81,7 @@ const EditPlatform = () => {
       <NavBar />
       <div className="Create-Form">
         <form className="Prueba" onSubmit={submitHandler}>
-          <p>{message}</p>
+          <p>{ initialState }</p>
           <input type="text" value={inputValue} onChange={changeHandler} />
           <div className="Submit-Buttons">
             <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark /> </button>

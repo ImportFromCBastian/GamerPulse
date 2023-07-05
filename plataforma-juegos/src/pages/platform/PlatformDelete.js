@@ -13,6 +13,7 @@ const PlatformDelete = () => {
   const { message , changeMessage} = useContext(MessageContext);
   const { id } = useParams("");
   const navigate = useNavigate();
+  const [initialState, setInitialState] = useState("");
 
 
   useEffect(()=>{
@@ -20,7 +21,7 @@ const PlatformDelete = () => {
       axios
         .get(`${endpoints.platform.fetch}${id}`)
         .then(response=>{
-          changeMessage(`Seguro borrar el elemento ${response.data.nombre}`);
+          setInitialState(`Seguro borrar el elemento ${response.data.nombre}`);
 
         });
     } catch (error) {
@@ -59,7 +60,7 @@ const PlatformDelete = () => {
     <NavBar/>
     <div className="Create-Form">
       <div className="Prueba">
-        <p>{ message }</p>
+        <p>{ initialState }</p>
         <span>
           <button onClick={ clickCheckMarkHandler }><IoIosCheckmark /></button>
           <button onClick={ clickCloseMarkHandler }><IoIosClose /></button>

@@ -12,15 +12,18 @@ const GenderDelete = ()=>{
   const { id } = useParams("");
   const navigate = useNavigate();
   const { message,changeMessage  } = useContext(MessageContext);
+  const [initialState , setInitialState] = useState("");
+  const [valid , setValid] = useState(null);
 
   useEffect(()=>{
     try {
       axios
         .get(`${endpoints.gender.fetch}${id}`)
         .then(response=>{
-          changeMessage(`Seguro que desea borrar el elemento "${response.data.nombre}"`);
+          setInitialState(`Seguro que desea borrar el elemento "${response.data.nombre}"`);
         });
         
+    
     } catch (error) {
         console.log(error);
         
@@ -58,7 +61,7 @@ const GenderDelete = ()=>{
     <NavBar/>
     <div className="Create-Form">
       <div className="Prueba">
-      <p>{ message } </p>
+      <p>{ initialState } </p>
         <span>
           <button onClick={ clickCheckMarkHandler }><IoIosCheckmark/></button>
           <button onClick={ clickCloseMarkHandler }><IoIosClose/></button>
