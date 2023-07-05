@@ -3,6 +3,7 @@
   padding: 0px;
   margin: 0px;
   font-size: 1.225rem;
+  background:  #DFD1C5;
   
 }
 
@@ -39,6 +40,7 @@ button{
 button svg{
   font-size: 1.55ric;
   float:none;
+  background: none;
 }
 
 button:hover{
@@ -54,15 +56,45 @@ button:hover{
   margin-bottom: 1rem;
   border: 0.25rem solid;
   padding: 0.5rem;
-  background: rgb(251, 228, 126) ;
 
+
+}
+
+.NavBar a {
+  background: none;
 }
 
 
 .Header-Logo{
   justify-content: center;
   display: flex;
+  background: none;
   
 }
+.Header-Logo img{
+  background: none;
+}
+
+.Footer-Participants{
+  background: none;
+}
+
+.Footer-Participants h3{
+  background: none;
+}
+
+.Footer-Participants  ul {
+  background: none;
+}
+
+.Footer-Participants  ul strong li  {
+  background: none;
+}
+
+.Footer-Participants  ul li a {
+  background: none;
+}
+
+
 
 

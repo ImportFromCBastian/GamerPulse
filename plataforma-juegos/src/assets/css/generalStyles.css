@@ -1,7 +1,7 @@
 
   
 .juegos {
-  background: rgb(255, 243, 189);
+  background: linear-gradient(220.55deg, #FFC328 0%, #E20000 100%);
   border: 1px solid #000;
   border-radius: 10px;
   margin-right: 10px;
@@ -25,9 +25,41 @@
   display: flex;
   flex-wrap: wrap;
   margin: 25px;
+  background: none;
 }
 
-.Delete-Form{
-  display: inline-grid;
+.Create-Form{
+  display: flex;
+  background: none;
+  justify-items: center;
+  justify-content: center;
+}
+
+.Create-Form p{
+  background: none;
+
+}
+
+.Create-Form input{
+  background: none;
+  border: solid 2px;
+}
+
+.Create-Form input::placeholder{
+  color: black  ;
+}
+
+
+.Create-Form span{
+  background: none;
+
+}
+.Prueba{
+  display: grid;
+  border: solid 0.25rem;
+  border-radius: 1rem;
+  justify-items: center;
+  justify-content: center;
+  padding: 20px ;
 
 }

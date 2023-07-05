@@ -1,6 +1,6 @@
 
 .Dropdown{
-  border: 2px solid ;
+  border: 2px solid  ;
   margin-right: 15px;  
   background: none;
 }
@@ -18,20 +18,22 @@
 
 .Filter-Marker {
   position: absolute;
-  background: white;
-  color: black;
+  background: #DFD1C5;
   padding: 5px;
+  color: black;
   top: -22px;
   left: 50px;
 }
 
 .Form-Submit{
   margin-right: 15px;
+  
 }
 
 .Flex-Center{
   display: flex;
   justify-content: center;
+  background: none;
 }
 
 .Filter-Form{
@@ -43,3 +45,4 @@
   position: relative;
   
 }
+

@@ -4,6 +4,9 @@ import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 import { MessageContext } from '../../config/messageContext';
+import Header from '../../components/HeaderComponent';
+import NavBar from '../../components/NavBarComponent';
+import Footer from '../../components/FooterComponent';
 
 const GenderDelete = ()=>{
   const { id } = useParams("");
@@ -50,13 +53,20 @@ const GenderDelete = ()=>{
 
 
   return(
-    <div>
+    <>
+    <Header/>
+    <NavBar/>
+    <div className="Create-Form">
+      <div className="Prueba">
       <p>{ message } </p>
-      <div>
-        <button onClick={ clickCheckMarkHandler }><IoIosCheckmark/></button>
-        <button onClick={ clickCloseMarkHandler }><IoIosClose/></button>
+        <span>
+          <button onClick={ clickCheckMarkHandler }><IoIosCheckmark/></button>
+          <button onClick={ clickCloseMarkHandler }><IoIosClose/></button>
+        </span>
       </div>
     </div>
+    <Footer/>
+    </>
   )
 }
 export default GenderDelete;

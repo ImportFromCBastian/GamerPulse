@@ -4,6 +4,9 @@ import endpoints from '../../config/endpoints';
 import {  useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 import { MessageContext } from '../../config/messageContext';
+import Footer from '../../components/FooterComponent';
+import Header from '../../components/HeaderComponent';
+import NavBar from '../../components/NavBarComponent';
 
 const NewGender = ()=>{
   const { message,changeMessage} = useContext(MessageContext);
@@ -33,16 +36,24 @@ const NewGender = ()=>{
   }
 
   return (
-    <form className="Delete-Form"  onSubmit={submitHandler}>
-      <p>Herramienta de agregado</p>
-      
-      <input type="text" placeholder="Nombre del genero" onChange={changeHandler}/>
-      <span>
-        <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
-        <button onClick={() => { setSelected(false) }}><IoIosClose/></button>
+    <>
+      <Header/>
+      <NavBar/>
+      <form className="Create-Form"  onSubmit={submitHandler}>
+        <div className="Prueba">
+          <p>Herramienta de agregado</p>
+          
+          <input className="Create-Item"  type="text" placeholder="Nombre del genero" onChange={changeHandler}/>
+          <span>
+            <button className="Create-Item" onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
+            <button className="Create-Item" onClick={() => { setSelected(false) }}><IoIosClose/></button>
 
-      </span>
-    </form>
+          </span>
+
+        </div>
+      </form>
+      <Footer/>
+    </>
     )
   }
 export default NewGender;

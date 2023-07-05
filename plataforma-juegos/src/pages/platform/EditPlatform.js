@@ -4,6 +4,9 @@ import endpoints from '../../config/endpoints';
 import { useParams, useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 import { MessageContext } from '../../config/messageContext';
+import Header from '../../components/HeaderComponent';
+import NavBar from '../../components/NavBarComponent';
+import Footer from '../../components/FooterComponent';
 
 // Tira warning sin sentido, porque es lo mismo que el componente EditGender 
 
@@ -57,16 +60,21 @@ const EditPlatform = () => {
   }
 
   return (
-    <div>
-      <p>{ message }</p>
-      <form onSubmit={ submitHandler }>
-        <input type="text" value={ inputValue } onChange={ changeHandler } />
-        <div className="Submit-Buttons">
-          <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark /> </button>
-          <button onClick={() => { setSelected(false) }}> <IoIosClose />     </button>
-        </div>
-      </form>
-    </div>
+    <>
+      <Header />
+      <NavBar />
+      <div className="Create-Form">
+        <form className="Prueba" onSubmit={submitHandler}>
+          <p>{message}</p>
+          <input type="text" value={inputValue} onChange={changeHandler} />
+          <div className="Submit-Buttons">
+            <button onClick={() => { setSelected(true) }}>  <IoIosCheckmark /> </button>
+            <button onClick={() => { setSelected(false) }}> <IoIosClose />     </button>
+          </div>
+        </form>
+      </div>
+      <Footer />
+    </>
   )
 }
 

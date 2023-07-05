@@ -4,6 +4,9 @@ import endpoints from '../../config/endpoints';
 import { useNavigate } from 'react-router-dom';
 import { IoIosCheckmark, IoIosClose } from 'react-icons/io';
 import { MessageContext } from '../../config/messageContext';
+import Header from '../../components/HeaderComponent';
+import NavBar from '../../components/NavBarComponent';
+import Footer from '../../components/FooterComponent';
 
 const NewPlatform = () => {
   const [inputValue, setInputValue] = useState("");
@@ -38,15 +41,21 @@ const NewPlatform = () => {
   }
 
   return (
-    <form className="Delete-Form" onSubmit={ submitHandler }>
-      <p>Herramienta de agregado</p>
-      <input type="text" placeholder="Nombre de la plataforma" onChange={ changeHandler } />
-      <span>
-        <button onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
-        <button onClick={() => { setSelected(false) }}><IoIosClose /></button>
-
-      </span>
-    </form>
+    <>
+      <Header/>
+      <NavBar/>
+      <form className="Create-Form" onSubmit={ submitHandler }>
+      <div className="Prueba">
+        <p>Herramienta de agregado</p>
+        <input type="text" placeholder="Nombre de la plataforma" onChange={ changeHandler } />
+        <span>
+          <button  onClick={() => { setSelected(true) }} ><IoIosCheckmark /></button>
+          <button  onClick={() => { setSelected(false) }}><IoIosClose /></button>
+        </span>
+      </div>
+      </form>
+      <Footer/>
+    </>
   )
 }
 export default NewPlatform;
