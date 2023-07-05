@@ -50,7 +50,12 @@ const EditGender = () => {
       changeMessage("No se actualizo el genero");
     } 
 
-    navigate("/genders");
+    if (inputValue){
+      navigate("/platforms");
+    }
+    else{
+      changeMessage("No se obtuvo ningún nombre a modificar");
+    }
   }
 
   const changeHandler = event =>{

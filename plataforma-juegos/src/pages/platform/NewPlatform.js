@@ -31,7 +31,13 @@ const NewPlatform = () => {
 
 
     };
-    navigate("/platforms");
+    if (inputValue){
+      navigate("/platforms");
+    }
+    else{
+      changeMessage("No se obtuvo ningún nombre a modificar");
+      alert(message);
+    }
 
     
   }

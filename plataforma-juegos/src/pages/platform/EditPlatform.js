@@ -52,7 +52,12 @@ const EditPlatform = () => {
     } else {
       changeMessage("No se actualizo la plataforma");
     }
-    navigate("/platforms");
+    if (inputValue){
+      navigate("/platforms");
+    }
+    else{
+      changeMessage("No se obtuvo ningún nombre a modificar");
+    }
   }
 
   const changeHandler = event => {

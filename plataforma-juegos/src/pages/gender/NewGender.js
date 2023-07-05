@@ -28,7 +28,13 @@ const NewGender = ()=>{
       }
     }
     
-    navigate("/genders");
+    if (inputValue){
+      navigate("/platforms");
+    }
+    else{
+      changeMessage("No se obtuvo ningún nombre a modificar");
+      alert(message);
+    }
   }
 
   const changeHandler = event =>{
