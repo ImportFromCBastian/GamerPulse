@@ -6,7 +6,7 @@ import axios from 'axios';
 import endpoints from '../../config/endpoints';
 import '../../assets/css/generalStyles.css';
 import Game from './Game';
-import { FaArrowUp, FaArrowDown, FaArrowsAltV } from 'react-icons/fa';
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import Dropdown from './DropDown';
 
 const DashboardPage = () => {
