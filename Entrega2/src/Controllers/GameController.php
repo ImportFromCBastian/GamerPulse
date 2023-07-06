@@ -41,15 +41,15 @@ class GameController{
 
 
         if(!empty($nombre)){
-          $sqlQuery.=" AND nombre LIKE '%$nombre%'";    
+          $sqlQuery.=" AND j.nombre LIKE '%$nombre%'";    
         }
 
         if(!empty($id_genero)){
-          $sqlQuery.=" AND id_genero = $id_genero";
+          $sqlQuery.=" AND j.id_genero = $id_genero";
         }
         
         if(!empty($id_plataforma)){
-          $sqlQuery.=" AND id_plataforma = $id_plataforma";
+          $sqlQuery.=" AND j.id_plataforma = $id_plataforma";
         }
 
         if(!empty($orden)){
