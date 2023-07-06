@@ -1,33 +1,3 @@
-
-  
-.juegos {
-  background: linear-gradient(220.55deg, #FFF500 0%, #FF00B8 100%);
-  border: 1px solid #000;
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  padding: 20px;
-  width: auto; 
-  box-sizing: border-box;
-}
-.juegos a {
-  background: none;
-}
-.juegos a img{
-  background: none;
-}
-
-.juegos p{
-  background: none;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 50px;
-  background: none;
-}
-
 .Create-Form{
   display: flex;
   background: none;

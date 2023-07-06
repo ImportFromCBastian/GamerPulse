@@ -15,9 +15,10 @@ const Game = (props)=>{
           <br></br>
           <p>{props.elem.descripcion}</p>
           <br></br>
-          <p>{props.elem.nombre_plataforma}</p>
           <br></br>
-          <p>{props.elem.nombre_genero}</p>
+          <p>Disponible para: {props.elem.nombre_plataforma}</p>
+          <br></br>
+          <p>Genero: {props.elem.nombre_genero}</p>
         </div>
     </>
   )
