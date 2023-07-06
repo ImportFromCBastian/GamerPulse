@@ -89,75 +89,6 @@ class GameController{
       $this->status = 404;
     }
   }
-/*
-Para aplicar la técnica de consulta preparada y evitar la inyección SQL en la función getGames, puedes modificarla de la siguiente manera:
-
-php
-Copy code
-function getGames(Request $request, Response &$response){
-  try{
-    $sqlQuery = "SELECT * FROM juegos WHERE 1 = 1";  
-    $params = [];
-
-    if(!empty($request->getBody())){
-      $fetcher = json_decode($request->getBody());
-
-      if(!empty($fetcher->nombre)){
-        $sqlQuery .= " AND nombre LIKE :nombre";
-        $params[':nombre'] = "%" . $fetcher->nombre . "%";
-      }
-
-      if(!empty($fetcher->id_genero)){
-        $sqlQuery .= " AND id_genero = :id_genero";
-        $params[':id_genero'] = $fetcher->id_genero;
-      }
-
-      if(!empty($fetcher->id_plataforma)){
-        $sqlQuery .= " AND id_plataforma = :id_plataforma";
-        $params[':id_plataforma'] = $fetcher->id_plataforma;
-      }
-
-      if(!empty($fetcher->orden)){
-        if(strpos($fetcher->orden, "ASC") !== false){
-          $sqlQuery .= " ORDER BY nombre ASC";
-        } else if(strpos($fetcher->orden, "DESC") !== false){
-          $sqlQuery .= " ORDER BY nombre DESC";
-        }
-      }
-    }
-      
-    $query = $this->dataBaseConnection->prepare($sqlQuery);
-    $query->execute($params);
-
-    $games = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    if(empty($games)){
-      $response->getBody()->write(json_encode(['mensaje' => 'FETCHING DOESNT MATCH => EMPTY RESOURCE']));
-    } else {
-      $response->getBody()->write(json_encode($games));
-    }
-
-    $query = null;
-    $this->dataBaseConnection = null;
-  } catch(PDOException $e){
-    $query = null;
-    $this->dataBaseConnection = null;
-
-    $response->getBody()->write(json_encode(['mensaje' => $e->getMessage()]));
-    $this->status = 404;
-  }
-}
-En este código, se han realizado los siguientes cambios:
-
-Se ha creado un arreglo $params para almacenar los parámetros de consulta que se utilizarán en la consulta preparada.
-En lugar de concatenar directamente los valores en la cadena de consulta, se han reemplazado por marcadores de posición :nombre, :id_genero, :id_plataforma, etc.
-Se ha utilizado $params para asociar los valores de los parámetros a los marcadores de posición correspondientes.
-Se ha reemplazado la línea $query = $this->dataBaseConnection->query($sqlQuery); por $query = $this->dataBaseConnection->prepare($sqlQuery); para preparar la consulta.
-En lugar de llamar a fetchAll directamente en $query, se ha llamado a execute($params) para ejecutar la consulta preparada con los parámetros.
-Se ha ajustado el manejo de la respuesta en caso de que no se encuentren juegos, escribiendo un mensaje en el cuerpo de la respuesta.
-Se han agregado las líneas $query = null; y $this->dataBaseConnection = null; para liberar los recursos adecuadamente.
-Con estos cambios, deberías poder ejecutar la consulta de forma segura y evitar el error de inyección SQL.
-*/
 
   function fetchGame(Request $request, Response &$response, $args){
     try{
@@ -168,7 +99,7 @@ Con estos cambios, deberías poder ejecutar la consulta de forma segura y evitar
 
       $games = $query -> fetch(PDO::FETCH_ASSOC);
       if(!$games){
-        $response ->getBody()->write(json_encode(['mensaje'=> "no existe un juego con ese id"]));
+        $response ->getBody()->write(json_encode(['mensaje'=> "NO EXISTE JUEGO CON ESE ID"]));
         $query = null;
         $this->dataBaseConnection = null;
         return;
@@ -279,7 +210,7 @@ Con estos cambios, deberías poder ejecutar la consulta de forma segura y evitar
           $errorMessage .= 'No se recibió juego. ';
         }
         if (!empty($errorMessage)) {
-            $response->getBody()->write(json_encode(['mensaje' => $errorMessage." => BAD REQUEST"]));
+            $response->getBody()->write(json_encode(['mensaje' => $errorMessage.""]));
             $this->status = 400;
             $query = null;
             $this->dataBaseConnection = null;
@@ -298,7 +229,7 @@ Con estos cambios, deberías poder ejecutar la consulta de forma segura y evitar
         $query=null;
         $this->dataBaseConnection=null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE"]));
         $this->status=404;
 
       }
@@ -359,7 +290,6 @@ Con estos cambios, deberías poder ejecutar la consulta de forma segura y evitar
           }
 
           if (!empty($errorMessage)) {
-            $errorMessage.="=> BAD REQUEST.";
             $response->getBody()->write(json_encode(['mensaje' => $errorMessage]));
             $this->status = 400;
             $query = null;
@@ -377,7 +307,7 @@ Con estos cambios, deberías poder ejecutar la consulta de forma segura y evitar
           $this->dataBaseConnection = null;
 
         }else{
-          $response->getBody()->write(json_encode(['mensaje'=>"ERROR (EMPTY) PARAMETERS => BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERROR (EMPTY) PARAMETERS"]));
           $this->status = 400;
           $this->dataBaseConnection = null;
         }

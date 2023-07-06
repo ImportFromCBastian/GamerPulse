@@ -92,7 +92,7 @@ class PlatformController{
 
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS => BAD REQUEST."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS"]));
         $this->status = 400;
       }
     }catch(PDOException $e){
@@ -176,7 +176,7 @@ class PlatformController{
           $validID = null;
           $this->dataBaseConnection = null;
           
-          $response->getBody()->write(json_encode(['mensaje'=>"ERR PLATFORM ASSOC TO GAME"]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERROR PLATAFORMA ASOCIADA A UN JUEGO"]));
           $this->status = 400;
           return;
 
