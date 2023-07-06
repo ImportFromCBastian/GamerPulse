@@ -91,7 +91,7 @@ class GenderController{
 
         $this->dataBaseConnection = null;
 
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS => BAD REQUEST."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR IN PARAMETERS"]));
         $this->status = 400;
       }
     }catch(PDOException $e){
@@ -116,13 +116,13 @@ class GenderController{
         $query = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE"]));
         $this->status = 404;
       }else{
         $genderName = json_decode($request->getBody());
 
         if(empty($genderName) || empty($genderName->nombre)){ 
-          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN (EMPTY) PARAMETERS => BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN (EMPTY) PARAMETERS"]));
           $this->status = 400;
           return;
 
@@ -161,7 +161,7 @@ class GenderController{
         $validID = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE"]));
         $this->status = 404;
         
       }else{
@@ -173,7 +173,7 @@ class GenderController{
           $validGender = null;
           $this->dataBaseConnection = null;
           
-          $response->getBody()->write(json_encode(['mensaje'=>"ERR GENDER ASSOC TO GAME => BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR GENDER ASSOC TO GAME"]));
           $this->status = 400;
 
           return;

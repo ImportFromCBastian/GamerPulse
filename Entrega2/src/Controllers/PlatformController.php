@@ -118,14 +118,14 @@ class PlatformController{
         $query = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE"]));
         $this->status = 404;
         
       }else{
         $platformName = json_decode($request->getBody());
 
         if(empty($platformName) || empty($platformName->nombre)){
-          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN (EMPTY) PARAMETERS => BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR IN (EMPTY) PARAMETERS"]));
           $this->status = 400;
           
           return;
@@ -164,7 +164,7 @@ class PlatformController{
         $validID = null;
         $this->dataBaseConnection = null;
         
-        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE => NOT FOUND."]));
+        $response->getBody()->write(json_encode(['mensaje'=>"ERR FOUNDING SOURCE"]));
         $this->status = 404;
         
       }else{
@@ -176,7 +176,7 @@ class PlatformController{
           $validID = null;
           $this->dataBaseConnection = null;
           
-          $response->getBody()->write(json_encode(['mensaje'=>"ERR PLATFORM ASSOC TO GAME => BAD REQUEST."]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERR PLATFORM ASSOC TO GAME"]));
           $this->status = 400;
           return;
 
