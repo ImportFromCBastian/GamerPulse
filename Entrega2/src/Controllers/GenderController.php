@@ -173,7 +173,7 @@ class GenderController{
           $validGender = null;
           $this->dataBaseConnection = null;
           
-          $response->getBody()->write(json_encode(['mensaje'=>"GENERO ASOCIADO A UN JUEGO"]));
+          $response->getBody()->write(json_encode(['mensaje'=>"ERROR GENERO ASOCIADO A UN JUEGO"]));
           $this->status = 400;
 
           return;
