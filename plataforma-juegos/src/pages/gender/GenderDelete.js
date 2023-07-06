@@ -29,22 +29,21 @@ const GenderDelete = ()=>{
 
   const clickCheckMarkHandler = () => {
     changeMessage("");
-    try {
-      axios
-        .delete(`${endpoints.gender.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
-        .then(response =>{
-          changeMessage(response.data.mensaje);
-        });
-      
-    } catch (error) {
-      if(error.response.status === 400){
-        changeMessage(error.response.data.mensaje);
-        alert(message);
-      }  
-    }
+    axios
+      .delete(`${endpoints.gender.delete}${id}`)
+      .then(response => {
+        changeMessage(response.data.mensaje);
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 400) {
+          changeMessage(error.response.data.mensaje);
+        } else {
+          console.error(error);
+        }
+      });
     navigate("/genders");
-
-  }
+  };
+  
 
 
   const clickCloseMarkHandler = ()=>{ 
