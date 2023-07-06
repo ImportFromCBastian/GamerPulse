@@ -13,7 +13,6 @@ const PlatformDelete = () => {
   const { message , changeMessage} = useContext(MessageContext);
   const { id } = useParams("");
   const navigate = useNavigate();
-  const [initialState, setInitialState] = useState("");
 
 
   useEffect(()=>{
@@ -21,8 +20,7 @@ const PlatformDelete = () => {
       axios
         .get(`${endpoints.platform.fetch}${id}`)
         .then(response=>{
-          setInitialState(`Seguro borrar el elemento ${response.data.nombre}`);
-
+          changeMessage(`Seguro borrar el elemento ${response.data.nombre}`);
         });
     } catch (error) {
       console.log(error);
@@ -32,22 +30,20 @@ const PlatformDelete = () => {
 
   const clickCheckMarkHandler = () => {
     changeMessage("");
-    try {
-      axios
-        .delete(`${endpoints.platform.delete}${id}`, { header: ('Access-Control-Allow-Origin', '*') })
-        .then(response => {
-          changeMessage(response.data.mensaje);
-          
-        });
-      
-    } catch (error) {
-      if (error.response.status === 400) {
-        changeMessage(error.response.data.mensaje);
-      }    
-    }
+    axios
+      .delete(`${endpoints.platform.delete}${id}`)
+      .then(response => {
+        changeMessage(response.data.mensaje);
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 400) {
+          changeMessage(error.response.data.mensaje);
+        } else {
+          console.error(error);
+        }
+      });
     navigate("/platforms");
-
-  }
+  };
 
   const clickCloseMarkHandler = () => {
     changeMessage("No se borro plataforma");
@@ -60,7 +56,7 @@ const PlatformDelete = () => {
     <NavBar/>
     <div className="Create-Form">
       <div className="Prueba">
-        <p>{ initialState }</p>
+        <p>{ message }</p>
         <span>
           <button onClick={ clickCheckMarkHandler }><IoIosCheckmark /></button>
           <button onClick={ clickCloseMarkHandler }><IoIosClose /></button>
